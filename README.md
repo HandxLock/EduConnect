@@ -1,6 +1,7 @@
 # EduConnect
 
 ## Tabla de Contenido
+***
 - [EduConnect](#educonnect)
   - [Tabla de Contenido](#tabla-de-contenido)
   - [Descripción](#descripción)
