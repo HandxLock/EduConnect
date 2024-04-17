@@ -1,3 +1,13 @@
+# EduConnect
+
+## Tabla de Contenido
+- [EduConnect](#educonnect)
+  - [Tabla de Contenido](#tabla-de-contenido)
+  - [Descripción](#descripción)
+  - [Uso](#uso)
+  - [Tecnologías Ocupadas](#tecnologías-ocupadas)
+
+
 ## Descripción
 ***
 **EduConnect** es un proyecto  para establecimientos escolares que buscan simplificar y mejorar la gestión académica y la comunicación entre docentes, estudiantes y apoderados. Con EduConnect, los colegios tienen a su disposición una herramienta versátil y fácil de usar que les permite llevar un control completo de su institución.
