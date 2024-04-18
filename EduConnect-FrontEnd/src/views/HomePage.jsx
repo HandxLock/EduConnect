@@ -1,5 +1,6 @@
 import Beneficio from '../components/Beneficio'
 import LineaPunteada from '../components/LineaPunteada'
+import ContactForm from '../components/contacto'
 import '../styles/homeStyle.css'
 function HomePage () {
   return (
@@ -19,6 +20,12 @@ function HomePage () {
       </div>
       <div id="beneficios" className="container">
         <Beneficio />
+      </div>
+      <div className='d-flex mt-4 '>
+        <LineaPunteada/>
+      </div>
+      <div id="contacto" className="container">
+        <ContactForm/>
       </div>
     </div>
   )
