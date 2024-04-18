@@ -1,11 +1,15 @@
-import ContactForm from './components/contacto'
-import './App.css'
+import { Routes, Route } from 'react-router-dom'
+import NavBar from './components/NavBar'
+import HomePage from './views/HomePage'
 
 function App () {
   return (
-    <div>
-      <ContactForm />
-    </div>
+    <>
+      <NavBar />
+      <Routes>
+        <Route path='/' element={<HomePage />}/>
+      </Routes>
+    </>
   )
 }
 
