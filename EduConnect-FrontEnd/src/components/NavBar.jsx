@@ -1,9 +1,8 @@
-import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import '../styles/homeStyle.css';
+import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
+import '../styles/homeStyle.css'
 
-
-function NavBar() {
+function NavBar () {
   return (
     <Navbar className='bgcolor' expand="lg">
       <Container>
@@ -21,7 +20,7 @@ function NavBar() {
             <Nav className="mr-auto navbar-color">
               <Nav.Link as={Link} to="/">Home</Nav.Link>
               <Nav.Link href="#beneficios">Beneficios</Nav.Link>
-              <Nav.Link as={Link} to="/contacto">Contacto</Nav.Link>
+              <Nav.Link href='#contacto'>Contacto</Nav.Link>
             </Nav>
           </div>
           <Nav>
@@ -30,7 +29,7 @@ function NavBar() {
         </Navbar.Collapse>
       </Container>
     </Navbar>
-  );
+  )
 }
 
-export default NavBar;
+export default NavBar
