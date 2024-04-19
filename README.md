@@ -22,6 +22,7 @@ Para facilitar aún más la toma de decisiones y el seguimiento del desempeño d
 Para poder usar **EduConnect** es necesario tener instalado:
 - VSCode
 - Postgres
+- Conexión a internet
 
 
 ## Tecnologías Ocupadas
