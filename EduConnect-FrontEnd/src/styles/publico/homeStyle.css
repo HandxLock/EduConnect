@@ -1,0 +1,59 @@
+.posicion {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+}
+strong{
+  font-weight: bold;
+  color: #281b4f;
+}
+#h1{
+  text-align: left;
+  font-size: 40px;
+  font-weight: 350;
+  color: #483285;
+}
+.imagen {
+  width: 520px;
+  height: 290px;
+}
+.bgcolor{
+  background-color: #f5f1ff;
+}
+#homepage{
+  margin-top: 120px;
+}
+.navbar-color > a{
+  color: #281b4fff;
+}
+.linea-punteada{
+    width: 80%;
+    height: 0.1;
+    border-top: 1px dashed #ccc;
+    margin: 10px auto;
+}
+
+.beneficio{
+  justify-content: center;
+}
+
+#logo{
+  fill: red;
+}
+
+
+@media (max-width: 576px) {
+  #h1{
+    text-align: center;
+    color: #483285;
+  }
+  .imagen{
+    width: 350px;
+    height: 200px;
+  }
+  .posicion {
+    position: static;
+  }
+}
