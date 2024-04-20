@@ -1,3 +1,10 @@
+.posicion {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+}
 strong{
   font-weight: bold;
   color: #281b4f;
@@ -15,18 +22,23 @@ strong{
 .bgcolor{
   background-color: #f5f1ff;
 }
+#homepage{
+  margin-top: 60px;
+}
 .navbar-color > a{
   color: #281b4fff;
 }
 .linea-punteada{
     width: 80%;
     height: 0.1;
-    /* Define la altura del separador */
     border-top: 1px dashed #ccc;
-    /* Establece la línea punteada con color gris */
     margin: 10px auto;
-    /* Margen superior e inferior del separador */
 }
+
+.beneficio{
+  justify-content: center;
+}
+
 
 
 @media (max-width: 576px) {
@@ -37,5 +49,8 @@ strong{
   .imagen{
     width: 350px;
     height: 200px;
+  }
+  .posicion {
+    position: static;
   }
 }

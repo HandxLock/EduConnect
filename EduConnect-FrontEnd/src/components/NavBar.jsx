@@ -28,7 +28,7 @@ function NavBar () {
             <Nav className="mr-auto navbar-color">
               <Nav.Link as={Link} to="/">Home</Nav.Link>
               <Nav.Link href="#beneficios">Beneficios</Nav.Link>
-              <Nav.Link as={Link} to="/contacto">Contacto</Nav.Link>
+              <Nav.Link href='#contacto'>Contacto</Nav.Link>
             </Nav>
           </div>
           <Nav>
