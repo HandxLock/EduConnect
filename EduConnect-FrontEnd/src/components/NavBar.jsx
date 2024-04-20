@@ -1,9 +1,16 @@
-import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import '../styles/homeStyle.css';
+import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap'
+import { Link, useLocation } from 'react-router-dom'
+import '../styles/homeStyle.css'
 
+function NavBar () {
+  const location = useLocation()
 
-function NavBar() {
+  const isLoginPage = location.pathname === '/login'
+
+  if (isLoginPage) {
+    return null
+  }
+
   return (
     <Navbar className='bgcolor' expand="lg">
       <Container>
@@ -25,12 +32,12 @@ function NavBar() {
             </Nav>
           </div>
           <Nav>
-              <NavDropdown.Item className='navbar-color' as={Link} to="/login">Login <img src="https://cdn.hugeicons.com/icons/login-03-stroke-rounded.svg" alt="login-03" width="24" height="24" /></NavDropdown.Item>
+            <NavDropdown.Item className='navbar-color' as={Link} to="/login">Login <img src="https://cdn.hugeicons.com/icons/login-03-stroke-rounded.svg" alt="login-03" width="24" height="24" /></NavDropdown.Item>
           </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
-  );
+  )
 }
 
-export default NavBar;
+export default NavBar
