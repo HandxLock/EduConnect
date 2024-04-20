@@ -1,5 +1,5 @@
 import AlertIngresoDatos from '../components/AlertIngresoDatos'
-import Aside from '../components/Aside'
+import AsideSuperAdmin from '../components/AsideSuperAdmin'
 import FormularioAdmin from '../components/FormularioAdmin'
 import { Container, Col, Row } from 'react-bootstrap'
 
@@ -8,7 +8,7 @@ function PerfilSuperAdminFormularioAdmin () {
     <Container fluid lg={12} className='p-0'>
       <Row>
         <Col xs={3}>
-          <Aside/>
+          <AsideSuperAdmin/>
         </Col>
         <Col xs={6}>
           <FormularioAdmin />

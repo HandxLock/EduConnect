@@ -3,7 +3,7 @@ import Dropdown from 'react-bootstrap/Dropdown'
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import Image from 'react-bootstrap/Image'
 
-function Aside () {
+function AsideSuperAdmin () {
   return (
         <>
             <div className="aside">
@@ -13,13 +13,13 @@ function Aside () {
                     <p>Profile</p>
                 </div>
                 <DropdownButton id="dropdown-basic-button" title="Selecciona" className=''>
-                     <Dropdown.Item href="#/action-1">Colegio</Dropdown.Item>
-                     <Dropdown.Item href="#/action-2">Administrador</Dropdown.Item>
-                     <Dropdown.Item href="#/action-3">Asignar Colegio</Dropdown.Item>
+                     <Dropdown.Item href='formularioColegio'>Colegio</Dropdown.Item>
+                     <Dropdown.Item href="formularioAdmin">Administrador</Dropdown.Item>
+                     <Dropdown.Item href="#/asignarColegio">Asignar Colegio</Dropdown.Item>
                  </DropdownButton>
 
             </div>
         </>
   )
 }
-export default Aside
+export default AsideSuperAdmin
