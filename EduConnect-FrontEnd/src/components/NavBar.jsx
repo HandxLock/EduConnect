@@ -11,7 +11,6 @@ function NavBar () {
     return null
   }
 
->>>>>>>>> Temporary merge branch 2
   return (
     <Navbar className='bgcolor' expand="lg">
       <Container>
