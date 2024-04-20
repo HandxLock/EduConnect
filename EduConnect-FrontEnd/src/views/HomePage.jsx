@@ -1,10 +1,12 @@
 import Beneficio from '../components/Beneficio'
 import LineaPunteada from '../components/LineaPunteada'
 import ContactForm from '../components/contacto'
+import NavBar from '../components/NavBar'
 import '../styles/homeStyle.css'
 function HomePage () {
   return (
     <div>
+      <NavBar/>
       <div id="homepage" className="container text-center">
         <div className='d-lg-flex justify-content-center align-items-center container '>
           <h1 id='h1'>
