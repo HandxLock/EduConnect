@@ -2,6 +2,8 @@ import Beneficio from '../components/Beneficio'
 import LineaPunteada from '../components/LineaPunteada'
 import ContactForm from '../components/contacto'
 import Navbar from '../components/NavBar'
+import Footer from '../components/Footer'
+import '../styles/footer.css'
 import '../styles/homeStyle.css'
 import '../styles/contacto.css'
 function HomePage () {
@@ -34,6 +36,9 @@ function HomePage () {
         <div className='formulario'>
           <ContactForm />
         </div>
+      </div>
+      <div className='footer'>
+        <Footer />
       </div>
     </div>
   )
