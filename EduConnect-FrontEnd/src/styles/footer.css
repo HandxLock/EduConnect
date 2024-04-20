@@ -1,0 +1,23 @@
+.footer{
+  background-color: #281b4f;
+  color: rgb(173, 173, 173);
+  font-size: 14px;
+}
+
+.footer> footer >div >a{
+  text-decoration: none;
+  color: rgb(194, 194, 194);
+}
+
+.footer>footer>div>a:hover {
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+}
+
+@media (max-width: 576px) {
+  footer{
+    padding: 30px;
+    text-align: center;
+  }
+
+}
