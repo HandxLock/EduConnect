@@ -23,4 +23,4 @@ const personByEmailModel = async ({email}) => {
     return response.rows[0]
 }
 
-export {/*createPersonModel, */personByEmailModel}
+export {createPersonModel, personByEmailModel}
