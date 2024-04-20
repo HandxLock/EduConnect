@@ -1,0 +1,13 @@
+.formulario{
+  margin-top: 30px;
+  width: 50%;
+}
+.formulario > h2{
+  text-align: center;
+}
+
+@media (max-width: 576px) {
+  .formulario{
+    width: 80%;
+  }
+}
