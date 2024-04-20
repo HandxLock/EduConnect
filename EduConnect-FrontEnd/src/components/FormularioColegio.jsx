@@ -8,44 +8,24 @@ function FormularioColegio () {
         <Card className=" formulario p-4">
             <Form>
                 <Form.Group controlId="formGridEmail">
-                    <Form.Label>Nombre</Form.Label>
-                    <Form.Control type="string" placeholder="Nombre" />
-                </Form.Group>
-                <Form.Group controlId="formGridEmail">
-                    <Form.Label>Apellido Paterno</Form.Label>
-                    <Form.Control type="string" placeholder="Apellido Paterno" />
-                </Form.Group>
-                <Form.Group controlId="formGridEmail">
-                    <Form.Label>Apellido Materno</Form.Label>
-                    <Form.Control type="string" placeholder="APellido Materno" />
+                <Form.Label>Nombre Establecimiento</Form.Label>
+                <Form.Control type="string" placeholder="Establecimiento" />
                 </Form.Group>
                 <Form.Group controlId="formGridPassword">
-                    <Form.Label>Rut</Form.Label>
-                    <Form.Control type="string" placeholder="Rut" />
+                <Form.Label>Dirección</Form.Label>
+                <Form.Control type="string" placeholder="Dirección" />
                 </Form.Group>
-                <Form.Group controlId="formGridEmail">
-                    <Form.Label>Dirección</Form.Label>
-                    <Form.Control type="string" placeholder="Dirección" />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formGridAddress1">
-                    <Form.Label>Comuna</Form.Label>
-                    <Form.Control type="string" placeholder="Comuna" />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formGridAddress2">
-                    <Form.Label>Teléfono</Form.Label>
-                    <Form.Control type="string" placeholder="Teléfono" />
-                </Form.Group>
-                <Form.Group controlId="formGridEmail">
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control type="string" placeholder="Email" />
-                </Form.Group>
-                <Form.Group controlId="formGridEmail">
-                    <Form.Label>Clave</Form.Label>
-                    <Form.Control type="string" placeholder="Clave" />
-                </Form.Group>
-                <Button variant="primary" type="submit">
-                    Ingresar
-                </Button>
+            <Form.Group className="mb-3" controlId="formGridAddress1">
+                <Form.Label>Teléfono</Form.Label>
+                <Form.Control type="string" placeholder="Teléfono" />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formGridAddress2">
+                <Form.Label>Comuna</Form.Label>
+                <Form.Control type="string" placeholder="Comuna" />
+            </Form.Group>
+            <Button variant="primary" type="submit">
+                Ingresar
+            </Button>
             </Form>
         </Card>
         </>
