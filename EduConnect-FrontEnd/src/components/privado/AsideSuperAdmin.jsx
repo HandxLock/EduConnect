@@ -1,5 +1,5 @@
 import { Col, Container, Row } from 'react-bootstrap'
-import '../styles/privado/aside.css'
+import '../../styles/privado/aside.css'
 import Dropdown from 'react-bootstrap/Dropdown'
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import Image from 'react-bootstrap/Image'

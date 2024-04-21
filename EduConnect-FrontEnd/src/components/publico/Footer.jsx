@@ -11,8 +11,9 @@ function Footer () {
         <a href="#" className="footer-link">Política de calidad</a>
       </div>
       <div className="footer-info">
-        <p className="footer-copyright">Copyright 2024 EduConnect Ltda | Todos los derechos reservados</p>
-        <p className="footer-developer">Desarrollado por <a href="https://github.com/HandxLock/EduConnect" className="footer-link">EduConnect</a></p>
+        <p className="footer-copyright">Copyright 2024 EduConnect Ltda | Todos los derechos reservados | Desarrollado por
+        <a className="footer-link" href="https://github.com/HandxLock/EduConnect"> EduConnect</a>
+        </p>
       </div>
     </footer>
   )

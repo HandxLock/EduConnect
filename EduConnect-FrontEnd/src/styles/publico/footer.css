@@ -1,21 +1,18 @@
 .footer {
-  background-color: #10514e;
+  background-color: #281b4f;
   color: #fff;
-  font-size: 15px;
-  padding: 20px;
+  font-size: 14px;
 }
 
-.footer-links {
-  margin-bottom: 10px;
-}
 
 .footer-link {
   text-decoration: none;
-  color: #fff;
+  color: rgb(173, 173, 173);
 }
 
 .footer-link:hover {
-  text-decoration: underline;
+  text-decoration: none;
+    color: rgb(255, 255, 255);
 }
 
 .footer-separator {
@@ -33,4 +30,12 @@
 
 .footer-developer {
   margin: 0;
+}
+
+@media (max-width: 576px) {
+  footer {
+    padding: 30px;
+    text-align: center;
+  }
+
 }
