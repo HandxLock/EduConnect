@@ -13,7 +13,7 @@ function NavBar () {
   }
 
   return (
-    <Navbar className='bgcolor shadow' expand="lg">
+    <Navbar className='bgcolor' expand="lg">
       <Container>
         <Navbar.Brand as={Link} to="/">
         <IconBook height className="d-inline-block align-top logo" stroke={2} />
@@ -21,7 +21,7 @@ function NavBar () {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <div className="d-lg-flex justify-content-center align-items-center flex-lg-grow-1">
-            <Nav className="mr-auto navbar-color txt-m">
+            <Nav className="mr-auto navbar-color">
               <Nav.Link class href="#beneficios">Beneficios</Nav.Link>
               <Nav.Link href='#contacto'>Contacto</Nav.Link>
             </Nav>

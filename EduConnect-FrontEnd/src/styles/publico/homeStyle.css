@@ -23,8 +23,7 @@ strong {
   height: 290px;
 }
 .bgcolor {
-  background-color: #cafdf3;
-  min-height: 100px;
+  background-color:#f5f1ff ;
 }
 #homepage {
   margin-top: 120px;
@@ -41,17 +40,14 @@ strong {
 .beneficio {
   justify-content: center;
 }
-.txt-m {
-  margin-left: 13px;
-  font-size: 20px;
-}
+
 .btn {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   font-size: 24px;
 }
 
 .logo {
-  width: 50px;
+  width: 30px;
 }
 
 .btLog {
