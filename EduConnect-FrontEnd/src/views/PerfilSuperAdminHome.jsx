@@ -1,4 +1,4 @@
-import Aside from '../components/Aside'
+import AsideSuperAdmin from '../components/AsideSuperAdmin'
 import { Container, Col, Row } from 'react-bootstrap'
 import HomeSuperAdmin from '../components/HomeSuperAdmin'
 
@@ -7,7 +7,7 @@ function PerfilSuperAdminHome () {
     <Container fluid lg={12} className='p-0'>
       <Row>
         <Col xs={3}>
-          <Aside/>
+          <AsideSuperAdmin/>
         </Col>
         <Col xs={9}>
           <HomeSuperAdmin />
