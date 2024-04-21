@@ -1,8 +1,8 @@
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import Card from 'react-bootstrap/Card'
-import useMostrarAlertaConfirmacion from '../../hooks/useMostrarAlertaConfirmacion'
-import '../styles/privado/formulario.css'
+import useMostrarAlertaConfirmacion from '../../../hooks/useMostrarAlertaConfirmacion'
+import '../../../styles/privado/formulario.css'
 
 function FormularioProfesor () {
   return (
