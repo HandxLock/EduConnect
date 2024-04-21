@@ -26,7 +26,7 @@ function Login () {
     <Container>
       <Row className='login-Cter'>
         {/* Columna izquierda */}
-        <Col xs={12} md={6} className="text-center custom-col-dech shadow p-4">
+        <Col xs={12} md={6} className="text-center custom-col-izq shadow p-4">
           <section>
             <div className="titulos-div">
               <h2 className='titulosIz'><b>Inicia sesión aquí</b></h2>
@@ -87,7 +87,7 @@ function Login () {
           </section>
         </Col>
         {/* Columna derecha */}
-        <Col xs={12} md={6} className="text-center custom-col-izq custom-col-img shadow p-4">
+        <Col xs={12} md={6} className="text-center custom-col-dech custom-col-img shadow p-4">
           <section>
             <div>
               <h2 className='titulosDc text-white'><b>Comienza Tus registros ¡ahora!</b></h2>
