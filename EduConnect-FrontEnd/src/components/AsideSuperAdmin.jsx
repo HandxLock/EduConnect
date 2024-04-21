@@ -17,9 +17,9 @@ function AsideSuperAdmin () {
                     <Row>
                         <Col md={{ span: 6, offset: 4 }} >
                             <DropdownButton id="dropdown-basic-button" title="Selecciona" drop={'down-centered'} >
-                                <Dropdown.Item href='formularioColegio'>Colegio</Dropdown.Item>
-                                <Dropdown.Item href="formularioAdmin">Administrador</Dropdown.Item>
-                                <Dropdown.Item href="#/asignarColegio">Asignar Colegio</Dropdown.Item>
+                                <Dropdown.Item href='/superAdmin/formularioColegio'>Colegio</Dropdown.Item>
+                                <Dropdown.Item href="/superAdmin/formularioAdmin">Administrador</Dropdown.Item>
+                                <Dropdown.Item href="#/superAdmin/asignarColegio">Asignar Colegio</Dropdown.Item>
                             </DropdownButton>
                         </Col>
                     </Row>
