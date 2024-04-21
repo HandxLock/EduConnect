@@ -1,0 +1,41 @@
+.footer {
+  background-color: #281b4f;
+  color: #fff;
+  font-size: 14px;
+}
+
+
+.footer-link {
+  text-decoration: none;
+  color: rgb(173, 173, 173);
+}
+
+.footer-link:hover {
+  text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+.footer-separator {
+  color: #fff;
+  margin: 0 5px;
+}
+
+.footer-info {
+  opacity: 0.8;
+}
+
+.footer-copyright {
+  margin: 0;
+}
+
+.footer-developer {
+  margin: 0;
+}
+
+@media (max-width: 576px) {
+  footer {
+    padding: 30px;
+    text-align: center;
+  }
+
+}
