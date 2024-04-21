@@ -6,7 +6,7 @@ import '../styles/formulario.css'
 function FormularioColegio () {
   return (
         <>
-        <Card className=" formulario p-4">
+        <Card className=" formulario">
             <Form onSubmit={useMostrarAlertaConfirmacion}>
                 <Form.Group>
                     <Form.Label>Nombre Establecimiento</Form.Label>

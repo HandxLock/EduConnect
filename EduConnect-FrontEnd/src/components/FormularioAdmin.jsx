@@ -7,7 +7,7 @@ import '../styles/formulario.css'
 function FormularioAdmin () {
   return (
         <>
-        <Card className=" formulario p-4">
+        <Card className=" formulario">
             <Form onSubmit={useMostrarAlertaConfirmacion}>
                 <Form.Group>
                     <Form.Label>Nombre</Form.Label>
@@ -45,7 +45,7 @@ function FormularioAdmin () {
                     <Form.Label>Clave</Form.Label>
                     <Form.Control type="string" placeholder="Clave" />
                 </Form.Group>
-                <Button variant="primary" type="submit">
+                <Button variant="primary" type="submit" className='m-3'>
                     Ingresar
                 </Button>
             </Form>

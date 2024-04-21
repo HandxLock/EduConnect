@@ -9,11 +9,8 @@ function PerfilSuperAdminFormularioAdmin () {
         <Col xs={3}>
           <AsideSuperAdmin/>
         </Col>
-        <Col xs={6}>
+        <Col xs={9}>
           <FormularioAdmin />
-        </Col>
-        <Col xs={3}>
-
         </Col>
       </Row>
     </Container>
