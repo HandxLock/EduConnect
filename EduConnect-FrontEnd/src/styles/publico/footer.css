@@ -1,0 +1,36 @@
+.footer {
+  background-color: #10514e;
+  color: #fff;
+  font-size: 15px;
+  padding: 20px;
+}
+
+.footer-links {
+  margin-bottom: 10px;
+}
+
+.footer-link {
+  text-decoration: none;
+  color: #fff;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
+}
+
+.footer-separator {
+  color: #fff;
+  margin: 0 5px;
+}
+
+.footer-info {
+  opacity: 0.8;
+}
+
+.footer-copyright {
+  margin: 0;
+}
+
+.footer-developer {
+  margin: 0;
+}

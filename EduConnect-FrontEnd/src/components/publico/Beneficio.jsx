@@ -1,5 +1,5 @@
 import Card from 'react-bootstrap/Card'
-import '../styles/beneficios.css'
+import '../../styles/publico/beneficios.css'
 
 function Beneficio () {
   return (

@@ -1,4 +1,4 @@
-import '../styles/contacto.css'
+import '../../styles/publico/contacto.css'
 import { useState } from 'react'
 
 const ContactForm = () => {
