@@ -15,7 +15,7 @@ function AsideSuperAdmin () {
                 </div>
                 <Container fluid>
                     <Row>
-                        <Col md={{ span: 6, offset: 3 }}>
+                        <Col md={{ span: 6, offset: 4 }} >
                             <DropdownButton id="dropdown-basic-button" title="Selecciona" drop={'down-centered'} >
                                 <Dropdown.Item href='formularioColegio'>Colegio</Dropdown.Item>
                                 <Dropdown.Item href="formularioAdmin">Administrador</Dropdown.Item>
