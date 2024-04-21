@@ -8,7 +8,7 @@ function HomeSuperAdmin () {
     <Row xs={1} md={3} className="g-4 m-4">
         <Col>
           <Card className=''>
-            <Card.Img variant="top" src="https://www.colegiosiria.cl/wp-content/uploads/Bienvenida-2023-Media.jpg" />
+            <Card.Img variant="top" src="https://static.vecteezy.com/system/resources/previews/023/842/276/non_2x/school-building-cartoon-illustration-on-isolated-background-vector.jpg" />
             <Card.Body>
               <Card.Title>Colegio República de Siria</Card.Title>
               <Card.Text>
@@ -19,22 +19,22 @@ function HomeSuperAdmin () {
         </Col>
         <Col>
           <Card className=''>
-            <Card.Img variant="top" src="https://www.colegiosiria.cl/wp-content/uploads/Bienvenida-2023-Media.jpg" />
+            <Card.Img variant="top" src="https://static.vecteezy.com/system/resources/previews/023/842/276/non_2x/school-building-cartoon-illustration-on-isolated-background-vector.jpg" />
             <Card.Body>
-              <Card.Title>Colegio República de Siria</Card.Title>
+              <Card.Title>Colegio Frei Montalva</Card.Title>
               <Card.Text>
-                Colegio Republica de Siria
+                Colegio Frei Montalva
               </Card.Text>
             </Card.Body>
           </Card>
         </Col>
         <Col>
           <Card className=''>
-            <Card.Img variant="top" src="https://www.colegiosiria.cl/wp-content/uploads/Bienvenida-2023-Media.jpg" />
+            <Card.Img variant="top" src="https://static.vecteezy.com/system/resources/previews/023/842/276/non_2x/school-building-cartoon-illustration-on-isolated-background-vector.jpg" />
             <Card.Body>
-              <Card.Title>Colegio República de Siria</Card.Title>
+              <Card.Title>Colegio Manuel de Salas</Card.Title>
               <Card.Text>
-                Colegio Republica de Siria
+                Colegio Manuel de Salas
               </Card.Text>
             </Card.Body>
           </Card>

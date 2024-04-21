@@ -1,3 +1,4 @@
+import { Col, Container, Row } from 'react-bootstrap'
 import '../styles/aside.css'
 import Dropdown from 'react-bootstrap/Dropdown'
 import DropdownButton from 'react-bootstrap/DropdownButton'
@@ -12,12 +13,17 @@ function AsideSuperAdmin () {
                     <h3>SuperAdmin</h3>
                     <p>Profile</p>
                 </div>
-                <DropdownButton id="dropdown-basic-button" title="Selecciona" className=''>
-                     <Dropdown.Item href='formularioColegio'>Colegio</Dropdown.Item>
-                     <Dropdown.Item href="formularioAdmin">Administrador</Dropdown.Item>
-                     <Dropdown.Item href="#/asignarColegio">Asignar Colegio</Dropdown.Item>
-                 </DropdownButton>
-
+                <Container fluid>
+                    <Row>
+                        <Col md={{ span: 6, offset: 3 }}>
+                            <DropdownButton id="dropdown-basic-button" title="Selecciona" drop={'down-centered'} >
+                                <Dropdown.Item href='formularioColegio'>Colegio</Dropdown.Item>
+                                <Dropdown.Item href="formularioAdmin">Administrador</Dropdown.Item>
+                                <Dropdown.Item href="#/asignarColegio">Asignar Colegio</Dropdown.Item>
+                            </DropdownButton>
+                        </Col>
+                    </Row>
+                </Container>
             </div>
         </>
   )
