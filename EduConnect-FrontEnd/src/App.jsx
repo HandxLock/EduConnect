@@ -7,9 +7,15 @@ import PerfilSuperAdminFormularioAdmin from './views/PerfilSuperAdminFormularioA
 import PerfilAdminFormularioProfesor from './views/PerfilAdminFormularioProfesor.jsx'
 import PerfilAdminHome from './views/PerfilAdminHome.jsx'
 import PerfilAdminFormularioEstudiante from './views/PerfilAdminFormularioEstudiante.jsx'
+
+import NavBar from './components/publico/NavBar.jsx'
+import HomePage from './views/publico/HomePage.jsx'
+import Login from './views/publico/login.jsx'
+
 function App () {
   return (
     <>
+      <NavBar />
       <Routes>
         <Route path='/' element={<HomePage />}/>
         <Route path='/login' element={<Login />} />

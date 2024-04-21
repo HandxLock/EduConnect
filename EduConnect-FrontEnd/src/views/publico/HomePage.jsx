@@ -1,20 +1,18 @@
-import Beneficio from '../components/Beneficio'
-import LineaPunteada from '../components/LineaPunteada'
-import ContactForm from '../components/contacto'
-import Navbar from '../components/NavBar'
-import Footer from '../components/Footer'
-import '../styles/footer.css'
-import '../styles/homeStyle.css'
-import '../styles/contacto.css'
+import Beneficio from '../../components/publico/Beneficio'
+import LineaPunteada from '../../components/publico/LineaPunteada'
+import ContactForm from '../../components/publico/contacto'
+import Footer from '../../components/publico/Footer'
+import '../../styles/publico/footer.css'
+import '../../styles/publico/homeStyle.css'
+import '../../styles/publico/contacto.css'
 function HomePage () {
   return (
     <div>
       <div id='navbar ' className='posicion'>
-        <Navbar />
       </div>
       <div id="homepage" className="container text-center">
 
-        <div className='d-lg-flex justify-content-center align-items-center container '>
+        <div className='d-lg-flex justify-content-center align-items-center container'>
           <h1 id='h1'>
             <strong >Simplifica </strong> , mejora la
             <strong> gestión </strong>
