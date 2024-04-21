@@ -1,3 +1,4 @@
+import '../../styles/publico/contacto.css'
 import { useState } from 'react'
 
 const ContactForm = () => {
@@ -29,6 +30,8 @@ const ContactForm = () => {
             type="text"
             className="form-control"
             id="name"
+            autoComplete='name'
+            placeholder='Ingrese Nombre'
             value={name}
             onChange={handleChange}
             required
@@ -40,6 +43,8 @@ const ContactForm = () => {
             type="email"
             className="form-control"
             id="email"
+            autoComplete='email'
+            placeholder='Ingrese Email'
             value={email}
             onChange={handleChange}
             required
@@ -50,6 +55,7 @@ const ContactForm = () => {
           <textarea
             className="form-control"
             id="message"
+            placeholder='Ingrese Mensaje'
             rows="4"
             value={message}
             onChange={handleChange}

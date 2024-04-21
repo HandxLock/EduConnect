@@ -1,4 +1,4 @@
-import '../styles/homeStyle.css'
+import '../../styles/publico/homeStyle.css'
 function LineaPunteada () {
   return <div className="linea-punteada"></div>
 }
