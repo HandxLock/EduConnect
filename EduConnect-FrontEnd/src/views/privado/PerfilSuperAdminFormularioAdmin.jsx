@@ -1,5 +1,5 @@
-import AsideSuperAdmin from '../../components/privado/AsideSuperAdmin'
-import FormularioAdmin from '../../components/privado/FormularioAdmin'
+import AsideSuperAdmin from '../../components/privado/SuperAdmin/AsideSuperAdmin'
+import FormularioAdmin from '../../components/privado/Admin/FormularioAdmin'
 import { Container, Col, Row } from 'react-bootstrap'
 
 function PerfilSuperAdminFormularioAdmin () {

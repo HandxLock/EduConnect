@@ -1,6 +1,6 @@
-import AsideSuperAdmin from '../../components/privado/AsideSuperAdmin'
+import AsideSuperAdmin from '../../components/privado/SuperAdmin/AsideSuperAdmin'
 import { Container, Col, Row } from 'react-bootstrap'
-import HomeSuperAdmin from '../../components/privado/HomeSuperAdmin'
+import HomeSuperAdmin from '../../components/privado/SuperAdmin/HomeSuperAdmin'
 
 function PerfilSuperAdminHome () {
   return (
