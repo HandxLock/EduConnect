@@ -23,8 +23,7 @@ strong {
   height: 290px;
 }
 .bgcolor {
-  background-color: #cafdf3;
-  min-height: 100px;
+  min-height: 140px;
 }
 #homepage {
   margin-top: 120px;
@@ -50,8 +49,13 @@ strong {
   font-size: 24px;
 }
 
+.carrusel{
+  margin-top: 140px;
+}
+
 .logo {
-  width: 50px;
+  width: 70px;
+  margin-left: 50px;
 }
 
 .btLog {
@@ -62,6 +66,7 @@ strong {
   transform: scale(1.1);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
 @media (max-width: 576px) {
   #h1 {
     text-align: center;
@@ -73,5 +78,10 @@ strong {
   }
   .posicion {
     position: static;
+  }
+
+  .logo {
+    margin-left: 13px;
+    
   }
 }

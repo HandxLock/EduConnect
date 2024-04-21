@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import NavBar from './components/publico/NavBar.jsx'
-import HomePage from './views/publico/HomePage.jsx'
+import ImagesSliderDemo from './views/publico/HomePage.jsx'
 import Login from './views/publico/login.jsx'
 
 function App () {
@@ -8,7 +8,7 @@ function App () {
     <>
       <NavBar />
       <Routes>
-        <Route path='/' element={<HomePage />}/>
+        <Route path='/' element={<ImagesSliderDemo />}/>
         <Route path='/login' element={<Login />} />
       </Routes>
     </>
