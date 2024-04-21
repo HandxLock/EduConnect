@@ -1,0 +1,41 @@
+{
+  "page": 1,
+  "per_page": 15,
+  "photos": [
+    {
+        "id":1,
+        "nombre":"Erich",
+        "email":"erich@educonnect.cl",
+        "clave":"e1234",
+        "rol":"Superadmin"
+    },
+    {
+        "id":2,
+        "nombre":"Constanza",
+        "email":"constanza@educonnect.cl",
+        "clave":"c1234",
+        "rol":"Admin"
+    },
+    {
+        "id":3,
+        "nombre":"Francisco",
+        "email":"Francisco@educonnect.cl",
+        "clave":"f1234",
+        "rol":"Docente"
+    },
+    {
+        "id":4,
+        "nombre":"Alfredo",
+        "email":"alfredo@educonnect.cl",
+        "clave":"a1234",
+        "rol":"Alumno"
+    },
+    {
+        "id":5,
+        "nombre":"Claudio",
+        "email":"claudio@educonnect.cl",
+        "clave":"c1234",
+        "rol":"Docente"
+    }
+  ]
+}
