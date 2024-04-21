@@ -1,7 +1,7 @@
-import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap'
+import { Navbar, Nav, Container, Button } from 'react-bootstrap'
 import { Link, useLocation } from 'react-router-dom'
-import { IconLogin2 } from '@tabler/icons-react'
 import '../../styles/publico/homeStyle.css'
+import { IconBook } from '@tabler/icons-react'
 
 function NavBar () {
   const location = useLocation()
@@ -13,28 +13,22 @@ function NavBar () {
   }
 
   return (
-    <Navbar className='bgcolor' expand="lg">
+    <Navbar className='bgcolor shadow' expand="lg">
       <Container>
         <Navbar.Brand as={Link} to="/">
-          <img
-            src="/logo.png"
-            height="30"
-            className="d-inline-block align-top"
-            alt="Logo"
-          />
+        <IconBook height className="d-inline-block align-top logo" stroke={2} />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <div className="d-lg-flex justify-content-center align-items-center flex-lg-grow-1">
-            <Nav className="mr-auto navbar-color">
-              <Nav.Link as={Link} to="/">Home</Nav.Link>
-              <Nav.Link href="#beneficios">Beneficios</Nav.Link>
+            <Nav className="mr-auto navbar-color txt-m">
+              <Nav.Link class href="#beneficios">Beneficios</Nav.Link>
               <Nav.Link href='#contacto'>Contacto</Nav.Link>
             </Nav>
           </div>
-          <Nav>
-            <NavDropdown.Item className='navbar-color' as={Link} to="/login">Login <IconLogin2 stroke={2} /></NavDropdown.Item>
-          </Nav>
+          <Link to="/login" className='text-dark'>
+          <Button className='btn' variant=""><b className='btLog'>Iniciar sesión</b></Button>
+            </Link>
         </Navbar.Collapse>
       </Container>
     </Navbar>
