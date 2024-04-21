@@ -1,6 +1,6 @@
-import AsideAdmin from '../components/AsideAdmin'
+import AsideAdmin from '../../components/privado/AsideAdmin'
 import { Container, Col, Row } from 'react-bootstrap'
-import HomeAdmin from '../components/HomeAdmin'
+import HomeAdmin from '../../components/privado/HomeAdmin'
 
 function PerfilAdminHome () {
   return (
