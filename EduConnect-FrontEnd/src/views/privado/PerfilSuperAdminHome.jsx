@@ -1,8 +1,8 @@
-import AsideSuperAdmin from '../components/AsideSuperAdmin'
-import FormularioAdmin from '../components/FormularioAdmin'
+import AsideSuperAdmin from '../../components/privado/AsideSuperAdmin'
 import { Container, Col, Row } from 'react-bootstrap'
+import HomeSuperAdmin from '../../components/privado/HomeSuperAdmin'
 
-function PerfilSuperAdminFormularioAdmin () {
+function PerfilSuperAdminHome () {
   return (
     <Container fluid lg={12} className='p-0'>
       <Row>
@@ -10,11 +10,11 @@ function PerfilSuperAdminFormularioAdmin () {
           <AsideSuperAdmin/>
         </Col>
         <Col xs={9}>
-          <FormularioAdmin />
+          <HomeSuperAdmin />
         </Col>
       </Row>
     </Container>
   )
 }
 
-export default PerfilSuperAdminFormularioAdmin
+export default PerfilSuperAdminHome

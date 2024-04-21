@@ -1,10 +1,10 @@
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import Card from 'react-bootstrap/Card'
-import useMostrarAlertaConfirmacion from '../hooks/useMostrarAlertaConfirmacion'
-import '../styles/formulario.css'
+import useMostrarAlertaConfirmacion from '../../hooks/useMostrarAlertaConfirmacion'
+import '../styles/privado/formulario.css'
 
-function FormularioAdmin () {
+function FormularioEstudiante () {
   return (
         <>
         <Card className=" formulario">
@@ -54,4 +54,4 @@ function FormularioAdmin () {
   )
 }
 
-export default FormularioAdmin
+export default FormularioEstudiante
