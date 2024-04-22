@@ -1,13 +1,13 @@
-import { Container, Row, Col } from 'react-bootstrap';
-import * as echarts from 'echarts'; 
-import { useEffect, useRef } from 'react';
+import { Container, Row, Col } from 'react-bootstrap'
+import * as echarts from 'echarts'
+import { useEffect, useRef } from 'react'
 
 const Dashboard = () => {
-  const chartContainer = useRef(null);
+  const chartContainer = useRef(null)
 
   useEffect(() => {
     if (chartContainer && chartContainer.current) {
-      const myChart = echarts.init(chartContainer.current);
+      const myChart = echarts.init(chartContainer.current)
       myChart.setOption({
         title: {
           text: 'Asignaturas'
@@ -23,9 +23,9 @@ const Dashboard = () => {
           data: [6.5, 4, 5.7, 7, 2],
           type: 'bar'
         }]
-      });
+      })
     }
-  }, []);
+  }, [])
 
   return (
     <Container>
@@ -39,7 +39,7 @@ const Dashboard = () => {
         </Col>
       </Row>
     </Container>
-  );
+  )
 }
 
-export default Dashboard;
+export default Dashboard

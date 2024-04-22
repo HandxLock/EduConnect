@@ -1,15 +1,15 @@
-import { Col, Container, Row } from 'react-bootstrap';
-import NotasAlumno from '../../components/privado/NotasAlumno';
-import AnotacionesAlumno from '../../components/privado/AnotacionesAlumno';
-import ObservacionesAlumno from '../../components/privado/ObservacionesAlumno';
-import AsideAlumno from '../../components/privado/AsideAlumno';
-import AlumnosDashboard from '../../components/privado/AlumnosDashboard';
-import '../../styles/privado/views.css';
+import { Col, Container, Row } from 'react-bootstrap'
+import NotasAlumno from '../../components/privado/AlumnoNotas'
+import AnotacionesAlumno from '../../components/privado/AlumnoAnotaciones'
+import ObservacionesAlumno from '../../components/privado/AlumnoObservaciones'
+import AsideAlumno from '../../components/privado/AlumnoAside'
+import AlumnosDashboard from '../../components/privado/AlumnosDashboard'
+import '../../styles/privado/views.css'
 
 const Views = () => {
-  const notas = [6.5, 4.0, 5.7, 7.0, 2.0];
-  const anotaciones = ["1-Falta de atención", "2-Participa mucho en clase"];
-  const observaciones = ["1-Alumno con buen rendimiento académico", "2-Necesita mejorar en matemáticas"];
+  const notas = [6.5, 4.0, 5.7, 7.0, 2.0]
+  const anotaciones = ['1-Falta de atención', '2-Participa mucho en clase']
+  const observaciones = ['1-Alumno con buen rendimiento académico', '2-Necesita mejorar en matemáticas']
 
   return (
     <Container fluid className='views-container'>
@@ -37,7 +37,7 @@ const Views = () => {
         </Col>
       </Row>
     </Container>
-  );
-};
+  )
+}
 
-export default Views;
+export default Views

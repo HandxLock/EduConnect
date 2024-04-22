@@ -6,16 +6,16 @@ const NotasAlumno = ({ notas }) => {
     padding: '20px',
     border: '1px solid #dee2e6',
     borderRadius: '4px',
-    height: '100%',
+    height: '100%'
   }
 
   const h2Style = {
     fontSize: '20px',
-    marginBottom: '10px',
+    marginBottom: '10px'
   }
 
   const liStyle = {
-    marginBottom: '5px',
+    marginBottom: '5px'
   }
 
   return (
@@ -31,7 +31,7 @@ const NotasAlumno = ({ notas }) => {
 }
 
 NotasAlumno.propTypes = {
-  notas: PropTypes.arrayOf(PropTypes.number).isRequired,
+  notas: PropTypes.arrayOf(PropTypes.number).isRequired
 }
 
-export default NotasAlumno;
+export default NotasAlumno

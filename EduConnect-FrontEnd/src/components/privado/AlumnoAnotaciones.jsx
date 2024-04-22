@@ -6,17 +6,17 @@ const AnotacionesAlumno = ({ anotaciones }) => {
     padding: '20px',
     border: '1px solid #dee2e6',
     borderRadius: '4px',
-    height: '100%', // Ajuste de altura para igualar el tamaño del cuadro
-  };
+    height: '100%' // Ajuste de altura para igualar el tamaño del cuadro
+  }
 
   const h2Style = {
     fontSize: '20px',
-    marginBottom: '10px',
-  };
+    marginBottom: '10px'
+  }
 
   const liStyle = {
-    marginBottom: '5px',
-  };
+    marginBottom: '5px'
+  }
 
   return (
     <div style={anotacionesStyle}>
@@ -31,7 +31,7 @@ const AnotacionesAlumno = ({ anotaciones }) => {
 }
 
 AnotacionesAlumno.propTypes = {
-  anotaciones: PropTypes.arrayOf(PropTypes.string).isRequired, // Se espera un array de strings
+  anotaciones: PropTypes.arrayOf(PropTypes.string).isRequired // Se espera un array de strings
 }
 
-export default AnotacionesAlumno;
+export default AnotacionesAlumno
