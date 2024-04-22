@@ -1,15 +1,62 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useState, useContext } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import { IconBrandGithub, IconBrandGoogle, IconBrandFacebook } from '@tabler/icons-react'
 import '../../styles/publico/login.css'
+import { PersonasContext } from '../../context/PersonaContext'
+import { LoginContext } from '../../context/LoginContext'
+const PersonaURL = '/personas.json'
 
 function Login () {
+  const { setPersona } = useContext(PersonasContext)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [rememberMe, setRememberMe] = useState(false)
+  const { LoginState } = useContext(LoginContext)
+  const navigate = useNavigate()
+  const redirect = (Persona) => {
+    console.log('persona', Persona)
+    if (Persona.perfil === 'Admin') {
+      navigate('/Admin')
+    }
+    if (Persona.perfil === 'Superadmin') {
+      navigate('/superAdmin')
+    }
+    if (Persona.perfil === 'Docente') {
+      navigate('/Admin')
+    }
+    if (Persona.perfil === 'Alumno') {
+      navigate('/Admin')
+    }
+  }
 
-  const handleSubmit = (e) => {
+  const personasData = async (email, password) => {
+    try {
+      const LoginData = { email, password }
+      const Resolution = await fetch(PersonaURL)
+      if (!Resolution.ok) {
+        throw new Error('Hay un error en la data')
+      }
+      const data = await Resolution.json()
+      // console.log('data del package json: ', data)
+      const personasData = data.personas
+      const LoginPersona = personasData.find(persona => persona.email === LoginData.email)
+      console.log('data de personas encontrada: ', LoginPersona)
+      if (!LoginPersona) {
+        throw new Error('Correo incorrecto, favor vuelva a intentar con un correo valido')
+      }
+      if (LoginPersona.clave === LoginData.password) {
+        const PersonaValidated = { nombre: LoginPersona.nombre, perfil: LoginPersona.perfil }
+        setPersona(PersonaValidated)
+      } else {
+        throw new Error('Contraseña incorrecta, favor intentar con otra contraseña')
+      }
+    } catch (error) {
+      console.error({ message: error })
+    }
+  }
+
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
     if (!email.trim()) {
@@ -20,6 +67,11 @@ function Login () {
     if (!password.trim()) {
       alert('Por favor ingresa tu contraseña')
     }
+
+    personasData(email, password)
+    redirect(LoginState)
+    console.log('funcion persona', personasData(email, password))
+    console.log(LoginState)
   }
 
   return (
