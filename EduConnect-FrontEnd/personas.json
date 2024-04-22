@@ -7,35 +7,35 @@
         "nombre":"Erich",
         "email":"erich@educonnect.cl",
         "clave":"e1234",
-        "rol":"Superadmin"
+        "perfil":"Superadmin"
     },
     {
         "id":2,
         "nombre":"Constanza",
         "email":"constanza@educonnect.cl",
         "clave":"c1234",
-        "rol":"Admin"
+        "perfil":"Admin"
     },
     {
         "id":3,
         "nombre":"Francisco",
         "email":"Francisco@educonnect.cl",
         "clave":"f1234",
-        "rol":"Docente"
+        "perfil":"Docente"
     },
     {
         "id":4,
         "nombre":"Alfredo",
         "email":"alfredo@educonnect.cl",
         "clave":"a1234",
-        "rol":"Alumno"
+        "perfil":"Alumno"
     },
     {
         "id":5,
         "nombre":"Claudio",
         "email":"claudio@educonnect.cl",
         "clave":"c1234",
-        "rol":"Docente"
+        "perfil":"Docente"
     }
   ]
 }
