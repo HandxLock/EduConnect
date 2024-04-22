@@ -4,7 +4,7 @@ import Dropdown from 'react-bootstrap/Dropdown'
 import Image from 'react-bootstrap/Image'
 import '../../styles/privado/aside.css'
 
-function AsideAlumno() {
+function AsideAlumno () {
   return (
     <div className="aside ">
       <div className='perfil'>
@@ -29,4 +29,4 @@ function AsideAlumno() {
   )
 }
 
-export default AsideAlumno;
+export default AsideAlumno

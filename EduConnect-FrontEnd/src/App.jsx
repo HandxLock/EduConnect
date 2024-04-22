@@ -10,6 +10,7 @@ import NavBar from './components/publico/NavBar.jsx'
 import HomePage from './views/publico/HomePage.jsx'
 import { PersonasContext } from './context/PersonaContext.jsx'
 import Login from './views/publico/login.jsx'
+import Alumno from './views/privado/PerfilAlumno.jsx'
 
 function App () {
   const { Persona } = useContext(PersonasContext)
@@ -26,6 +27,7 @@ function App () {
         <Route path='/Admin' element={ Persona.perfil === 'Admin' ? <PerfilAdminHome/> : <Navigate to ='/login' replace />}/>
         <Route path='/Admin/formularioProfesor' element={ Persona.perfil === 'Admin' ? <PerfilAdminFormularioProfesor/> : <Navigate to ='/login' replace />}/>
         <Route path='/Admin/formularioEstudiante' element={ Persona.perfil === 'Admin' ? <PerfilAdminFormularioEstudiante/> : <Navigate to ='/login' replace />}/>
+        <Route path='/Alumno' element={ Persona.perfil === 'Alumno' ? <Alumno/> : <Navigate to ='/login' replace />}></Route>
       </Routes>
     </>
   )
