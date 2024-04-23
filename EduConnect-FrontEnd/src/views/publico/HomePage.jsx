@@ -5,10 +5,12 @@ import Footer from '../../components/publico/Footer'
 import '../../styles/publico/footer.css'
 import '../../styles/publico/homeStyle.css'
 import '../../styles/publico/contacto.css'
+import NavBar from '../../components/publico/NavBar'
 function HomePage () {
   return (
     <div>
       <div id='navbar ' className='posicion'>
+        <NavBar />
       </div>
       <div id="homepage" className="container text-center">
 
