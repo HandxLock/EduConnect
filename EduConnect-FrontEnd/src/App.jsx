@@ -6,7 +6,6 @@ import PerfilSuperAdminFormularioAdmin from './views/privado/PerfilSuperAdminFor
 import PerfilAdminFormularioProfesor from './views/privado/PerfilAdminFormularioProfesor.jsx'
 import PerfilAdminHome from './views/privado/PerfilAdminHome.jsx'
 import PerfilAdminFormularioEstudiante from './views/privado/PerfilAdminFormularioEstudiante.jsx'
-import NavBar from './components/publico/NavBar.jsx'
 import HomePage from './views/publico/HomePage.jsx'
 import { PersonasContext } from './context/PersonaContext.jsx'
 import Login from './views/publico/login.jsx'
@@ -17,7 +16,6 @@ function App () {
   console.log('context: ', Persona)
   return (
     <>
-      <NavBar />
       <Routes>
         <Route path='/' element={<HomePage />}/>
         <Route path='/login' element={<Login />} />
