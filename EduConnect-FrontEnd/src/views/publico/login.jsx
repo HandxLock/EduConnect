@@ -26,7 +26,7 @@ function Login () {
       navigate('/Admin')
     }
     if (Persona.perfil === 'Alumno') {
-      navigate('/Admin')
+      navigate('/Alumno')
     }
   }
 

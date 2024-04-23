@@ -6,38 +6,46 @@ export const LoginContext = createContext()
 
 const LoginProvider = ({ children }) => {
   const { Persona } = useContext(PersonasContext)
-  const [LoginState, setLoginState] = useState({ nombre: 'anonimo', perfil: 'publico', isLoggedIn: false })
+  const [loginState, setLoginState] = useState({ nombre: 'anonimo', perfil: 'publico', isLoggedIn: false })
   const navigate = useNavigate()
+
   const login = () => {
     setLoginState({ nombre: Persona.nombre, perfil: Persona.perfil, isLoggedIn: true })
-    console.log('login state', LoginState)
-    const redirect = () => {
-      console.log('persona', LoginState)
-      if (LoginState.perfil === 'Admin') {
-        navigate('/Admin')
-      }
-      if (LoginState.perfil === 'Superadmin') {
-        navigate('/superAdmin')
-      }
-      if (LoginState.perfil === 'Docente') {
-        navigate('/Admin')
-      }
-      if (LoginState.perfil === 'Alumno') {
-        navigate('/Admin')
-      }
-    }
-    redirect()
   }
 
   useEffect(() => {
-    login()
+    if (Persona) {
+      login()
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [Persona])
 
+  useEffect(() => {
+    if (loginState.isLoggedIn) {
+      redirect()
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loginState])
+
+  const redirect = () => {
+    if (loginState.perfil === 'Admin') {
+      navigate('/Admin')
+    }
+    if (loginState.perfil === 'Superadmin') {
+      navigate('/superAdmin')
+    }
+    if (loginState.perfil === 'Docente') {
+      navigate('/Docente')
+    }
+    if (loginState.perfil === 'Alumno') {
+      navigate('/Alumno')
+    }
+  }
+
   return (
-        <LoginContext.Provider value={{ LoginState, setLoginState }}>
-            {children}
-        </LoginContext.Provider>
+    <LoginContext.Provider value={{ loginState, setLoginState }}>
+      {children}
+    </LoginContext.Provider>
   )
 }
 
