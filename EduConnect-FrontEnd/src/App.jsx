@@ -19,13 +19,13 @@ function App () {
       <Routes>
         <Route path='/' element={<HomePage />}/>
         <Route path='/login' element={<Login />} />
-        <Route path='/superAdmin' element={ Persona.perfil === 'Superadmin' ? <PerfilSuperAdminHome/> : <Navigate to ='/login' replace />}/>
-        <Route path='/superAdmin/formularioColegio' element={ Persona.perfil === 'Superadmin' ? <PerfilSuperAdminFormulario/> : <Navigate to ='/login' replace />}/>
-        <Route path='/superAdmin/formularioAdmin' element={ Persona.perfil === 'Superadmin' ? <PerfilSuperAdminFormularioAdmin/> : <Navigate to ='/login' replace />}/>
-        <Route path='/Admin' element={ Persona.perfil === 'Admin' ? <PerfilAdminHome/> : <Navigate to ='/login' replace />}/>
-        <Route path='/Admin/formularioProfesor' element={ Persona.perfil === 'Admin' ? <PerfilAdminFormularioProfesor/> : <Navigate to ='/login' replace />}/>
-        <Route path='/Admin/formularioEstudiante' element={ Persona.perfil === 'Admin' ? <PerfilAdminFormularioEstudiante/> : <Navigate to ='/login' replace />}/>
-        <Route path='/Alumno' element={ Persona.perfil === 'Alumno' ? <Alumno/> : <Navigate to ='/login' replace />}></Route>
+        <Route path='/superadmin' element={ Persona.perfil === 'Superadmin' ? <PerfilSuperAdminHome/> : <Navigate to ='/login' replace />}/>
+        <Route path='/superadmin/formulariocolegio' element={ Persona.perfil === 'Superadmin' ? <PerfilSuperAdminFormulario/> : <Navigate to ='/login' replace />}/>
+        <Route path='/superadmin/formularioadmin' element={ Persona.perfil === 'Superadmin' ? <PerfilSuperAdminFormularioAdmin/> : <Navigate to ='/login' replace />}/>
+        <Route path='/admin' element={ Persona.perfil === 'Admin' ? <PerfilAdminHome/> : <Navigate to ='/login' replace />}/>
+        <Route path='/admin/formularioprofesor' element={ Persona.perfil === 'Admin' ? <PerfilAdminFormularioProfesor/> : <Navigate to ='/login' replace />}/>
+        <Route path='/admin/formularioestudiante' element={ Persona.perfil === 'Admin' ? <PerfilAdminFormularioEstudiante/> : <Navigate to ='/login' replace />}/>
+        <Route path='/alumno' element={ Persona.perfil === 'Alumno' ? <Alumno/> : <Navigate to ='/login' replace />}></Route>
       </Routes>
     </>
   )
