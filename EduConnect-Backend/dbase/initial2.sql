@@ -71,16 +71,12 @@ CREATE SCHEMA colegio;
 CREATE TABLE colegio.apoderados (
   apoderado_id SERIAL PRIMARY KEY,
   usuario_id INT,
-  rut VARCHAR(15),
-  nombre VARCHAR(50),
   colegio_id INT
   );
 
 CREATE TABLE colegio.alumnos (
   alumno_id SERIAL PRIMARY KEY,
   usuario_id INT,
-  rut VARCHAR(15),
-  nombre VARCHAR(50),
   colegio_id INT,
   apoderado_id INT,
   curso_id INT
@@ -89,8 +85,6 @@ CREATE TABLE colegio.alumnos (
 CREATE TABLE colegio.docentes (
   docente_id SERIAL PRIMARY KEY,
   usuario_id INT,
-  rut VARCHAR(15),
-  nombre VARCHAR(50),
   colegio_id INT,
   asignatura_id INT
   );
@@ -189,18 +183,12 @@ CREATE TABLE superadmin.colegios (
 CREATE TABLE superadmin.admins (
   admin_id SERIAL PRIMARY KEY,
   usuario_id INT,
-  rut VARCHAR(20),
-  nombre VARCHAR(50),
-  cargo VARCHAR(100),
   colegio_id INT
   );
 
 CREATE TABLE superadmin.superAdmins (
   super_admin_id SERIAL PRIMARY KEY,
   usuario_id INT,
-  rut VARCHAR(20),
-  nombre VARCHAR(50),
-  cargo VARCHAR(100)
   );
 
 ALTER TABLE superadmin.admins ADD FOREIGN KEY (usuario_id) REFERENCES perfilamiento.usuarios (usuario_id);
