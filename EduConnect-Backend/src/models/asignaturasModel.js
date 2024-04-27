@@ -1,26 +1,47 @@
-import pool from '../../dbase/config.js'
-import bcrypt from 'bcryptjs'
+import pool from '../../dbase/config'
 
-const createPersonModel = async ({ rut, nombre, apellido1, apellido2, email, clave, direccion, telefono, comunaid }) => {
-  const hashedClave = bcrypt.hashSync(clave)
+const createAsignaturaModel = async (nombre) => {
   const SQLQuery = {
-    text: 'INSERT INTO usuarios (rut, nombre, apellido1, apellido2, email, clave, direccion, telefono, comunaid) VALUES ($1, $2, $3, $4. $5, $6, $7, $8, $9) RETURNING *',
-    values: [rut, nombre, apellido1, apellido2, email, clave, hashedClave, direccion, telefono, comunaid]
+    text: 'INSERT INTO asignatura (nombre) VALUES ($1) RETURNING *',
+    values: [nombre]
   }
   const response = await pool.query(SQLQuery)
   return response.rows[0]
 }
 
-const personByEmailModel = async ({ email }) => {
-  // console.log(email);
+const getAsignaturaByIdModel = async (asignatura_id) => {
   const SQLQuery = {
-    text: 'SELECT * FROM usuarios WHERE email = $1',
-    values: [email]
+    text: 'SELECT * FROM asignatura WHERE asignatura_id = $1',
+    values: [asignatura_id]
   }
-  // console.log(SQLQuery);
   const response = await pool.query(SQLQuery)
-  // console.log(response.rows[0]);
   return response.rows[0]
 }
 
-export { createPersonModel, personByEmailModel }
+const getAllAsignaturasModel = async () => {
+  const SQLQuery = {
+    text: 'SELECT * FROM asignatura'
+  }
+  const response = await pool.query(SQLQuery)
+  return response.rows
+}
+
+const updateAsignaturaModel = async (asignatura_id, nombre) => {
+  const SQLQuery = {
+    text: 'UPDATE asignatura SET nombre = $1 WHERE asignatura_id = $2 RETURNING *',
+    values: [nombre, asignatura_id]
+  }
+  const response = await pool.query(SQLQuery)
+  return response.rows[0]
+}
+
+const deleteAsignaturaModel = async (asignatura_id) => {
+  const SQLQuery = {
+    text: 'DELETE FROM asignatura WHERE asignatura_id = $1 RETURNING *',
+    values: [asignatura_id]
+  }
+  const response = await pool.query(SQLQuery)
+  return response.rows[0]
+}
+
+export { createAsignaturaModel, getAsignaturaByIdModel, getAllAsignaturasModel, updateAsignaturaModel, deleteAsignaturaModel }
