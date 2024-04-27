@@ -1,5 +1,5 @@
 // sección CRUD asignaturas
-import { createAsignaturaModel, getAsignaturaByIdModel, getAllAsignaturasModel, updateAsignaturaModel, deleteAsignaturaModel } from '../models/asignaturaModel.js'
+import { createAsignaturaModel, getAsignaturaByIdModel, getAllAsignaturasModel, updateAsignaturaModel, deleteAsignaturaModel } from '../models/asignaturasModel'
 
 const createAsignatura = async (req, res) => {
   try {
