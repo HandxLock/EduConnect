@@ -1,10 +1,10 @@
-import { createPersonModel, personByEmailModel } from '../models/personasmodel.js'
+import { createUsuarioModel, personByEmailModel } from '../models/Usuariomodel.js'
 
-const createNewPerson = async (req, res) => {
+const createNewUser = async (req, res) => {
   try {
-    const { person } = req.body
-    const newPerson = await createPersonModel(person)
-    return res.status(201).json(newPerson)
+    const { user } = req.body
+    const newUser = await createUsuarioModel(user)
+    return res.status(201).json(newUser)
   } catch (error) {
     console.error('Error al crear un registro nuevo de persona:', error)
     return res.status(400).json({ message: 'Error interno del servidor' })
@@ -24,4 +24,4 @@ const getPersonByID = async (req, res) => {
   }
 }
 
-export { createNewPerson, getPersonByID }
+export { createNewUser, getPersonByID }
