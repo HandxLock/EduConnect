@@ -24,12 +24,16 @@ const obtenerColegios = async () => {
 
 const actualizarColegio = async (colegio_id, nombre, descripcion, rut, direccion, telefono, email) => {
   try {
-    const colegioActualizado = await pool.query(
-      'UPDATE superadmin.colegios SET nombre = $1, descripcion = $2, rut = $3, direccion = $4, telefono = $5, email = $6 WHERE colegio_id = $7 RETURNING *',
-      // eslint-disable-next-line camelcase
-      [nombre, descripcion, rut, direccion, telefono, email, colegio_id]
-    )
-    return colegioActualizado.rows[0]
+    const colegioExiste = await pool.query('SELECT * FROM superadmin.colegios WHERE colegio_id=$1', [colegio_id])
+    if (colegioExiste.rows.length === 0) {
+      throw new Error('El colegio con el ID especificado no existe')
+    } else {
+      const colegioActualizado = await pool.query(
+        'UPDATE superadmin.colegios SET nombre = $1, descripcion = $2, rut = $3, direccion = $4, telefono = $5, email = $6 WHERE colegio_id = $7 RETURNING *',
+        [nombre, descripcion, rut, direccion, telefono, email, colegio_id]
+      )
+      return colegioActualizado.rows[0]
+    }
   } catch (error) {
     throw new Error(`Error al actualizar el colegio: ${error.message}`)
   }
@@ -37,8 +41,12 @@ const actualizarColegio = async (colegio_id, nombre, descripcion, rut, direccion
 
 const eliminarColegio = async (colegio_id) => {
   try {
-    // eslint-disable-next-line camelcase
-    await pool.query('DELETE FROM superadmin.colegios WHERE colegio_id = $1', [colegio_id])
+    const colegioExiste = await pool.query('SELECT * FROM superadmin.colegios WHERE colegio_id=$1', [colegio_id])
+    if (colegioExiste.rows.length === 0) {
+      throw new Error('El colegio con el ID especificado no existe')
+    } else {
+      await pool.query('DELETE FROM superadmin.colegios WHERE colegio_id = $1', [colegio_id])
+    }
   } catch (error) {
     throw new Error(`Error al eliminar el colegio: ${error.message}`)
   }
