@@ -1,4 +1,4 @@
-import { personByEmailModel } from '../models/personasmodel.js'
+import { personByEmailModel } from '../models/UsuarioModel.js'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import sendErrorResponse from '../../utils/utils.js'

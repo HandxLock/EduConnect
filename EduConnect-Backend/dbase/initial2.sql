@@ -56,7 +56,14 @@ INSERT INTO perfilamiento.permisos (nombre, descripcion, fecha_creacion, fecha_m
 VALUES ('accesoPaginaSuperAdmin', 'Permiso para ver la view de SuperAdmin', NOW(), NOW()),
   ('crearColegio', 'permiso para crear colegio', NOW(), NOW()),
   ('crearAdmin', 'permiso de crear usuarios perfil Admin', NOW(), NOW()),
-  ('crearAlumno', 'permiso para crear usuarios perfil alumno', NOW(), NOW());
+  ('crearAlumno', 'permiso para crear usuarios perfil alumno', NOW(), NOW()),
+  ('crearAsignatura', 'permiso para crear asignaturas', NOW(), NOW()),
+  ('crearCurso', 'permiso para crear cursos', NOW(), NOW()),
+  ('crearEvaluaciones', 'permiso para crear evaluaciones', NOW(), NOW()),
+  ('crearObersvaciones', 'permiso para crear asignaturas', NOW(), NOW()),
+  ('crearAsignatura', 'permiso para crear asignaturas', NOW(), NOW()),
+  ('crearAsignatura', 'permiso para crear asignaturas', NOW(), NOW()),
+  ;
 
 INSERT INTO perfilamiento.permisosPorPerfil (perfil_id, permiso_id) 
 VALUES (1, 1),
