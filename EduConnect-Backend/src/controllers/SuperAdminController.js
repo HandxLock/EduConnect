@@ -1,43 +1,47 @@
-import { personByEmailModel } from '../models/ejemplomodel.js'
-import bcrypt from 'bcryptjs'
-import jwt from 'jsonwebtoken'
-import sendErrorResponse from '../../utils/utils.js'
+/* eslint-disable camelcase */
+import { actualizarColegio, crearColegio, eliminarColegio, obtenerColegios } from '../models/superAdminModel.js'
 
-const loginPerson = async (req, res) => {
-  const { person } = req.body
-
+const crearColegioController = async (req, res) => {
   try {
-    const findPerson = await personByEmailModel(person)
-    console.log(findPerson)
-    if (!findPerson) {
-      return await sendErrorResponse(res, 'log_01')
-    }
-    const isPassValid = bcrypt.compareSync(
-      person.clave,
-      findPerson.clave
-    )
-    if (!isPassValid) {
-      return await sendErrorResponse(res, 'log_02')
-    }
-
-    const { email, nombre, apellido1, apellido2 } = findPerson
-    const token = await createToken(email)
-    res.status(200).json({
-      message: `Bienvenid@ ${nombre} ${apellido1} ${apellido2}, has iniciado sesión satisfactoriamente.`,
-      code: 200,
-      token
-    })
+    const { nombre, descripcion, rut, direccion, telefono, email } = req.body
+    const nuevoColegio = await crearColegio(nombre, descripcion, rut, direccion, telefono, email)
+    res.json(nuevoColegio)
   } catch (error) {
-    res.status(500).json({ error: error.message })
+    console.error('Error al crear el colegio:', error.message)
+    res.status(500).json({ error: 'Error interno del servidor' })
   }
 }
 
-// funcion para crear el token
-const createToken = async (email) => {
-  const token = jwt.sign({ email }, process.env.JWT_SECRET, {
-    expiresIn: '60s'
-  })
-  return token
+const obtenerColegioController = async (req, res) => {
+  try {
+    const colegios = await obtenerColegios()
+    res.json(colegios)
+  } catch (error) {
+    console.error('Error al obtener los colegios:', error.message)
+    res.status(500).json({ error: 'Error interno del servidor' })
+  }
+}
+const actualizarColegioController = async (req, res) => {
+  try {
+    const { colegio_id } = req.params
+    const { nombre, descripcion, rut, direccion, telefono, email } = req.body
+    const colegioActualizado = await actualizarColegio(colegio_id, nombre, descripcion, rut, direccion, telefono, email)
+    res.json(colegioActualizado)
+  } catch (error) {
+    console.error('Error al actualizar el colegio:', error.message)
+    res.status(500).json({ error: 'Error interno del servidor' })
+  }
 }
 
-export default loginPerson
+const eliminarColegioController = async (req, res) => {
+  try {
+    const { colegio_id } = req.params
+    await eliminarColegio(colegio_id)
+    res.json({ mensaje: 'Colegio eliminado exitosamente' })
+  } catch (error) {
+    console.error('Error al eliminar el colegio:', error.message)
+    res.status(500).json({ error: 'Error interno del servidor' })
+  }
+}
+
+export { crearColegioController, obtenerColegioController, actualizarColegioController, eliminarColegioController }
