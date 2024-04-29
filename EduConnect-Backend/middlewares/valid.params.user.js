@@ -1,6 +1,6 @@
 const validateParamsUser = (req, res, next) => {
-  const { person } = req.body
-  if (!person.rut || !person.nombre || !person.apellido1 || !person.apellido2 || !person.email || !person.clave || !person.direccion || !person.telefono || !person.perfil_id) {
+  const { user } = req.body
+  if (!user.rut || !user.nombre || !user.apellido1 || !user.apellido2 || !user.email || !user.clave || !user.direccion || !user.telefono || !user.perfilId) {
     return res.status(400).json({ error: 'debe ingresar todos los campos para registrar una persona' })
   }
   next()

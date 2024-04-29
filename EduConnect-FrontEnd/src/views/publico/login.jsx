@@ -1,10 +1,11 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import { IconBrandGithub, IconBrandGoogle, IconBrandFacebook } from '@tabler/icons-react'
 import '../../styles/publico/login.css'
 import { PersonasContext } from '../../context/PersonaContext'
-import { LoginContext } from '../../context/LoginContext'
+import { gapi } from 'gapi-script'
+import GoogleLogin from 'react-google-login'
 const PersonaURL = '/personas.json'
 
 function Login () {
@@ -12,42 +13,44 @@ function Login () {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [rememberMe, setRememberMe] = useState(false)
-  const { LoginState } = useContext(LoginContext)
   const navigate = useNavigate()
-  const redirect = (Persona) => {
-    console.log('persona', Persona)
-    if (Persona.perfil === 'Admin') {
+  const clientID = '478413847757-l3rtklhr4umscf79s1fhqidd6pae54om.apps.googleusercontent.com'
+
+  const redirect = (persona) => {
+    console.log('persona', persona)
+    if (persona.perfil === 'Admin') {
       navigate('/Admin')
     }
-    if (Persona.perfil === 'Superadmin') {
-      navigate('/superAdmin')
+    if (persona.perfil === 'Superadmin') {
+      console.log('super')
+      navigate('/superadmin')
     }
-    if (Persona.perfil === 'Docente') {
+    if (persona.perfil === 'Docente') {
       navigate('/Admin')
     }
-    if (Persona.perfil === 'Alumno') {
+    if (persona.perfil === 'Alumno') {
       navigate('/Alumno')
     }
   }
 
   const personasData = async (email, password) => {
     try {
-      const LoginData = { email, password }
-      const Resolution = await fetch(PersonaURL)
-      if (!Resolution.ok) {
+      const loginData = { email, password }
+      const resolution = await fetch(PersonaURL)
+      if (!resolution.ok) {
         throw new Error('Hay un error en la data')
       }
-      const data = await Resolution.json()
+      const data = await resolution.json()
       // console.log('data del package json: ', data)
       const personasData = data.personas
-      const LoginPersona = personasData.find(persona => persona.email === LoginData.email)
-      console.log('data de personas encontrada: ', LoginPersona)
-      if (!LoginPersona) {
+      const loginPersona = personasData.find(persona => persona.email === loginData.email)
+      console.log('data de personas encontrada: ', loginPersona)
+      if (!loginPersona) {
         throw new Error('Correo incorrecto, favor vuelva a intentar con un correo valido')
       }
-      if (LoginPersona.clave === LoginData.password) {
-        const PersonaValidated = { nombre: LoginPersona.nombre, perfil: LoginPersona.perfil }
-        setPersona(PersonaValidated)
+      if (loginPersona.clave === loginData.password) {
+        const personaValidated = { nombre: loginPersona.nombre, perfil: loginPersona.perfil }
+        setPersona(personaValidated)
       } else {
         throw new Error('Contraseña incorrecta, favor intentar con otra contraseña')
       }
@@ -69,9 +72,30 @@ function Login () {
     }
 
     personasData(email, password)
-    redirect(LoginState)
-    console.log('funcion persona', personasData(email, password))
-    console.log(LoginState)
+  }
+
+  useEffect(() => {
+    const start = () => {
+      gapi.auth2.init({
+        clientId: clientID
+      })
+    }
+    gapi.load('client:auth2', start)
+  }, [])
+
+  const onSuccess = (response) => {
+    console.log(response.profileObj)
+    const persona = {
+      ...response.profileObj,
+      perfil: 'Superadmin',
+      isLogedIn: true
+    }
+    setPersona(persona)
+    redirect(persona)
+  }
+
+  const onFailure = (error) => {
+    console.error('Error: ', error)
   }
 
   return (
@@ -131,6 +155,12 @@ function Login () {
 
             <p className='mt-5'>O usa tu cuenta</p>
 
+            <GoogleLogin
+              clientId={clientID}
+              onSuccess={onSuccess}
+              onFailure={onFailure}
+              cookiePolicy={'single_host_policy'}
+            />
             <div className='d-flex justify-content-center'>
               <a href="https://github.com/" className='m-3'><IconBrandGithub size={25} stroke={2} /></a>
               <a href="https://www.google.com/" className='m-3'><IconBrandGoogle size={25} stroke={2} /></a>
