@@ -12,16 +12,16 @@ const createUsuarioModel = async ({ rut, nombre, apellido1, apellido2, email, cl
   return response.rows[0]
 }
 
-const personByEmailModel = async ({ email }) => {
-  // console.log(email);
+const userByEmailModel = async (email) => {
+  // console.log('correo en modelo: ', email)
   const SQLQuery = {
-    text: 'SELECT * FROM usuarios WHERE email = $1',
+    text: 'SELECT * FROM perfilamiento.usuarios WHERE email = $1',
     values: [email]
   }
-  // console.log(SQLQuery);
+  // console.log('info de la query', SQLQuery)
   const response = await pool.query(SQLQuery)
-  // console.log(response.rows[0]);
+  // console.log('respuesta que se devuelve', response.rows[0])
   return response.rows[0]
 }
 
-export { createUsuarioModel, personByEmailModel }
+export { createUsuarioModel, userByEmailModel }
