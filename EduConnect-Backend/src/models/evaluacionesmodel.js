@@ -24,3 +24,43 @@ const personByEmailModel = async ({ email }) => {
 }
 
 export { createPersonModel, personByEmailModel }
+
+const createEvaluacionModel = async ({ alumnoId, evaluacionData }) => {
+  const { nombre, calificacion, fechaEvaluacion } = evaluacionData
+  const SQLQuery = {
+    text: 'INSERT INTO evaluaciones_por_alumno (alumno_id, nombre, calificacion, fecha_evaluacion) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+    values: [alumnoId, nombre, calificacion, fechaEvaluacion]
+  }
+  const response = await pool.query(SQLQuery)
+  return response.rows[0]
+}
+
+const getEvaluacionesByAlumnoIdModel = async (alumnoId) => {
+  const SQLQuery = {
+    text: 'SELECT * FROM evaluaciones_por_alumno WHERE alumno_id = $1',
+    values: [alumnoId]
+  }
+  const response = await pool.query(SQLQuery)
+  return response.rows
+}
+
+const updateEvaluacionModel = async (evaluacionId, evaluacionData) => {
+  const { nombre, calificacion, fechaEvaluacion } = evaluacionData
+  const SQLQuery = {
+    text: 'UPDATE evaluaciones_por_alumno SET nombre = $1, calificacion = $2, fecha_evaluacion = $3 WHERE evaluacion_id = $4 RETURNING *',
+    values: [nombre, calificacion, fechaEvaluacion, evaluacionId]
+  }
+  const response = await pool.query(SQLQuery)
+  return response.rows[0]
+}
+
+const deleteEvaluacionModel = async (evaluacionId) => {
+  const SQLQuery = {
+    text: 'DELETE FROM evaluaciones_por_alumno WHERE evaluacion_id = $1 RETURNING *',
+    values: [evaluacionId]
+  }
+  const response = await pool.query(SQLQuery)
+  return response.rows[0]
+}
+
+export { createEvaluacionModel, getEvaluacionesByAlumnoIdModel, updateEvaluacionModel, deleteEvaluacionModel }
