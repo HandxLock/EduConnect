@@ -5,6 +5,8 @@ import sendErrorResponse from '../../utils/utils.js'
 
 const loginUser = async (req, res) => {
   const { user } = req.body
+  // para hacer pruebas de login favor usar las siguientes credenciales: { email: 'ens@educonnect.cl', clave: 'e1234' }
+  // frente a dudas revisar archivo de seteo de base de datos
   // console.log('info ingresada: ', user)
   try {
     const findUser = await userByEmailModel(user.email)
