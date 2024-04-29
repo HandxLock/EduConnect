@@ -1,26 +1,26 @@
-import { personByEmailModel } from '../models/UsuarioModel.js'
+import { userByEmailModel } from '../models/Usuariomodel.js'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import sendErrorResponse from '../../utils/utils.js'
 
-const loginPerson = async (req, res) => {
-  const { person } = req.body
-
+const loginUser = async (req, res) => {
+  const { user } = req.body
+  // console.log('info ingresada: ', user)
   try {
-    const findPerson = await personByEmailModel(person)
-    console.log(findPerson)
-    if (!findPerson) {
+    const findUser = await userByEmailModel(user.email)
+    // console.log('info retornada: ', findUser)
+    if (!findUser) {
       return await sendErrorResponse(res, 'log_01')
     }
     const isPassValid = bcrypt.compareSync(
-      person.clave,
-      findPerson.clave
+      user.clave,
+      findUser.clave
     )
     if (!isPassValid) {
       return await sendErrorResponse(res, 'log_02')
     }
 
-    const { email, nombre, apellido1, apellido2 } = findPerson
+    const { email, nombre, apellido1, apellido2 } = findUser
     const token = await createToken(email)
     res.status(200).json({
       message: `Bienvenid@ ${nombre} ${apellido1} ${apellido2}, has iniciado sesión satisfactoriamente.`,
@@ -40,4 +40,4 @@ const createToken = async (email) => {
   return token
 }
 
-export default loginPerson
+export default loginUser
