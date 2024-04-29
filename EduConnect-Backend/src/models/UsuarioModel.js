@@ -4,8 +4,8 @@ import bcrypt from 'bcryptjs'
 const createUsuarioModel = async ({ rut, nombre, apellido1, apellido2, email, clave, direccion, telefono, perfilId }) => {
   const hashedClave = bcrypt.hashSync(clave)
   const SQLQuery = {
-    text: 'INSERT INTO perfilamiento.usuarios (rut, nombre, apellido1, apellido2, email, clave, direccion, telefono, perfil_id) VALUES ($1, $2, $3, $4. $5, $6, $7, $8, $9) RETURNING *',
-    values: [rut, nombre, apellido1, apellido2, email, clave, hashedClave, direccion, telefono, perfilId]
+    text: 'INSERT INTO perfilamiento.usuarios (rut, nombre, apellido1, apellido2, email, clave, direccion, telefono, perfil_id, fecha_creacion, fecha_modificacion) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, NOW(), NOW()) RETURNING *',
+    values: [rut, nombre, apellido1, apellido2, email, hashedClave, direccion, telefono, perfilId]
   }
   const response = await pool.query(SQLQuery)
 
