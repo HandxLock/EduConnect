@@ -29,7 +29,7 @@ const actualizarColegioController = async (req, res) => {
     res.json(colegioActualizado)
   } catch (error) {
     console.error('Error al actualizar el colegio:', error.message)
-    res.status(500).json({ error: 'Error interno del servidor' })
+    res.status(500).json({ error: 'No se Encuentra ID a Actualizar' })
   }
 }
 
@@ -40,7 +40,7 @@ const eliminarColegioController = async (req, res) => {
     res.json({ mensaje: 'Colegio eliminado exitosamente' })
   } catch (error) {
     console.error('Error al eliminar el colegio:', error.message)
-    res.status(500).json({ error: 'Error interno del servidor' })
+    res.status(500).json({ error: 'No se Encuentr ID para Eliminar' })
   }
 }
 
