@@ -1,9 +1,11 @@
+// Este archivo de rutas aún se encuentra en pendientes
+
 import { Router } from 'express'
-import loginPerson from '../src/controllers/loginController.js'
-import validateParamsLogin from '../middlewares/valid.params.login.js'
+import { createNewAlumno } from '../src/controllers/AdminController.js'
+import validateParamsAlumno from '../middlewares/valid.params.Alumno.js'
 
 const router = Router()
 
-router.post('/login', validateParamsLogin, loginPerson)
+router.post('/admin/alumno', validateParamsAlumno, createNewAlumno)
 
 export default router
