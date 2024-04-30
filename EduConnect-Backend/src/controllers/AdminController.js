@@ -1,53 +1,36 @@
-import { personByEmailModel } from '../models/UsuarioModel.js'
-import bcrypt from 'bcryptjs'
-import jwt from 'jsonwebtoken'
-import sendErrorResponse from '../../utils/utils.js'
+// Este archivo de controllers aun se encuentra pendiente
 
-/*sección CRUD asignaturas*/
+import { createAlumnoModel } from '../models/alumnoModel.js'
+import { createApoderadoModel } from '../models/apoderadoModel.js'
+import { createUsuarioModel } from '../models/Usuariomodel.js'
+// import sendErrorResponse from '../../utils/utils.js'
 
-/*sección CRUD cursos*/
+/* sección CRUD asignaturas */
 
-/*sección CRUD docentes*/
+/* sección CRUD cursos */
 
-/*sección CRUD alumnos*/
+/* sección CRUD docentes */
 
-/*sección CRUD apoderados*/
+/* sección CRUD alumnos */
 
-const loginPerson = async (req, res) => {
-  const { person } = req.body
-
+const createNewAlumno = async (req, res) => {
   try {
-    const findPerson = await personByEmailModel(person)
-    console.log(findPerson)
-    if (!findPerson) {
-      return await sendErrorResponse(res, 'log_01')
-    }
-    const isPassValid = bcrypt.compareSync(
-      person.clave,
-      findPerson.clave
-    )
-    if (!isPassValid) {
-      return await sendErrorResponse(res, 'log_02')
-    }
-
-    const { email, nombre, apellido1, apellido2 } = findPerson
-    const token = await createToken(email)
-    res.status(200).json({
-      message: `Bienvenid@ ${nombre} ${apellido1} ${apellido2}, has iniciado sesión satisfactoriamente.`,
-      code: 200,
-      token
-    })
+    const { alumno, apoderado } = req.body
+    console.log('info ingresada:', alumno, apoderado)
+    const newUserAlumno = await createUsuarioModel(alumno.user)
+    const newUserApoderado = await createUsuarioModel(apoderado.user)
+    console.log('info retornada usuario alumno', newUserAlumno)
+    console.log('info retornada usuario apoderado', newUserApoderado)
+    console.log('info alumno: ', alumno.colegioID, alumno.cursoID, newUserApoderado.apoderado_id)
+    const newApoderado = await createApoderadoModel(newUserApoderado.usuario_id, apoderado.colegioID)
+    const newAlumno = await createAlumnoModel(newUserAlumno.usuario_id, alumno.colegioID, newApoderado.apoderado_id, alumno.cursoID)
+    return res.status(201).json({ newUserAlumno, newAlumno, newUserApoderado, newApoderado })
   } catch (error) {
-    res.status(500).json({ error: error.message })
+    console.error('Error al crear un registro nuevo de alumno:', error)
+    return res.status(400).json({ message: 'Error interno del servidor' })
   }
 }
 
-// funcion para crear el token
-const createToken = async (email) => {
-  const token = jwt.sign({ email }, process.env.JWT_SECRET, {
-    expiresIn: '60s'
-  })
-  return token
-}
+/* sección CRUD apoderados */
 
-export default loginPerson
+export { createNewAlumno }
