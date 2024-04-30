@@ -1,53 +1,82 @@
-import { personByEmailModel } from '../models/UsuarioModel.js'
-import bcrypt from 'bcryptjs'
-import jwt from 'jsonwebtoken'
-import sendErrorResponse from '../../utils/utils.js'
+/* eslint-disable camelcase */
+// sección CRUD asignaturas
+import { createAsignaturaModel, getAsignaturaByIdModel, getAllAsignaturasModel, updateAsignaturaModel, deleteAsignaturaModel } from '../models/asignaturasModel'
 
-/*sección CRUD asignaturas*/
-
-/*sección CRUD cursos*/
-
-/*sección CRUD docentes*/
-
-/*sección CRUD alumnos*/
-
-/*sección CRUD apoderados*/
-
-const loginPerson = async (req, res) => {
-  const { person } = req.body
-
+const createAsignatura = async (req, res) => {
   try {
-    const findPerson = await personByEmailModel(person)
-    console.log(findPerson)
-    if (!findPerson) {
-      return await sendErrorResponse(res, 'log_01')
-    }
-    const isPassValid = bcrypt.compareSync(
-      person.clave,
-      findPerson.clave
-    )
-    if (!isPassValid) {
-      return await sendErrorResponse(res, 'log_02')
+    const { nombre } = req.body
+
+    if (!nombre) {
+      return res.status(400).json({ message: 'El nombre de la asignatura es requerido' })
     }
 
-    const { email, nombre, apellido1, apellido2 } = findPerson
-    const token = await createToken(email)
-    res.status(200).json({
-      message: `Bienvenid@ ${nombre} ${apellido1} ${apellido2}, has iniciado sesión satisfactoriamente.`,
-      code: 200,
-      token
-    })
+    const nuevaAsignatura = await createAsignaturaModel(nombre)
+    return res.status(201).json(nuevaAsignatura)
   } catch (error) {
-    res.status(500).json({ error: error.message })
+    console.error('Error al crear una nueva asignatura:', error)
+    return res.status(500).json({ message: 'Error interno del servidor' })
   }
 }
 
-// funcion para crear el token
-const createToken = async (email) => {
-  const token = jwt.sign({ email }, process.env.JWT_SECRET, {
-    expiresIn: '60s'
-  })
-  return token
+const getAsignaturaById = async (req, res) => {
+  try {
+    const { asignatura_id } = req.params
+    const asignatura = await getAsignaturaByIdModel(asignatura_id)
+    if (asignatura) {
+      return res.status(200).json(asignatura)
+    } else {
+      return res.status(404).json({ message: 'Asignatura no encontrada' })
+    }
+  } catch (error) {
+    console.error('Error al obtener una asignatura por ID:', error)
+    return res.status(500).json({ message: 'Error interno del servidor' })
+  }
 }
 
-export default loginPerson
+const getAllAsignaturas = async (req, res) => {
+  try {
+    const asignaturas = await getAllAsignaturasModel()
+    return res.status(200).json(asignaturas)
+  } catch (error) {
+    console.error('Error al obtener todas las asignaturas:', error)
+    return res.status(500).json({ message: 'Error interno del servidor' })
+  }
+}
+
+const updateAsignatura = async (req, res) => {
+  try {
+    const { asignatura_id } = req.params
+    const { nombre } = req.body
+
+    if (!nombre) {
+      return res.status(400).json({ message: 'El nombre de la asignatura es requerido' })
+    }
+
+    const asignaturaActualizada = await updateAsignaturaModel(asignatura_id, nombre)
+    return res.status(200).json(asignaturaActualizada)
+  } catch (error) {
+    console.error('Error al actualizar una asignatura:', error)
+    return res.status(500).json({ message: 'Error interno del servidor' })
+  }
+}
+
+const deleteAsignatura = async (req, res) => {
+  try {
+    const { asignatura_id } = req.params
+    const asignaturaEliminada = await deleteAsignaturaModel(asignatura_id)
+    return res.status(200).json(asignaturaEliminada)
+  } catch (error) {
+    console.error('Error al eliminar una asignatura:', error)
+    return res.status(500).json({ message: 'Error interno del servidor' })
+  }
+}
+
+export { createAsignatura, getAsignaturaById, getAllAsignaturas, updateAsignatura, deleteAsignatura }
+
+// sección CRUD cursos
+
+// sección CRUD docentes
+
+// sección CRUD alumnos
+
+// sección CRUD apoderados
