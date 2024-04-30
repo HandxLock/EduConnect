@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 // sección CRUD asignaturas
 import { createAsignaturaModel, getAsignaturaByIdModel, getAllAsignaturasModel, updateAsignaturaModel, deleteAsignaturaModel } from '../models/asignaturasModel'
 
