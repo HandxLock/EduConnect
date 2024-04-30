@@ -1,3 +1,6 @@
+-- Segunda versión de la inicialización de la base de datos
+-- Ya obsoleta, no ocupar
+
 CREATE DATABASE educonnect;
 
 \c educonnect;

@@ -1,9 +1,11 @@
-import { createUsuarioModel, personByEmailModel } from '../models/Usuariomodel.js'
+import { createUsuarioModel, userByEmailModel } from '../models/Usuariomodel.js'
 
 const createNewUser = async (req, res) => {
   try {
     const { user } = req.body
+    // console.log('info ingresada:', user)
     const newUser = await createUsuarioModel(user)
+    // console.log('info retornada:', newUser)
     return res.status(201).json(newUser)
   } catch (error) {
     console.error('Error al crear un registro nuevo de persona:', error)
@@ -11,17 +13,17 @@ const createNewUser = async (req, res) => {
   }
 }
 
-const getPersonByID = async (req, res) => {
+const getUserByEmail = async (req, res) => {
   try {
     const email = req.params
-    // console.log(email);
-    const person = await personByEmailModel(email)
-    // console.log('user: ', user);
-    return res.status(200).json(person)
+    // console.log('info ingresada :', email)
+    const user = await userByEmailModel(email.email)
+    // console.log('info retornada: ', user)
+    return res.status(200).json(user)
   } catch (error) {
     console.error('Error al buscar el registro de la persona:', error)
     return res.status(500).json({ message: 'Error interno del servidor' })
   }
 }
 
-export { createNewUser, getPersonByID }
+export { createNewUser, getUserByEmail }

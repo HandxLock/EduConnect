@@ -133,7 +133,12 @@ VALUES ('11.222.333-4', 'Erich', 'Armijo', 'Penroz', 'erich@educonnect.cl', 'e12
 ('16.726.384-1','Daniela','Garces','Jorquera','dgc@educconect.cl','444123a','Las Condes', '+56965485296',5, NOW(), NOW()),
 ('18.638.281-7','Brian','Jorquera', 'Martinez','BrianJ.r@educconect.cl', '444123a','Las Condes', '+56965485296',5, NOW(), NOW()),
 ('16.856.394-1','Jaime','Gonzalez', 'Perez','JaimeGonza123@educconect.cl', '014mty123','La Florida', '+56955664385',5, NOW(), NOW()),
-('13.864.953-7', 'Felipe','Pavez', 'Valdes', 'Fpavez1877@educconect.cl', 'qwert123', 'La Pintana', '+56994891225', 2, NOW(), NOW());
+('13.864.953-7', 'Felipe','Pavez', 'Valdes', 'Fpavez1877@educconect.cl', 'qwert123', 'La Pintana', '+56994891225', 2, NOW(), NOW()),
+('17.365.852-4', 'Estephan','Nasgul', 'Seanfield', 'ens@educonnect.cl', '$2a$10$qbTgTmTZylFNrwYrekaCGeiD/gqcaFwI5Helazd5QHX/KitxdxniK', 'Maipu', '+56965784923', 4, NOW(), NOW());
+-- considerar que el último usuario es el usuario para las pruebas de login ya que su clave esta encripata
+-- para ingresar usar su email y la contraseña es: "e1234"
+-- el resto de los usuarios no sirven para pruebas de login, ya que no tienen sus contraseñas encriptadas
+-- el resto de usuarios solo puede servir para consultas varias solamente
 
 CREATE SCHEMA colegio;
 
