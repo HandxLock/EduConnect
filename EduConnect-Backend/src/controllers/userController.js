@@ -3,9 +3,9 @@ import { createUsuarioModel, userByEmailModel } from '../models/UsuarioModel.js'
 const createNewUser = async (req, res) => {
   try {
     const { user } = req.body
-    // console.log('info ingresada:', user)
+    console.log('info ingresada:', user)
     const newUser = await createUsuarioModel(user)
-    // console.log('info retornada:', newUser)
+    console.log('info retornada:', newUser)
     return res.status(201).json(newUser)
   } catch (error) {
     console.error('Error al crear un registro nuevo de persona:', error)

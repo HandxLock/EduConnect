@@ -6,6 +6,7 @@ import superAdminRoutes from './routes/superAdmin.routes.js'
 import loginRoutes from './routes/login.routes.js'
 import userRoutes from './routes/user.routes.js'
 import observacionRoutes from './routes/observacion.routes.js'
+import adminRoutes from './routes/admin.routes.js'
 
 const PORT = process.env.PORT || 3000
 
@@ -19,4 +20,6 @@ app.use(superAdminRoutes)
 app.use(userRoutes)
 app.use(loginRoutes)
 app.use(observacionRoutes)
+app.use(adminRoutes)
+
 app.listen(PORT, console.log(`Server on http://localhost:${PORT}`))

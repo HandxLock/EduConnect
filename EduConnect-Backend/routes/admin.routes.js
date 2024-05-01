@@ -1,7 +1,17 @@
-import express from 'express'
-import { createAsignatura, getAsignaturaById, getAllAsignaturas, updateAsignatura, deleteAsignatura } from '../src/controllers/AdminController'
+// Este archivo de rutas aún se encuentra en pendientes
 
-const router = express.Router()
+import { Router } from 'express'
+import validateParamsAlumno from '../middlewares/valid.params.Alumno.js'
+import { createAsignatura, getAsignaturaById, getAllAsignaturas, updateAsignatura, deleteAsignatura, createNewAlumno, createNewDocente } from '../src/controllers/AdminController.js'
+import validateParamsDocente from '../middlewares/valid.params.Docente.js'
+
+const router = Router()
+
+// Rutas Alumnos
+router.post('/admin/alumno', validateParamsAlumno, createNewAlumno)
+
+// Rutas Docentes
+router.post('/admin/docente', validateParamsDocente, createNewDocente)
 
 // Rutas Asignaturas
 router.post('/asignaturas', createAsignatura)
