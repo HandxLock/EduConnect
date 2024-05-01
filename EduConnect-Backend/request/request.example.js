@@ -25,7 +25,7 @@
 // luego pegarla en la pestaña de "Auth" y la parte de "bearer" donde dice Bearer Token
 // ruta get -> http://localhost:3000/user/ens@educonnect.cl
 
-// ruta -> http://localhost:3000/admin/alumno
+// ruta post -> http://localhost:3000/admin/alumno
 // {
 //   "alumno":{
 //     "user":{
@@ -55,5 +55,23 @@
 //      "perfilId": 5
 //     },
 //     "colegioID": 1
+//   }
+// }
+// ruta post -> http://localhost:3000/admin/docente
+// {
+//   "docente":{
+//     "user":{
+//      "rut": "18.347.201-4",
+//      "nombre": "Stephany",
+//      "apellido1": "Soto",
+//      "apellido2": "Zuñiga",
+//      "email": "ssz@educonnect.cl",
+//      "clave": "s1234",
+//      "direccion": "Ñuñoa",
+//      "telefono": "+56967532491",
+//      "perfilId": 3
+//     },
+//     "colegioID": 1,
+//     "asignaturaID": 1
 //   }
 // }

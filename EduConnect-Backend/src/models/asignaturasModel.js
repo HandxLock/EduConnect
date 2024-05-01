@@ -1,4 +1,4 @@
-import pool from '../../dbase/config'
+import pool from '../../dbase/config.js'
 
 const createAsignaturaModel = async (nombre) => {
   const SQLQuery = {
