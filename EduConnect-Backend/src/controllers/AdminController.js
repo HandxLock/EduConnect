@@ -3,7 +3,8 @@
 import { createAlumnoModel } from '../models/alumnoModel.js'
 import { createApoderadoModel } from '../models/apoderadoModel.js'
 import { createUsuarioModel } from '../models/Usuariomodel.js'
-import { createAsignaturaModel, getAsignaturaByIdModel, getAllAsignaturasModel, updateAsignaturaModel, deleteAsignaturaModel } from '../models/asignaturasModel'
+import { createDocenteModel } from '../models/docentesModel.js'
+import { createAsignaturaModel, getAsignaturaByIdModel, getAllAsignaturasModel, updateAsignaturaModel, deleteAsignaturaModel } from '../models/asignaturasModel.js'
 // import sendErrorResponse from '../../utils/utils.js'
 
 /* sección CRUD asignaturas */
@@ -84,6 +85,21 @@ const deleteAsignatura = async (req, res) => {
 
 /* sección CRUD docentes */
 
+const createNewDocente = async (req, res) => {
+  try {
+    const { docente } = req.body
+    console.log('info ingresada:', docente)
+    const newUserDocente = await createUsuarioModel(docente.user)
+    console.log('info retornada usuario docente', newUserDocente)
+    console.log('info alumno: ', docente.colegioID, docente.asignaturaID, newUserDocente.user_id)
+    const NewDocente = await createDocenteModel(newUserDocente.usuario_id, docente.colegioID, docente.asignaturaID)
+    return res.status(201).json({ newUserDocente, NewDocente })
+  } catch (error) {
+    console.error('Error al crear un registro nuevo de docente:', error)
+    return res.status(400).json({ message: 'Error interno del servidor' })
+  }
+}
+
 /* sección CRUD alumnos */
 
 const createNewAlumno = async (req, res) => {
@@ -106,4 +122,4 @@ const createNewAlumno = async (req, res) => {
 
 /* sección CRUD apoderados */
 
-export { createAsignatura, getAsignaturaById, getAllAsignaturas, updateAsignatura, deleteAsignatura, createNewAlumno }
+export { createAsignatura, getAsignaturaById, getAllAsignaturas, updateAsignatura, deleteAsignatura, createNewAlumno, createNewDocente }
