@@ -1,4 +1,4 @@
-import { createUsuarioModel, userByEmailModel } from '../models/Usuariomodel.js'
+import { createUsuarioModel, userByEmailModel } from '../models/UsuarioModel.js'
 
 const createNewUser = async (req, res) => {
   try {
