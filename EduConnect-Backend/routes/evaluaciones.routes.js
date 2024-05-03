@@ -1,6 +1,6 @@
 import express from 'express'
-import { createEvaluation, getEvaluationById, updateEvaluation, deleteEvaluation } from '../src/controllers/evaluacionController'
-import validateParamsEvaluation from '../middlewares/validateParamsEvaluation.js'
+import { createEvaluation, getEvaluationById, updateEvaluation, deleteEvaluation } from '../src/controllers/evaluacionController.js'
+import validateParamsEvaluation from '../middlewares/valid.params.evaluaciones.js'
 
 const router = express.Router()
 

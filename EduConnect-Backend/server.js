@@ -7,6 +7,7 @@ import loginRoutes from './routes/login.routes.js'
 import userRoutes from './routes/user.routes.js'
 import observacionRoutes from './routes/observacion.routes.js'
 import adminRoutes from './routes/admin.routes.js'
+import alumnosRoutes from './routes/evaluaciones.routes.js'
 
 const PORT = process.env.PORT || 3000
 
@@ -21,5 +22,6 @@ app.use(userRoutes)
 app.use(loginRoutes)
 app.use(observacionRoutes)
 app.use(adminRoutes)
+app.use(alumnosRoutes)
 
 app.listen(PORT, console.log(`Server on http://localhost:${PORT}`))

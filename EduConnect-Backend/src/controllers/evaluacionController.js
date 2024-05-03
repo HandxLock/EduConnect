@@ -1,4 +1,4 @@
-import EvaluationModel from '../models/evaluacionesmodel.js'
+import { createEvaluacionModel, getEvaluacionesByAlumnoIdModel, updateEvaluacionModel, deleteEvaluacionModel } from '../models/evaluacionesmodel.js'
 import sendErrorResponse from '../../utils/utils.js'
 
 const createEvaluation = async (req, res) => {
@@ -6,7 +6,7 @@ const createEvaluation = async (req, res) => {
   const { title, score } = req.body.evaluation
 
   try {
-    const newEvaluation = await EvaluationModel.create({
+    const newEvaluation = await createEvaluacionModel({
       title,
       score,
       studentId: idAlumno
@@ -23,7 +23,7 @@ const getEvaluationById = async (req, res) => {
   const { idEvaluacion } = req.params
 
   try {
-    const evaluation = await EvaluationModel.findById(idEvaluacion)
+    const evaluation = await getEvaluacionesByAlumnoIdModel(idEvaluacion)
 
     if (!evaluation) {
       return await sendErrorResponse(res, 'eval_01')
@@ -41,7 +41,7 @@ const updateEvaluation = async (req, res) => {
   const { title, score } = req.body.evaluation
 
   try {
-    const updatedEvaluation = await EvaluationModel.findByIdAndUpdate(
+    const updatedEvaluation = await updateEvaluacionModel(
       idEvaluacion,
       { title, score },
       { new: true }
@@ -62,7 +62,7 @@ const deleteEvaluation = async (req, res) => {
   const { idEvaluacion } = req.params
 
   try {
-    const deletedEvaluation = await EvaluationModel.findByIdAndDelete(idEvaluacion)
+    const deletedEvaluation = await deleteEvaluacionModel(idEvaluacion)
 
     if (!deletedEvaluation) {
       return await sendErrorResponse(res, 'eval_01')
