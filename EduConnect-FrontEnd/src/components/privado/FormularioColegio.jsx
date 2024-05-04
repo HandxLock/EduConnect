@@ -12,25 +12,25 @@ function FormularioColegio () {
   const [direccion, setDireccion] = useState('')
   const [telefono, setTelefono] = useState('')
   const [email, setEmail] = useState('')
-  const [submitted, setSubmitted] = useState(false)
+
+  const [mensaje, setMensaje] = useState('')
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
       await agregarColegio(nombre, descripcion, rut, telefono, email)
-      // Marca el formulario como enviado
-      setSubmitted(true)
+      setMensaje('Colegio creado exitosamente.')
     } catch (error) {
       console.error('Error al agregar colegio:', error)
-      // Aquí puedes manejar el error, mostrar una alerta, etc.
+      setMensaje('Error al crear Colegio. Por favor, inténtalo de nuevo.')
     }
   }
-  if (submitted) {
-    window.location.href = '/superadmin'
-  }
+
   return (
         <>
+        <h2 className='text-center mt-3'>Creacion Colegio</h2>
         <Card className="formulario">
+          {mensaje && <div className="mensaje">{mensaje}</div>}
         <Form onSubmit={handleSubmit}>
           <Form.Group>
             <Form.Label>Nombre Establecimiento</Form.Label>
@@ -56,7 +56,7 @@ function FormularioColegio () {
             <Form.Label>Email</Form.Label>
             <Form.Control type="string" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
           </Form.Group>
-          <Button variant="primary" type="submit">
+          <Button className='m-3' variant="primary" type="submit">
             Ingresar
           </Button>
         </Form>
