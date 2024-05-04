@@ -1,7 +1,7 @@
 import { Routes, Route, BrowserRouter } from 'react-router-dom'
 // import { useContext } from 'react'
 // import PerfilSuperAdminFormulario from './views/privado/PerfilSuperAdminFormulario.jsx'
-import PerfilSuperAdminHome from './views/privado/PerfilSuperAdminHome.jsx'
+// import PerfilSuperAdminHome from './views/privado/PerfilSuperAdminHome.jsx'
 // import PerfilSuperAdminFormularioAdmin from './views/privado/PerfilSuperAdminFormularioAdmin.jsx'
 // import PerfilAdminFormularioProfesor from './views/privado/PerfilAdminFormularioProfesor.jsx'
 import PerfilAdminHome from './views/privado/PerfilAdminHome.jsx'
@@ -12,9 +12,8 @@ import Login from './views/publico/login.jsx'
 import ProtectedRouteAdmin from './ProtectedRouteAdmin.jsx'
 import ProtectedRouteSuperAdmin from './ProtectedRouteSuperAdmin.jsx'
 import PaginaError from './views/publico/paginaError.jsx'
-import FormularioAdmin from './components/privado/FormularioAdmin.jsx'
-import FormularioColegio from './components/privado/FormularioColegio.jsx'
-import AsignacionColegio from './components/privado/AsignacionColegio.jsx'
+
+import SuperAdmin from './views/privado/SuperAdmin.jsx'
 function App () {
   return (
     <>
@@ -23,13 +22,9 @@ function App () {
       <Routes>
         <Route path='/' element={<HomePage />}/>
         <Route path='/login' element={<Login />} />
-        <Route element ={ <ProtectedRouteSuperAdmin/> }>
-            <Route path='/superadmin' element={ <PerfilSuperAdminHome />}/>
-            <Route path='/superadmin/formularioAdmin' element={ <FormularioAdmin />}/>
-            <Route path='/superadmin/formularioColegio' element={ <FormularioColegio />}/>
-            <Route path='/superadmin/formularioAsignarColegio' element={ <AsignacionColegio />}/>
+          <Route element ={ <ProtectedRouteSuperAdmin/> }>
+            <Route path='/superadmin' element={ <SuperAdmin />}/>
             <Route path='*' element={< PaginaError />}/>
-
         </Route>
         <Route element ={ <ProtectedRouteAdmin/> }>
           <Route path='/admin' element={ <PerfilAdminHome />}/>
@@ -44,6 +39,7 @@ function App () {
         <Route path='/alumno' element={ Persona.perfil === 'Alumno' ? <Alumno/> : <Navigate to ='/login' replace />}></Route> */}
 
       </Routes>
+
       </BrowserRouter>
     </>
   )
