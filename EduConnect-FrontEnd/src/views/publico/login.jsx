@@ -1,102 +1,71 @@
-import { useState, useContext, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import { IconBrandGithub, IconBrandGoogle, IconBrandFacebook } from '@tabler/icons-react'
 import '../../styles/publico/login.css'
-import { PersonasContext } from '../../context/PersonaContext'
-import { gapi } from 'gapi-script'
-import GoogleLogin from 'react-google-login'
-const PersonaURL = '/personas.json'
+import { useAuth } from '../../context/AuthContext'
+// import { gapi } from 'gapi-script'
+// import GoogleLogin from 'react-google-login'
 
 function Login () {
-  const { setPersona } = useContext(PersonasContext)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [rememberMe, setRememberMe] = useState(false)
-  const navigate = useNavigate()
-  const clientID = '478413847757-l3rtklhr4umscf79s1fhqidd6pae54om.apps.googleusercontent.com'
-
-  const redirect = (persona) => {
-    console.log('persona', persona)
-    if (persona.perfil === 'Admin') {
-      navigate('/Admin')
-    }
-    if (persona.perfil === 'Superadmin') {
-      console.log('super')
-      navigate('/superadmin')
-    }
-    if (persona.perfil === 'Docente') {
-      navigate('/Admin')
-    }
-    if (persona.perfil === 'Alumno') {
-      navigate('/Alumno')
-    }
-  }
-
-  const personasData = async (email, password) => {
-    try {
-      const loginData = { email, password }
-      const resolution = await fetch(PersonaURL)
-      if (!resolution.ok) {
-        throw new Error('Hay un error en la data')
-      }
-      const data = await resolution.json()
-      // console.log('data del package json: ', data)
-      const personasData = data.personas
-      const loginPersona = personasData.find(persona => persona.email === loginData.email)
-      console.log('data de personas encontrada: ', loginPersona)
-      if (!loginPersona) {
-        throw new Error('Correo incorrecto, favor vuelva a intentar con un correo valido')
-      }
-      if (loginPersona.clave === loginData.password) {
-        const personaValidated = { nombre: loginPersona.nombre, perfil: loginPersona.perfil }
-        setPersona(personaValidated)
-      } else {
-        throw new Error('Contraseña incorrecta, favor intentar con otra contraseña')
-      }
-    } catch (error) {
-      console.error({ message: error })
-    }
-  }
-
+  const { logeo, errors: logeoErrors, user } = useAuth()
+  const [redirectTo, setRedirectTo] = useState(null)
   const handleSubmit = async (e) => {
     e.preventDefault()
-
-    if (!email.trim()) {
-      alert('Por favor ingresa tu correo electrónico')
-      return
+    try {
+      logeo({ email, password })
+    } catch (error) {
+      alert('Error de inicio de sesión. Por favor, verifica tus credenciales.')
     }
-
-    if (!password.trim()) {
-      alert('Por favor ingresa tu contraseña')
-    }
-
-    personasData(email, password)
   }
+  useEffect(() => {
+    // Verificar si user tiene un valor
+    if (user) {
+      if (user.perfil_id === 1) {
+        setRedirectTo('/superadmin')
+      } else if (user.perfil_id === 2) {
+        setRedirectTo('/admin')
+      } else {
+        setRedirectTo('/paginaError')
+      }
+      // También puedes realizar otras acciones, como redireccionar
+    }
+  }, [user])
 
   useEffect(() => {
-    const start = () => {
-      gapi.auth2.init({
-        clientId: clientID
-      })
+    if (redirectTo) {
+      // Redireccionar una vez que se establece redirectTo
+      window.location.href = redirectTo
     }
-    gapi.load('client:auth2', start)
-  }, [])
+  }, [redirectTo])
+  //  const clientID = '478413847757-l3rtklhr4umscf79s1fhqidd6pae54om.apps.googleusercontent.com'
 
-  const onSuccess = (response) => {
-    console.log(response.profileObj)
-    const persona = {
-      ...response.profileObj,
-      perfil: 'Superadmin',
-      isLogedIn: true
-    }
-    setPersona(persona)
-    redirect(persona)
-  }
+  // useEffect(() => {
+  //   const start = () => {
+  //     gapi.auth2.init({
+  //       clientId: clientID
+  //     })
+  //   }
+  //   gapi.load('client:auth2', start)
+  // }, [])
 
-  const onFailure = (error) => {
-    console.error('Error: ', error)
-  }
+  // const onSuccess = (response) => {
+  //   console.log(response.profileObj)
+  //   const persona = {
+  //     ...response.profileObj,
+  //     perfil: 'Superadmin',
+  //     isLogedIn: true
+  //   }
+  //   setPersona(persona)
+  //   redirect(persona)
+  // }
+
+  // const onFailure = (error) => {
+  //   console.error('Error: ', error)
+  // }
 
   return (
     <Container>
@@ -106,6 +75,13 @@ function Login () {
           <section>
             <div className="titulos-div">
               <h2 className='titulosIz'><b>Inicia sesión aquí</b></h2>
+              {
+                logeoErrors.map((error, i) => (
+                  <div className='bg-red-500 p-2 text-red' key={i} >
+                    {error}
+                  </div>
+                ))
+              }
             </div>
             <form onSubmit={handleSubmit}>
               <div className="w-5 mt-5">
@@ -155,12 +131,12 @@ function Login () {
 
             <p className='mt-5'>O usa tu cuenta</p>
 
-            <GoogleLogin
+            {/* <GoogleLogin
               clientId={clientID}
               onSuccess={onSuccess}
               onFailure={onFailure}
               cookiePolicy={'single_host_policy'}
-            />
+            /> */}
             <div className='d-flex justify-content-center'>
               <a href="https://github.com/" className='m-3'><IconBrandGithub size={25} stroke={2} /></a>
               <a href="https://www.google.com/" className='m-3'><IconBrandGoogle size={25} stroke={2} /></a>
