@@ -5,22 +5,20 @@ import { createApoderadoModel } from '../models/apoderadoModel.js'
 import { createUsuarioModel } from '../models/Usuariomodel.js'
 import { createDocenteModel } from '../models/docentesModel.js'
 import { createAsignaturaModel, getAsignaturaByIdModel, getAllAsignaturasModel, updateAsignaturaModel, deleteAsignaturaModel } from '../models/asignaturasModel.js'
+import { createCursoModel, getCursoByIdModel, getCursosModel, updateCursoModel, deleteCursoModel } from '../models/cursosModel.js'
 // import sendErrorResponse from '../../utils/utils.js'
-
-/* sección CRUD asignaturas */
 
 /* eslint-disable camelcase */
 // sección CRUD asignaturas
 
-const createAsignatura = async (req, res) => {
+export const createAsignatura = async (req, res) => {
   try {
-    const { nombre } = req.body
+    const { nombre, descripcion, colegio_id, docente_id } = req.body
 
-    if (!nombre) {
-      return res.status(400).json({ message: 'El nombre de la asignatura es requerido' })
+    if (!nombre || !descripcion || !colegio_id || !docente_id) {
+      return res.status(400).json({ message: 'Todos los campos son requeridos' })
     }
-
-    const nuevaAsignatura = await createAsignaturaModel(nombre)
+    const nuevaAsignatura = await createAsignaturaModel(nombre, descripcion, colegio_id, docente_id)
     return res.status(201).json(nuevaAsignatura)
   } catch (error) {
     console.error('Error al crear una nueva asignatura:', error)
@@ -28,9 +26,12 @@ const createAsignatura = async (req, res) => {
   }
 }
 
-const getAsignaturaById = async (req, res) => {
+export const getAsignaturaById = async (req, res) => {
   try {
     const { asignatura_id } = req.params
+    if (!asignatura_id) {
+      return res.status(400).json({ message: 'ID de asignatura no proporcionado' })
+    }
     const asignatura = await getAsignaturaByIdModel(asignatura_id)
     if (asignatura) {
       return res.status(200).json(asignatura)
@@ -43,7 +44,7 @@ const getAsignaturaById = async (req, res) => {
   }
 }
 
-const getAllAsignaturas = async (req, res) => {
+export const getAllAsignaturas = async (req, res) => {
   try {
     const asignaturas = await getAllAsignaturasModel()
     return res.status(200).json(asignaturas)
@@ -53,16 +54,17 @@ const getAllAsignaturas = async (req, res) => {
   }
 }
 
-const updateAsignatura = async (req, res) => {
+export const updateAsignatura = async (req, res) => {
   try {
     const { asignatura_id } = req.params
-    const { nombre } = req.body
-
-    if (!nombre) {
-      return res.status(400).json({ message: 'El nombre de la asignatura es requerido' })
+    const { nombre, descripcion, colegio_id, docente_id } = req.body
+    if (!asignatura_id) {
+      return res.status(400).json({ message: 'ID de asignatura no proporcionado' })
     }
-
-    const asignaturaActualizada = await updateAsignaturaModel(asignatura_id, nombre)
+    if (!nombre || !descripcion || !colegio_id || !docente_id) {
+      return res.status(400).json({ message: 'Todos los campos son requeridos' })
+    }
+    const asignaturaActualizada = await updateAsignaturaModel(asignatura_id, nombre, descripcion, colegio_id, docente_id)
     return res.status(200).json(asignaturaActualizada)
   } catch (error) {
     console.error('Error al actualizar una asignatura:', error)
@@ -70,9 +72,12 @@ const updateAsignatura = async (req, res) => {
   }
 }
 
-const deleteAsignatura = async (req, res) => {
+export const deleteAsignatura = async (req, res) => {
   try {
     const { asignatura_id } = req.params
+    if (!asignatura_id) {
+      return res.status(400).json({ message: 'ID de asignatura no proporcionado' })
+    }
     const asignaturaEliminada = await deleteAsignaturaModel(asignatura_id)
     return res.status(200).json(asignaturaEliminada)
   } catch (error) {
@@ -82,6 +87,71 @@ const deleteAsignatura = async (req, res) => {
 }
 
 /* sección CRUD cursos */
+
+export const createCurso = async (req, res) => {
+  const { name, description, school_id } = req.body
+  if (!name || !description || !school_id) {
+    return res.status(400).json({ message: 'Todos los campos son requeridos' })
+  }
+  try {
+    const newCourse = await createCursoModel(name, description, school_id)
+    return res.status(201).json(newCourse)
+  } catch (error) {
+    return res.status(500).json({ message: error.message })
+  }
+}
+
+export const getCurso = async (req, res) => {
+  try {
+    const courses = await getCursosModel()
+    return res.status(200).json(courses)
+  } catch (error) {
+    return res.status(500).json({ message: error.message })
+  }
+}
+
+export const getCursoById = async (req, res) => {
+  const { id } = req.params
+  if (!id) {
+    return res.status(400).json({ message: 'ID de curso no proporcionado' })
+  }
+  try {
+    const course = await getCursoByIdModel(id)
+    if (!course) {
+      return res.status(404).json({ message: 'Curso no encontrado' })
+    }
+    return res.status(200).json(course)
+  } catch (error) {
+    return res.status(500).json({ message: error.message })
+  }
+}
+
+export const updateCurso = async (req, res) => {
+  const { id } = req.params
+  const { name, description, school_id } = req.body
+  if (!id || !name || !description || !school_id) {
+    return res.status(400).json({ message: 'Todos los campos son requeridos' })
+  }
+  try {
+    const updatedCourse = await updateCursoModel(id, name, description, school_id)
+    return res.status(200).json(updatedCourse)
+  } catch (error) {
+    return res.status(500).json({ message: error.message })
+  }
+}
+
+export const deleteCurso = async (req, res) => {
+  const { id } = req.params
+  if (!id) {
+    return res.status(400).json({ message: 'ID de curso no proporcionado' })
+  }
+  try {
+    await deleteCursoModel(id)
+    return res.status(204).end()
+  } catch (error) {
+    return res.status(500).json({ message: error.message })
+  }
+}
 
 /* sección CRUD docentes */
 
@@ -122,4 +192,4 @@ const createNewAlumno = async (req, res) => {
 
 /* sección CRUD apoderados */
 
-export { createAsignatura, getAsignaturaById, getAllAsignaturas, updateAsignatura, deleteAsignatura, createNewAlumno, createNewDocente }
+export { createNewAlumno, createNewDocente }
