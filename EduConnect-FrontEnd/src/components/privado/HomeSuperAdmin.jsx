@@ -21,6 +21,7 @@ function HomeSuperAdmin () {
   }, [])
   return (
     <>
+    <h2 className='text-center mt-3'>Lista De Colegios</h2>
       <Row xs={1} md={3} className="g-4 m-4">
         {colegios.map(colegio => (
           <Col key={colegio.colegio_id}>

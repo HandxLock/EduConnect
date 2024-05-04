@@ -26,7 +26,7 @@ const loginUser = async (req, res) => {
 
     // eslint-disable-next-line camelcase
     const { usuario_id, email, nombre, apellido1, apellido2, perfil_id } = findUser
-    const token = await createToken(usuario_id, email, perfil_id)
+    const token = await createToken(usuario_id, nombre, email, perfil_id)
     res.cookie('token', token)
     res.status(200).json({
       usuario_id,
@@ -51,9 +51,9 @@ const logout = async (req, res) => {
 
 // funcion para crear el token
 // eslint-disable-next-line camelcase
-const createToken = async (usuario_id, email, perfil_id) => {
+const createToken = async (usuario_id, nombre, email, perfil_id) => {
   // eslint-disable-next-line camelcase
-  const token = jwt.sign({ usuario_id, email, perfil_id }, process.env.JWT_SECRET, {
+  const token = jwt.sign({ usuario_id, nombre, email, perfil_id }, process.env.JWT_SECRET, {
     expiresIn: '60m'
   })
   return token
@@ -70,6 +70,7 @@ const verifyToken = async (req, res) => {
 
     return res.json({
       id: usuarioEncontrado.usuario_id,
+      nombre: usuarioEncontrado.nombre,
       email: usuarioEncontrado.email,
       perfil: usuarioEncontrado.perfil_id
 

@@ -10,7 +10,7 @@ function AsignacionColegio () {
   const [administradores, setAdministradores] = useState([])
   const [selectedColegio, setSelectedColegio] = useState('') // Estado para almacenar el colegio seleccionado
   const [selectedAdmin, setSelectedAdmin] = useState('') // Estado para almacenar el admin seleccionado
-  const [submitted, setSubmitted] = useState(false)
+  const [mensaje, setMensaje] = useState('')
 
   useEffect(() => {
     // Función asincrónica para obtener los colegios y administradores al cargar el componente
@@ -25,7 +25,7 @@ function AsignacionColegio () {
       }
     }
 
-    fetchData() // Llamada a la función para obtener los datos al cargar el componente
+    fetchData()
   }, [])
 
   const handleSubmit = async (e) => {
@@ -33,19 +33,17 @@ function AsignacionColegio () {
     try {
       // Aquí debes enviar los IDs de colegio y administrador seleccionados al backend
       await asignarColegio(selectedAdmin, selectedColegio)
-      setSubmitted(true)
+      setMensaje('Asignacion creada exitosamente.')
     } catch (error) {
-      console.error('Error submitting form:', error)
+      setMensaje('Error al Asignar. Por favor, inténtalo de nuevo.')
     }
-  }
-
-  if (submitted) {
-    window.location.href = '/superadmin'
   }
 
   return (
     <>
+    <h2 className='text-center mt-3'>Asignacion Colegio</h2>
       <Card className="formulario">
+        {mensaje && <div className="mensaje">{mensaje}</div>}
         <Form onSubmit={handleSubmit}>
           <Form.Group>
             <Form.Label>Colegio</Form.Label>
@@ -65,7 +63,7 @@ function AsignacionColegio () {
               ))}
             </Form.Control>
           </Form.Group>
-          <Button variant="primary" type="submit">
+          <Button className='m-3' variant="primary" type="submit">
             Ingresar
           </Button>
         </Form>

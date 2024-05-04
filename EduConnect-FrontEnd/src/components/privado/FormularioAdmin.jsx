@@ -15,25 +15,23 @@ function FormularioAdmin () {
   const [clave, setClave] = useState('')
   const [direccion, setDireccion] = useState('')
   const [telefono, setTelefono] = useState('')
-  const [submitted, setSubmitted] = useState(false)
+  const [mensaje, setMensaje] = useState('')
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
       await agregarAdmin(rut, nombre, apellidoPaterno, apellidoMaterno, email, clave, direccion, telefono)
-      setSubmitted(true)
+      setMensaje('Admin creado exitosamente.')
     } catch (error) {
       console.error('Error al agregar administrador:', error)
-      // Aquí puedes manejar el error, mostrar una alerta, etc.
+      setMensaje('Error al crear admin. Por favor, inténtalo de nuevo.')
     }
-  }
-  if (submitted) {
-    window.location.href = '/superadmin'
-    // Cambi}a este valor para ajustar el tiempo de espera antes de la redirección
   }
   return (
         <>
+        <h2 className='text-center mt-3'>Creacion Admin</h2>
       <Card className="formulario">
+        {mensaje && <div className="mensaje">{mensaje}</div>}
         <Form onSubmit={handleSubmit}>
           <Form.Group>
             <Form.Label>Rut</Form.Label>
