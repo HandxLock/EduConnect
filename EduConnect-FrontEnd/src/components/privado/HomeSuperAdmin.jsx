@@ -1,47 +1,42 @@
+import { useEffect, useState } from 'react'
 import Card from 'react-bootstrap/Card'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
+import { getColegios } from '../../../api/auth'
 
 function HomeSuperAdmin () {
+  const [colegios, setColegios] = useState([])
+  useEffect(() => {
+    const fetchColegios = async () => {
+      try {
+        const data = await getColegios()
+
+        setColegios(data)
+      } catch (error) {
+        console.error('Error fetching colegios:', error.message)
+      }
+    }
+
+    fetchColegios()
+  }, [])
   return (
     <>
-    <Row xs={1} md={3} className="g-4 m-4">
-        <Col>
-          <Card className=''>
-            <Card.Img variant="top" src="https://static.vecteezy.com/system/resources/previews/023/842/276/non_2x/school-building-cartoon-illustration-on-isolated-background-vector.jpg" />
-            <Card.Body>
-              <Card.Title>Colegio República de Siria</Card.Title>
-              <Card.Text>
-                Colegio Republica de Siria
-              </Card.Text>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col>
-          <Card className=''>
-            <Card.Img variant="top" src="https://static.vecteezy.com/system/resources/previews/023/842/276/non_2x/school-building-cartoon-illustration-on-isolated-background-vector.jpg" />
-            <Card.Body>
-              <Card.Title>Colegio Frei Montalva</Card.Title>
-              <Card.Text>
-                Colegio Frei Montalva
-              </Card.Text>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col>
-          <Card className=''>
-            <Card.Img variant="top" src="https://static.vecteezy.com/system/resources/previews/023/842/276/non_2x/school-building-cartoon-illustration-on-isolated-background-vector.jpg" />
-            <Card.Body>
-              <Card.Title>Colegio Manuel de Salas</Card.Title>
-              <Card.Text>
-                Colegio Manuel de Salas
-              </Card.Text>
-            </Card.Body>
-          </Card>
-        </Col>
-        <br />
-
-    </Row>
+    <h2 className='text-center mt-3'>Lista De Colegios</h2>
+      <Row xs={1} md={3} className="g-4 m-4">
+        {colegios.map(colegio => (
+          <Col key={colegio.colegio_id}>
+            <Card className=''>
+              <Card.Img variant="top" src={colegio.imagenUrl} />
+              <Card.Body>
+                <Card.Title>{colegio.nombre}</Card.Title>
+                <Card.Text>
+                  {colegio.descripcion}
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
+        ))}
+      </Row>
     </>
   )
 }

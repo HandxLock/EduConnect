@@ -1,10 +1,11 @@
 import { Router } from 'express'
-import loginUser from '../src/controllers/loginController.js'
+import { loginUser, logout } from '../src/controllers/loginController.js'
 import validateParamsLogin from '../middlewares/valid.params.login.js'
 
 const router = Router()
 
 router.post('/login', validateParamsLogin, loginUser)
+router.post('/logout', logout)
 
 export default router
 
