@@ -1,47 +1,46 @@
+/* eslint-disable camelcase */
 import pool from '../../dbase/config.js'
 
-const createAsignaturaModel = async (nombre) => {
+export const createAsignaturaModel = async (nombre, descripcion, colegio_id, docente_id) => {
   const SQLQuery = {
-    text: 'INSERT INTO asignatura (nombre) VALUES ($1) RETURNING *',
-    values: [nombre]
+    text: 'INSERT INTO colegio.asignaturas (nombre, descripcion, colegio_id, docente_id) VALUES ($1, $2, $3, $4) RETURNING *',
+    values: [nombre, descripcion, colegio_id, docente_id]
   }
   const response = await pool.query(SQLQuery)
   return response.rows[0]
 }
 
-const getAsignaturaByIdModel = async (asignatura_id) => {
+export const getAsignaturaByIdModel = async (asignatura_id) => {
   const SQLQuery = {
-    text: 'SELECT * FROM asignatura WHERE asignatura_id = $1',
+    text: 'SELECT * FROM colegio.asignaturas WHERE asignatura_id = $1',
     values: [asignatura_id]
   }
   const response = await pool.query(SQLQuery)
   return response.rows[0]
 }
 
-const getAllAsignaturasModel = async () => {
+export const getAllAsignaturasModel = async () => {
   const SQLQuery = {
-    text: 'SELECT * FROM asignatura'
+    text: 'SELECT * FROM colegio.asignaturas'
   }
   const response = await pool.query(SQLQuery)
   return response.rows
 }
 
-const updateAsignaturaModel = async (asignatura_id, nombre) => {
+export const updateAsignaturaModel = async (asignatura_id, nombre, descripcion, colegio_id, docente_id) => {
   const SQLQuery = {
-    text: 'UPDATE asignatura SET nombre = $1 WHERE asignatura_id = $2 RETURNING *',
-    values: [nombre, asignatura_id]
+    text: 'UPDATE colegio.asignaturas SET nombre = $1, descripcion = $2, colegio_id = $3, docente_id = $4 WHERE asignatura_id = $5 RETURNING *',
+    values: [nombre, descripcion, colegio_id, docente_id, asignatura_id]
   }
   const response = await pool.query(SQLQuery)
   return response.rows[0]
 }
 
-const deleteAsignaturaModel = async (asignatura_id) => {
+export const deleteAsignaturaModel = async (asignatura_id) => {
   const SQLQuery = {
-    text: 'DELETE FROM asignatura WHERE asignatura_id = $1 RETURNING *',
+    text: 'DELETE FROM colegio.asignaturas WHERE asignatura_id = $1 RETURNING *',
     values: [asignatura_id]
   }
   const response = await pool.query(SQLQuery)
   return response.rows[0]
 }
-
-export { createAsignaturaModel, getAsignaturaByIdModel, getAllAsignaturasModel, updateAsignaturaModel, deleteAsignaturaModel }
