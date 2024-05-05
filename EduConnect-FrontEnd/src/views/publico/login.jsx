@@ -4,6 +4,8 @@ import { Container, Row, Col, Button } from 'react-bootstrap'
 import { IconBrandGithub, IconBrandGoogle, IconBrandFacebook } from '@tabler/icons-react'
 import '../../styles/publico/login.css'
 import { useAuth } from '../../context/AuthContext'
+import { GoogleOAuthProvider } from '@react-oauth/google'
+import LoginGoogle from './LoginGoogle'
 // import { gapi } from 'gapi-script'
 // import GoogleLogin from 'react-google-login'
 
@@ -11,8 +13,10 @@ function Login () {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [rememberMe, setRememberMe] = useState(false)
-  const { logeo, errors: logeoErrors, user } = useAuth()
   const [redirectTo, setRedirectTo] = useState(null)
+
+  const { logeo, errors: logeoErrors, user } = useAuth()
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
@@ -21,6 +25,7 @@ function Login () {
       alert('Error de inicio de sesión. Por favor, verifica tus credenciales.')
     }
   }
+
   useEffect(() => {
     // Verificar si user tiene un valor
     if (user) {
@@ -41,16 +46,6 @@ function Login () {
       window.location.href = redirectTo
     }
   }, [redirectTo])
-  //  const clientID = '478413847757-l3rtklhr4umscf79s1fhqidd6pae54om.apps.googleusercontent.com'
-
-  // useEffect(() => {
-  //   const start = () => {
-  //     gapi.auth2.init({
-  //       clientId: clientID
-  //     })
-  //   }
-  //   gapi.load('client:auth2', start)
-  // }, [])
 
   // const onSuccess = (response) => {
   //   console.log(response.profileObj)
@@ -61,10 +56,6 @@ function Login () {
   //   }
   //   setPersona(persona)
   //   redirect(persona)
-  // }
-
-  // const onFailure = (error) => {
-  //   console.error('Error: ', error)
   // }
 
   return (
@@ -136,7 +127,13 @@ function Login () {
               onSuccess={onSuccess}
               onFailure={onFailure}
               cookiePolicy={'single_host_policy'}
-            /> */}
+            /> */
+              <GoogleOAuthProvider
+                clientId='478413847757-67v0cr4i1g3ctbdji14vrrkseq0fqhu7.apps.googleusercontent.com'
+              >
+                <LoginGoogle />
+              </GoogleOAuthProvider>
+            }
             <div className='d-flex justify-content-center'>
               <a href="https://github.com/" className='m-3'><IconBrandGithub size={25} stroke={2} /></a>
               <a href="https://www.google.com/" className='m-3'><IconBrandGoogle size={25} stroke={2} /></a>
