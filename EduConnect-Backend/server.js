@@ -13,13 +13,14 @@ import evaluacionesRoutes from './routes/evaluaciones.routes.js'
 import docentesRoutes from './routes/docente.routes.js'
 import alumnosRoutes from './routes/alumno.routes.js'
 import cookieParser from 'cookie-parser'
-
+import apoderadoRoutes from './routes/apoderado.routes.js'
 const PORT = process.env.PORT || 3000
 
 const app = express()
 
 app.use(express.json())
 app.use(cookieParser())
+
 app.use(cors({
   origin: 'http://localhost:5173',
   credentials: true
@@ -34,5 +35,6 @@ app.use(asignaturaRoutes, cursoRoutes)
 app.use(evaluacionesRoutes)
 app.use(docentesRoutes)
 app.use(alumnosRoutes)
+app.use(apoderadoRoutes)
 
 app.listen(PORT, console.log(`Server on http://localhost:${PORT}`))
