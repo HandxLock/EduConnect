@@ -7,7 +7,8 @@ import verify from './routes/verify.routes.js'
 import loginRoutes from './routes/login.routes.js'
 import userRoutes from './routes/user.routes.js'
 import observacionRoutes from './routes/observacion.routes.js'
-import adminRoutes from './routes/admin.routes.js'
+import asignaturaRoutes from './routes/asignatura.routes.js'
+import cursoRoutes from './routes/curso.routes.js'
 import alumnosRoutes from './routes/evaluaciones.routes.js'
 import cookieParser from 'cookie-parser'
 
@@ -27,7 +28,7 @@ app.use(superAdminRoutes)
 app.use(userRoutes)
 app.use(loginRoutes)
 app.use(observacionRoutes)
-app.use(adminRoutes)
+app.use(asignaturaRoutes, cursoRoutes)
 app.use(alumnosRoutes)
 
 app.listen(PORT, console.log(`Server on http://localhost:${PORT}`))

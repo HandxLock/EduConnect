@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card'
 // import useMostrarAlertaConfirmacion from '../../hooks/useMostrarAlertaConfirmacion'
 import '../../styles/privado/formulario.css'
 import { useState } from 'react'
-import { agregarAdmin } from '../../../api/auth.js'
+import { agregarAdmin } from '../../../src/services/adminService.js'
 
 function FormularioAdmin () {
   const [rut, setRut] = useState('')
