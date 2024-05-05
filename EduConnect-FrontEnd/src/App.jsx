@@ -4,7 +4,6 @@ import { Routes, Route, BrowserRouter } from 'react-router-dom'
 // import PerfilSuperAdminHome from './views/privado/PerfilSuperAdminHome.jsx'
 // import PerfilSuperAdminFormularioAdmin from './views/privado/PerfilSuperAdminFormularioAdmin.jsx'
 // import PerfilAdminFormularioProfesor from './views/privado/PerfilAdminFormularioProfesor.jsx'
-import PerfilAdminHome from './views/privado/PerfilAdminHome.jsx'
 // import PerfilAdminFormularioEstudiante from './views/privado/PerfilAdminFormularioEstudiante.jsx'
 import HomePage from './views/publico/HomePage.jsx'
 import Login from './views/publico/login.jsx'
@@ -12,8 +11,8 @@ import Login from './views/publico/login.jsx'
 import ProtectedRouteAdmin from './ProtectedRouteAdmin.jsx'
 import ProtectedRouteSuperAdmin from './ProtectedRouteSuperAdmin.jsx'
 import PaginaError from './views/publico/paginaError.jsx'
-
 import SuperAdmin from './views/privado/SuperAdmin.jsx'
+import Admin from './views/privado/Admin.jsx'
 function App () {
   return (
     <>
@@ -27,7 +26,7 @@ function App () {
             <Route path='*' element={< PaginaError />}/>
         </Route>
         <Route element ={ <ProtectedRouteAdmin/> }>
-          <Route path='/admin' element={ <PerfilAdminHome />}/>
+          <Route path='/admin' element={ <Admin />}/>
           <Route path='*' element={< PaginaError />}/>
         </Route>
         <Route path='*' element={< PaginaError />}/>
