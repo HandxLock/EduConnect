@@ -13,12 +13,12 @@ import { createCursoModel, getCursoByIdModel, getCursosModel, updateCursoModel, 
 
 export const createAsignatura = async (req, res) => {
   try {
-    const { nombre, descripcion, colegio_id, docente_id } = req.body
+    const { nombre, descripcion, colegio_id } = req.body
 
-    if (!nombre || !descripcion || !colegio_id || !docente_id) {
+    if (!nombre || !descripcion || !colegio_id) {
       return res.status(400).json({ message: 'Todos los campos son requeridos' })
     }
-    const nuevaAsignatura = await createAsignaturaModel(nombre, descripcion, colegio_id, docente_id)
+    const nuevaAsignatura = await createAsignaturaModel(nombre, descripcion, colegio_id)
     return res.status(201).json(nuevaAsignatura)
   } catch (error) {
     console.error('Error al crear una nueva asignatura:', error)
