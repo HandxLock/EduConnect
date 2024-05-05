@@ -44,14 +44,16 @@ const getDocenteByUsuarioIdModel = async (usuarioId) => {
   }
 }
 
-const getUsuarioByDocenteModel = async (docenteID) => {
+const getDocenteByDocenteModel = async (docenteID) => {
   try {
+    console.log('docente id recibido modelo: ', docenteID);
     const SQLQuery = {
       text: 'SELECT * FROM colegio.docentes WHERE docente_id = $1',
       values: [docenteID]
     }
     const response = await pool.query(SQLQuery)
-    return response.rows
+    // console.log('respuesta busqueda docente modelo: ', response);
+    return response.rows[0]
   } catch (error) {
     throw new Error('Error al buscar en el registro de docentes:' + error.message)
   }
@@ -93,4 +95,4 @@ const deleteDocenteModel = async (docenteID) => {
   }
 }
 
-export { createDocenteModel, getDocenteByUsuarioIdModel, deleteDocenteModel, modifyDocenteModel, getAllDocentesModel, getDocenteByAsignaturaModel, getDocenteByCursoModel, getUsuarioByDocenteModel }
+export { createDocenteModel, getDocenteByUsuarioIdModel, deleteDocenteModel, modifyDocenteModel, getAllDocentesModel, getDocenteByAsignaturaModel, getDocenteByCursoModel, getDocenteByDocenteModel }

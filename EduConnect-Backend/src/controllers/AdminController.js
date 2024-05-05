@@ -1,9 +1,9 @@
 // Este archivo de controllers aun se encuentra pendiente
 
 import { createAlumnoModel, deleteAlumnoModel, getAllAlumnosModel, getUsuarioByAlumnoModel, modifyAlumnoModel } from '../models/alumnoModel.js'
-import { createApoderadoModel } from '../models/apoderadoModel.js'
-import { createUsuarioModel, deleteUsuarioModel, modifyUsuarioModel } from '../models/UsuarioModel.js'
-import { createDocenteModel, deleteDocenteModel, getAllDocentesModel, getDocenteByUsuarioIdModel, modifyDocenteModel } from '../models/docentesModel.js'
+import { createApoderadoModel, getApoderadoByAlumnoModel } from '../models/apoderadoModel.js'
+import { createUsuarioModel, deleteUsuarioModel, getUsuarioByUsuarioIdModel, modifyUsuarioModel } from '../models/UsuarioModel.js'
+import { createDocenteModel, deleteDocenteModel, getAllDocentesModel, getDocenteByUsuarioIdModel, getDocenteByDocenteModel, modifyDocenteModel } from '../models/docentesModel.js'
 import { createAsignaturaModel, getAsignaturaByIdModel, getAllAsignaturasModel, updateAsignaturaModel, deleteAsignaturaModel } from '../models/asignaturasModel.js'
 import { createCursoModel, getCursoByIdModel, getCursosModel, updateCursoModel, deleteCursoModel } from '../models/cursosModel.js'
 // import sendErrorResponse from '../../utils/utils.js'
@@ -183,14 +183,27 @@ const getDocentesController = async (req, res) => {
 
 const updateDocenteController = async (req, res) => {
   try {
-    const { docenteID } = req.params
-    console.log('docente id recibido: ', docenteID)
-    const usuario = getDocenteByUsuarioIdModel(docenteID)
-    console.log('usuario encontrado')
+    const { docente_id } = req.params
+    console.log('docente id recibido: ', docente_id)
+    const finddocente = await getDocenteByDocenteModel(docente_id)
+    console.log('docente encontrado: ', finddocente)
     const { docente } = req.body
-    const usuarioDocenteActualizado = await modifyUsuarioModel(usuario.usuario_id, docente.user)
-    const docenteActualizado = await modifyDocenteModel(docenteID, usuario.usuario_id, docente.ColegioID, docente.asignaturaID)
+    const usuarioDocenteActualizado = await modifyUsuarioModel(finddocente.usuario_id, docente.user)
+    const docenteActualizado = await modifyDocenteModel(docenteID, finddocente.usuario_id, docente.ColegioID, docente.asignaturaID)
     res.json(docenteActualizado, usuarioDocenteActualizado)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const getDocenteByIDController = async (req, res) => {
+  try {
+    const { docente_id } = req.params
+    console.log('docente id recibido: ', docente_id)
+    const finddocente = await getDocenteByDocenteModel(docente_id)
+    console.log('docente encontrado: ', finddocente)
+    const usuarioDocente = await getUsuarioByUsuarioIdModel(finddocente.usuario_id)
+    res.json({ finddocente, usuarioDocente})
   } catch (error) {
     console.log(error)
   }
@@ -241,12 +254,21 @@ const getAlumnosController = async (req, res) => {
 
 const updateAlumnoController = async (req, res) => {
   try {
-    const { alumnoID } = req.params
-    const usuarioID = getUsuarioByAlumnoModel(alumnoID)
-    const { alumno } = req.body
-    const usuarioAlumnoActualizado = await modifyUsuarioModel(usuarioID, alumno.user)
-    const alumnoActualizado = await modifyAlumnoModel(alumnoID, usuarioID, alumno.colegioID, alumno.apoderadoID, alumno.curdoID)
-    res.json(alumnoActualizado, usuarioAlumnoActualizado)
+    const { alumno_id } = req.params
+    console.log('alumno id recibido en controller: ', alumno_id)
+    const usuarioAlumno = await getUsuarioByAlumnoModel(alumno_id)
+    console.log('usuario encontrado por el alumno id: ', usuarioAlumno[0].usuario_id)
+    const { alumno, apoderado } = req.body
+    console.log('nueva data para alumno recibida en controller: ', alumno, apoderado)
+    const apoderadoAlumno = await getApoderadoByAlumnoModel(alumno_id)
+    console.log('apoderado buscado por alumno: ', apoderadoAlumno);
+    const usuarioAlumnoActualizado = await modifyUsuarioModel(usuarioAlumno[0].usuario_id, alumno.user)
+    console.log('usuario alumno actualizado: ', usuarioAlumnoActualizado)
+    const usuarioApoderadoActualizado = await modifyUsuarioModel(apoderadoAlumno[0].usuario_id, apoderado.user)
+    console.log('usuarios apoderado actualizado: ', usuarioApoderadoActualizado)
+    const alumnoActualizado = await modifyAlumnoModel(alumno_id, usuarioAlumno[0].usuario_id, alumno.colegioID, apoderadoAlumno[0].apoderado_id, alumno.cursoID)
+    console.log('registro alumno actualizado: ', alumnoActualizado)
+    res.json({ alumnoActualizado, usuarioAlumnoActualizado, usuarioApoderadoActualizado })
   } catch (error) {
     console.log(error)
   }
@@ -267,4 +289,4 @@ const deleteAlumnoController = async (req, res) => {
 
 /* sección CRUD apoderados */
 
-export { createNewAlumno, createNewDocente, getDocentesController, deleteDocenteController, updateDocenteController, getAlumnosController, updateAlumnoController, deleteAlumnoController }
+export { createNewAlumno, createNewDocente, getDocentesController, deleteDocenteController, updateDocenteController, getAlumnosController, updateAlumnoController, deleteAlumnoController, getDocenteByIDController }
