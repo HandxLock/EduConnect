@@ -10,7 +10,7 @@ const createAlumnoModel = async (usuarioID, colegioID, apoderadoID, cursoID) => 
   return response.rows[0]
 }
 
-const modifyAlumnoModel = async (alumnoId, { usuarioID, colegioID, apoderadoID, cursoID }) => {
+const modifyAlumnoModel = async (alumnoId, usuarioID, colegioID, apoderadoID, cursoID) => {
   try {
     console.log(usuarioID, colegioID, apoderadoID, cursoID)
     const response = pool.query('UPDATE colegio.alumnos SET usuario_id=$1, colegio_id=$2, apoderado_iD=$3, curso_iD=$4 WHERE alumno_id=$5 RETURNING *',
@@ -18,6 +18,19 @@ const modifyAlumnoModel = async (alumnoId, { usuarioID, colegioID, apoderadoID, 
     return response.rows
   } catch (error) {
     throw new Error('Error modificando el registro del alumno:' + error.message)
+  }
+}
+
+const getUsuarioByAlumnoModel = async (alumnoID) => {
+  try {
+    const SQLQuery = {
+      text: 'SELECT * FROM colegio.alumnos WHERE alumno_id = $1',
+      values: [alumnoID]
+    }
+    const response = await pool.query(SQLQuery)
+    return response.rows
+  } catch (error) {
+    throw new Error('Error al buscar en el registro de alumnos:' + error.message)
   }
 }
 
@@ -93,4 +106,4 @@ const deleteAlumnoModel = async (alumnoId) => {
   }
 }
 
-export { createAlumnoModel, getAlumnoByUsuarioIdModel, deleteAlumnoModel, modifyAlumnoModel, getAllAlumnosModel, getAlumnoByApoderadoModel, getAlumnoByCursoModel, getAlumnoByAsignaturaModel }
+export { createAlumnoModel, getAlumnoByUsuarioIdModel, deleteAlumnoModel, modifyAlumnoModel, getAllAlumnosModel, getAlumnoByApoderadoModel, getAlumnoByCursoModel, getAlumnoByAsignaturaModel, getUsuarioByAlumnoModel }

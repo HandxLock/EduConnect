@@ -29,7 +29,7 @@ const modifyUsuarioModel = async (usuarioId, { rut, nombre, apellido1, apellido2
     console.log(rut, nombre, apellido1, apellido2, email, clave, direccion, telefono, perfilId)
     const hashedClave = bcrypt.hashSync(clave)
     const SQLQuery = {
-      text: 'UPDATE perfilamiento.usuarios SET (rut, nombre, apellido1, apellido2, email, clave, direccion, telefono, perfil_id, fecha_creacion, fecha_modificacion) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, NOW(), NOW()) WHERE usuario_id=$10 RETURNING *',
+      text: 'UPDATE perfilamiento.usuarios SET (rut, nombre, apellido1, apellido2, email, clave, direccion, telefono, perfil_id, fecha_modificacion) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, NOW()) WHERE usuario_id=$10 RETURNING *',
       values: [rut, nombre, apellido1, apellido2, email, hashedClave, direccion, telefono, perfilId, usuarioId]
     }
     const response = pool.query(SQLQuery)

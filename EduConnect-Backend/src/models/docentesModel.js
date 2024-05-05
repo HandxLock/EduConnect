@@ -10,7 +10,7 @@ const createDocenteModel = async (usuarioID, colegioID, asignaturaID) => {
   return response.rows[0]
 }
 
-const modifyDocenteModel = async (docenteID, { usuarioID, colegioID, asignaturaID }) => {
+const modifyDocenteModel = async (docenteID, usuarioID, colegioID, asignaturaID) => {
   try {
     console.log(usuarioID, colegioID, asignaturaID)
     const response = pool.query('UPDATE colegio.docentes SET usuario_id=$1, colegio_id=$2, asignatura_id=$3 WHERE docente_id=$4 RETURNING *',
@@ -36,6 +36,19 @@ const getDocenteByUsuarioIdModel = async (usuarioId) => {
     const SQLQuery = {
       text: 'SELECT * FROM colegio.docentes WHERE usuario_id = $1',
       values: [usuarioId]
+    }
+    const response = await pool.query(SQLQuery)
+    return response.rows
+  } catch (error) {
+    throw new Error('Error al buscar en el registro de docentes:' + error.message)
+  }
+}
+
+const getUsuarioByDocenteModel = async (docenteID) => {
+  try {
+    const SQLQuery = {
+      text: 'SELECT * FROM colegio.docentes WHERE docente_id = $1',
+      values: [docenteID]
     }
     const response = await pool.query(SQLQuery)
     return response.rows
@@ -80,4 +93,4 @@ const deleteDocenteModel = async (docenteID) => {
   }
 }
 
-export { createDocenteModel, getDocenteByUsuarioIdModel, deleteDocenteModel, modifyDocenteModel, getAllDocentesModel, getDocenteByAsignaturaModel, getDocenteByCursoModel }
+export { createDocenteModel, getDocenteByUsuarioIdModel, deleteDocenteModel, modifyDocenteModel, getAllDocentesModel, getDocenteByAsignaturaModel, getDocenteByCursoModel, getUsuarioByDocenteModel }
