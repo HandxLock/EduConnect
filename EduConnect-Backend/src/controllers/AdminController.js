@@ -1,9 +1,9 @@
 // Este archivo de controllers aun se encuentra pendiente
 
-import { createAlumnoModel } from '../models/alumnoModel.js'
+import { createAlumnoModel, deleteAlumnoModel, getAllAlumnosModel, getUsuarioByAlumnoModel, modifyAlumnoModel } from '../models/alumnoModel.js'
 import { createApoderadoModel } from '../models/apoderadoModel.js'
-import { createUsuarioModel } from '../models/Usuariomodel.js'
-import { createDocenteModel } from '../models/docentesModel.js'
+import { createUsuarioModel, deleteUsuarioModel, modifyUsuarioModel } from '../models/Usuariomodel.js'
+import { createDocenteModel, deleteDocenteModel, getAllDocentesModel, getDocenteByUsuarioIdModel, modifyDocenteModel } from '../models/docentesModel.js'
 import { createAsignaturaModel, getAsignaturaByIdModel, getAllAsignaturasModel, updateAsignaturaModel, deleteAsignaturaModel } from '../models/asignaturasModel.js'
 import { createCursoModel, getCursoByIdModel, getCursosModel, updateCursoModel, deleteCursoModel } from '../models/cursosModel.js'
 // import sendErrorResponse from '../../utils/utils.js'
@@ -170,6 +170,44 @@ const createNewDocente = async (req, res) => {
   }
 }
 
+const getDocentesController = async (req, res) => {
+  try {
+    const admins = await getAllDocentesModel()
+    res.json(admins)
+  } catch (error) {
+    console.error('Error al buscar el registro de docentes:', error.message)
+    res.status(500).json({ error: 'No se encuentra la info de docentes' })
+  }
+}
+
+const updateDocenteController = async (req, res) => {
+  try {
+    const { docenteID } = req.params
+    console.log('docente id recibido: ', docenteID);
+    const usuario = getDocenteByUsuarioIdModel(docenteID)
+    console.log('usuario encontrado');
+    const { docente } = req.body
+    const usuarioDocenteActualizado = await modifyUsuarioModel(usuario.usuario_id, docente.user)
+    const docenteActualizado = await modifyDocenteModel(docenteID, usuario.usuario_id, docente.ColegioID, docente.asignaturaID)
+    res.json(docenteActualizado, usuarioDocenteActualizado)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const deleteDocenteController = async (req, res) => {
+  try {
+    const { docenteID } = req.params
+    const usuarioID = getDocenteByUsuarioIdModel(docenteID)
+    await deleteDocenteModel(docenteID)
+    await deleteUsuarioModel(usuarioID)
+    res.json({ mensaje: 'Docente eliminado exitosamente' })
+  } catch (error) {
+    console.error('Error al eliminar el docente:', error.message)
+    res.status(500).json({ error: 'No se encuentra ID para eliminar el docente' })
+  }
+}
+
 /* sección CRUD alumnos */
 
 const createNewAlumno = async (req, res) => {
@@ -190,6 +228,42 @@ const createNewAlumno = async (req, res) => {
   }
 }
 
+const getAlumnosController = async (req, res) => {
+  try {
+    const alumnos = await getAllAlumnosModel()
+    res.json(alumnos)
+  } catch (error) {
+    console.error('Error al buscar el registro de alumnos:', error.message)
+    res.status(500).json({ error: 'No se encuentra la info de alumnos' })
+  }
+}
+
+const updateAlumnoController = async (req, res) => {
+  try {
+    const { alumnoID } = req.params
+    const usuarioID = getUsuarioByAlumnoModel(alumnoID)
+    const { alumno } = req.body
+    const usuarioAlumnoActualizado = await modifyUsuarioModel(usuarioID, alumno.user)
+    const alumnoActualizado = await modifyAlumnoModel(alumnoID, usuarioID, alumno.colegioID, alumno.apoderadoID, alumno.curdoID)
+    res.json(alumnoActualizado, usuarioAlumnoActualizado)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const deleteAlumnoController = async (req, res) => {
+  try {
+    const { alumnoID } = req.params
+    const usuarioID = getUsuarioByAlumnoModel(alumnoID)
+    await deleteAlumnoModel(alumnoID)
+    await deleteUsuarioModel(usuarioID)
+    res.json({ mensaje: 'Alumno eliminado exitosamente' })
+  } catch (error) {
+    console.error('Error al eliminar el alumno:', error.message)
+    res.status(500).json({ error: 'No se encuentra ID para eliminar el alumno' })
+  }
+}
+
 /* sección CRUD apoderados */
 
-export { createNewAlumno, createNewDocente }
+export { createNewAlumno, createNewDocente, getDocentesController, deleteDocenteController, updateDocenteController, getAlumnosController, updateAlumnoController, deleteAlumnoController }
