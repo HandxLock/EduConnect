@@ -7,7 +7,7 @@ import { Routes, Route, BrowserRouter } from 'react-router-dom'
 // import PerfilAdminFormularioEstudiante from './views/privado/PerfilAdminFormularioEstudiante.jsx'
 import HomePage from './views/publico/HomePage.jsx'
 import Login from './views/publico/login.jsx'
-// import Alumno from './views/privado/PerfilAlumno.jsx'
+import Alumno from './views/privado/PerfilAlumno.jsx'
 import ProtectedRouteAdmin from './ProtectedRouteAdmin.jsx'
 import ProtectedRouteSuperAdmin from './ProtectedRouteSuperAdmin.jsx'
 import PaginaError from './views/publico/paginaError.jsx'
@@ -30,6 +30,7 @@ function App () {
           <Route path='*' element={< PaginaError />}/>
         </Route>
         <Route path='*' element={< PaginaError />}/>
+        <Route path='/alumno' element={ <Alumno />}/>
           {/* <Route path='/superadmin/formulariocolegio' element={ Persona.perfil === 'Superadmin' ? <PerfilSuperAdminFormulario/> : <Navigate to ='/login' replace />}/>
         <Route path='/superadmin/formularioadmin' element={ Persona.perfil === 'Superadmin' ? <PerfilSuperAdminFormularioAdmin/> : <Navigate to ='/login' replace />}/>
         <Route path='/admin' element={ Persona.perfil === 'Admin' ? <PerfilAdminHome/> : <Navigate to ='/login' replace />}/>
