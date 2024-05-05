@@ -3,7 +3,7 @@ import Form from 'react-bootstrap/Form'
 import Card from 'react-bootstrap/Card'
 // import useMostrarAlertaConfirmacion from '../../hooks/useMostrarAlertaConfirmacion'
 import '../../styles/privado/formulario.css'
-import { agregarColegio } from '../../../api/auth.js'
+import { agregarColegio } from '../../../src/services/colegioService.js'
 import { useState } from 'react'
 function FormularioColegio () {
   const [nombre, setNombre] = useState('')
