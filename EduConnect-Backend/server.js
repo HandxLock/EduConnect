@@ -9,7 +9,9 @@ import userRoutes from './routes/user.routes.js'
 import observacionRoutes from './routes/observacion.routes.js'
 import asignaturaRoutes from './routes/asignatura.routes.js'
 import cursoRoutes from './routes/curso.routes.js'
-import alumnosRoutes from './routes/evaluaciones.routes.js'
+import evaluacionesRoutes from './routes/evaluaciones.routes.js'
+import docentesRoutes from './routes/docente.routes.js'
+import alumnosRoutes from './routes/alumno.routes.js'
 import cookieParser from 'cookie-parser'
 
 const PORT = process.env.PORT || 3000
@@ -29,6 +31,8 @@ app.use(userRoutes)
 app.use(loginRoutes)
 app.use(observacionRoutes)
 app.use(asignaturaRoutes, cursoRoutes)
+app.use(evaluacionesRoutes)
+app.use(docentesRoutes)
 app.use(alumnosRoutes)
 
 app.listen(PORT, console.log(`Server on http://localhost:${PORT}`))
