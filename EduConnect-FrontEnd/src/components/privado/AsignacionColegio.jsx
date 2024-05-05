@@ -2,7 +2,8 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import Card from 'react-bootstrap/Card'
 import '../../styles/privado/formulario.css'
-import { asignarColegio, getAdmins, getColegios } from '../../../api/auth.js'
+import { asignarColegio, getColegios } from '../../../src/services/colegioService.js'
+import { getAdmins } from '../../services/adminService.js'
 import { useEffect, useState } from 'react'
 
 function AsignacionColegio () {

@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { createContext, useContext, useEffect, useState } from 'react'
-import { loginUser, verificarTokenRequest } from '../../api/auth'
+import { loginUser, verificarTokenRequest } from '../services/authService'
 import Cookies from 'js-cookie'
 
 const AuthContext = createContext()
