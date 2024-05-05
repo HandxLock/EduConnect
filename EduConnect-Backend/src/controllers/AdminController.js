@@ -2,7 +2,7 @@
 
 import { createAlumnoModel, deleteAlumnoModel, getAllAlumnosModel, getUsuarioByAlumnoModel, modifyAlumnoModel } from '../models/alumnoModel.js'
 import { createApoderadoModel } from '../models/apoderadoModel.js'
-import { createUsuarioModel, deleteUsuarioModel, modifyUsuarioModel } from '../models/Usuariomodel.js'
+import { createUsuarioModel, deleteUsuarioModel, modifyUsuarioModel } from '../models/UsuarioModel.js'
 import { createDocenteModel, deleteDocenteModel, getAllDocentesModel, getDocenteByUsuarioIdModel, modifyDocenteModel } from '../models/docentesModel.js'
 import { createAsignaturaModel, getAsignaturaByIdModel, getAllAsignaturasModel, updateAsignaturaModel, deleteAsignaturaModel } from '../models/asignaturasModel.js'
 import { createCursoModel, getCursoByIdModel, getCursosModel, updateCursoModel, deleteCursoModel } from '../models/cursosModel.js'
@@ -174,6 +174,7 @@ const getDocentesController = async (req, res) => {
   try {
     const admins = await getAllDocentesModel()
     res.json(admins)
+    console.log(admins)
   } catch (error) {
     console.error('Error al buscar el registro de docentes:', error.message)
     res.status(500).json({ error: 'No se encuentra la info de docentes' })
@@ -183,9 +184,9 @@ const getDocentesController = async (req, res) => {
 const updateDocenteController = async (req, res) => {
   try {
     const { docenteID } = req.params
-    console.log('docente id recibido: ', docenteID);
+    console.log('docente id recibido: ', docenteID)
     const usuario = getDocenteByUsuarioIdModel(docenteID)
-    console.log('usuario encontrado');
+    console.log('usuario encontrado')
     const { docente } = req.body
     const usuarioDocenteActualizado = await modifyUsuarioModel(usuario.usuario_id, docente.user)
     const docenteActualizado = await modifyDocenteModel(docenteID, usuario.usuario_id, docente.ColegioID, docente.asignaturaID)
