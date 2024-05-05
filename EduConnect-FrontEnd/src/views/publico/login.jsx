@@ -34,7 +34,7 @@ function Login () {
       } else if (user.perfil_id === 2) {
         setRedirectTo('/admin')
       } else {
-        setRedirectTo('/paginaError')
+        setRedirectTo('/login')
       }
       // También puedes realizar otras acciones, como redireccionar
     }

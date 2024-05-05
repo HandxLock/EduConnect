@@ -26,6 +26,9 @@ const Sidebar = ({ onSidebarClick }) => {
           <Button variant="primary" size="lg" onClick={() => handleClick('Botón 3')}>
             Asignar Colegio
           </Button>
+          <Button variant="dark" size="lg" onClick={() => handleClick('Botón 4')}>
+            DashBoard
+          </Button>
         </div>
       </div>
       <div className='cerrarSesion'>

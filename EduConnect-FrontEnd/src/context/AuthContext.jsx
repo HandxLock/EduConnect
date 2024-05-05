@@ -46,16 +46,18 @@ const AuthProvider = ({ children }) => {
       if (!cookies.token) {
         setAuthenticated(false)
         setUser('')
+        setLoading(false)
+        return
       }
       try {
         const res = await verificarTokenRequest(cookies.token)
         if (!res.data) {
           setAuthenticated(false)
+          setUser(null)
           setLoading(false)
           return
         }
         setAuthenticated(true)
-        console.log(res.data)
         setUser(res.data)
         setLoading(false)
       } catch (error) {
@@ -64,7 +66,13 @@ const AuthProvider = ({ children }) => {
         setLoading(false)
       }
     }
-    checkLogin()
+    if (Cookies.get('token')) {
+      checkLogin()
+    } else {
+      setAuthenticated(false)
+      setUser('')
+      setLoading(false)
+    }
   }, [])
 
   return (
