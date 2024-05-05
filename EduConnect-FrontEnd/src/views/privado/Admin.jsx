@@ -1,6 +1,7 @@
 import SidebarAdmin from '../../components/privado/SidebarAdmin'
 import MainAdmin from '../../components/privado/MainAdmin'
 import { useState } from 'react'
+import FormularioAsignatura from '../../components/privado/FormularioAsignatura'
 function Admin () {
   const [contenido, setContenido] = useState('')
   const handleSidebarClick = (boton) => {
@@ -12,7 +13,7 @@ function Admin () {
         setContenido('colocar componente 1')
         break
       case 'Botón 2':
-        setContenido('colocar componente 2')
+        setContenido(<FormularioAsignatura/>)
         break
       case 'Botón 3':
         setContenido('colocar componente 3')
