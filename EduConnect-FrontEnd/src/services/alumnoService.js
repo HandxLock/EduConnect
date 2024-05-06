@@ -18,12 +18,12 @@ const getAlumnos = async () => {
   }
 } */
 
-const createAlumno = async (usuarioID, colegioID, apoderadoID, cursoID) => {
+const createAlumno = async (alumno, apoderado) => {
   try {
-    const alumno = { usuarioID, colegioID, apoderadoID, cursoID }
-    return await axios.post('/admin/alumno', alumno)
+    const data = { alumno, apoderado }
+    return await axios.post('/admin/alumno', data)
   } catch (error) {
-    console.log(error)
+    console.log('mensaje error' + error)
   }
 }
 const deleteAlumno = async () => {

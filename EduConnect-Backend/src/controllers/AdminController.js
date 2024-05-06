@@ -180,7 +180,7 @@ const updateDocenteController = async (req, res) => {
     console.log('docente encontrado: ', finddocente)
     const { docente } = req.body
     const usuarioDocenteActualizado = await modifyUsuarioModel(finddocente.usuario_id, docente.user)
-    const docenteActualizado = await modifyDocenteModel(docenteID, finddocente.usuario_id, docente.ColegioID, docente.asignaturaID)
+    const docenteActualizado = await modifyDocenteModel(docente_id, finddocente.usuario_id, docente.ColegioID, docente.asignaturaID)
     res.json(docenteActualizado, usuarioDocenteActualizado)
   } catch (error) {
     console.log(error)
