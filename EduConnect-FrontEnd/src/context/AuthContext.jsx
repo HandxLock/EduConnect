@@ -19,12 +19,13 @@ const AuthProvider = ({ children }) => {
   const [errors, setErrors] = useState([])
   const [loading, setLoading] = useState(true)
 
-  const logeo = async ({ email, password }) => {
+  const logeo = async (email, password) => {
     try {
       const res = await loginUser(email, password)
 
       setAuthenticated(true)
       setUser(res.data)
+      console.log(res.data)
     } catch (error) {
       if (Array.isArray(error.response.data)) {
         return setErrors(error.response.data)
