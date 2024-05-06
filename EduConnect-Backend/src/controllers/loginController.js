@@ -4,6 +4,7 @@ import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import sendErrorResponse from '../../utils/utils.js'
 import { idColegioAsignaturaModel } from '../models/asignaturasModel.js'
+import 'dotenv/config'
 
 const loginUser = async (req, res) => {
   console.log(req.body)
@@ -28,7 +29,9 @@ const loginUser = async (req, res) => {
     // eslint-disable-next-line camelcase
     const { usuario_id, email, nombre, apellido1, apellido2, perfil_id } = findUser
     const token = await createToken(usuario_id, nombre, email, perfil_id)
-    res.cookie('token', token)
+    res.cookie('token', token, {
+      httpOnly: true
+    })
     res.status(200).json({
       usuario_id,
       email,
@@ -55,14 +58,14 @@ const logout = async (req, res) => {
 const createToken = async (usuario_id, nombre, email, perfil_id) => {
   // eslint-disable-next-line camelcase
   const token = jwt.sign({ usuario_id, nombre, email, perfil_id }, process.env.JWT_SECRET, {
-    expiresIn: '60m'
+    expiresIn: '1h'
   })
   return token
 }
 
 const verifyToken = async (req, res) => {
-  const { token } = req.cookies
-  console.log(req.cookie)
+  const token = req.cookies.token
+  console.log(req.cookie.token)
   if (!token) return res.status(401).json({ message: 'No Autorizado' })
   jwt.verify(token, process.env.JWT_SECRET, async (err, user) => {
     if (err) return res.status(401).json({ message: 'No Autorizado' })
