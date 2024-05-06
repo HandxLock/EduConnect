@@ -180,7 +180,7 @@ const updateDocenteController = async (req, res) => {
     console.log('docente encontrado: ', finddocente)
     const { docente } = req.body
     const usuarioDocenteActualizado = await modifyUsuarioModel(finddocente.usuario_id, docente.user)
-    const docenteActualizado = await modifyDocenteModel(docenteID, finddocente.usuario_id, docente.ColegioID, docente.asignaturaID)
+    const docenteActualizado = await modifyDocenteModel(docente_id, finddocente.usuario_id, docente.ColegioID, docente.asignaturaID)
     res.json(docenteActualizado, usuarioDocenteActualizado)
   } catch (error) {
     console.log(error)
@@ -194,7 +194,7 @@ const getDocenteByIDController = async (req, res) => {
     const finddocente = await getDocenteByDocenteModel(docente_id)
     console.log('docente encontrado: ', finddocente)
     const usuarioDocente = await getUsuarioByUsuarioIdModel(finddocente.usuario_id)
-    res.json({ finddocente, usuarioDocente})
+    res.json({ finddocente, usuarioDocente })
   } catch (error) {
     console.log(error)
   }
@@ -252,7 +252,7 @@ const updateAlumnoController = async (req, res) => {
     const { alumno, apoderado } = req.body
     console.log('nueva data para alumno recibida en controller: ', alumno, apoderado)
     const apoderadoAlumno = await getApoderadoByAlumnoModel(alumno_id)
-    console.log('apoderado buscado por alumno: ', apoderadoAlumno);
+    console.log('apoderado buscado por alumno: ', apoderadoAlumno)
     const usuarioAlumnoActualizado = await modifyUsuarioModel(usuarioAlumno[0].usuario_id, alumno.user)
     console.log('usuario alumno actualizado: ', usuarioAlumnoActualizado)
     const usuarioApoderadoActualizado = await modifyUsuarioModel(apoderadoAlumno[0].usuario_id, apoderado.user)
