@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import { IconBrandGithub, IconBrandGoogle, IconBrandFacebook } from '@tabler/icons-react'
@@ -22,19 +22,21 @@ function Login () {
       alert('Error de inicio de sesión. Por favor, verifica tus credenciales.')
     }
   }
-  if (user) {
-    if (user.perfil_id === 1) {
-      navigate('/superadmin')
-    } else if (user.perfil_id === 2) {
-      navigate('/admin')
-    } else if (user.perfil_id === 4) {
-      navigate('/alumno')
-    } else if (user.perfil_id === 3) {
-      navigate('/docente')
-    } else {
-      navigate('/login')
+  useEffect(() => {
+    if (user) {
+      if (user.perfil_id === 1) {
+        navigate('/superadmin')
+      } else if (user.perfil_id === 2) {
+        navigate('/admin')
+      } else if (user.perfil_id === 4) {
+        navigate('/alumno')
+      } else if (user.perfil_id === 3) {
+        navigate('/docente')
+      } else {
+        navigate('/login')
+      }
     }
-  }
+  }, [user, navigate])
 
   return (
     <Container>
