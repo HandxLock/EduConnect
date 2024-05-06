@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const instance = axios.create({
-  baseURL: 'http://localhost:3000' || 'https://educonnect-f34m.onrender.com/',
+  baseURL: `${import.meta.env.VITE_BACKEND_URL}` || 'http://localhost:3000',
   withCredentials: true
 })
 
