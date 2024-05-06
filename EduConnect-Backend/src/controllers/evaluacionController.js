@@ -1,4 +1,5 @@
-import { createEvaluacionModel, getEvaluacionesByAlumnoIdModel, updateEvaluacionModel, deleteEvaluacionModel } from '../models/evaluacionesmodel.js'
+/* eslint-disable camelcase */
+import { createEvaluacionModel, getEvaluacionesByAlumnoIdModel, updateEvaluacionModel, deleteEvaluacionModel, getEvaluacionesByUsuarioIdModel } from '../models/evaluacionesmodel.js'
 import sendErrorResponse from '../../utils/utils.js'
 
 const createEvaluation = async (req, res) => {
@@ -75,4 +76,21 @@ const deleteEvaluation = async (req, res) => {
   }
 }
 
-export { createEvaluation, getEvaluationById, updateEvaluation, deleteEvaluation }
+const getEvaluationByusuarioId = async (req, res) => {
+  const { usuario_id } = req.params
+
+  try {
+    const evaluation = await getEvaluacionesByUsuarioIdModel(usuario_id)
+
+    if (!evaluation) {
+      return await sendErrorResponse(res, 'eval_01')
+    }
+
+    res.json(evaluation)
+  } catch (error) {
+    console.error('Error al obtener la evaluación por ID:', error)
+    res.status(500).json({ error: error.message })
+  }
+}
+
+export { createEvaluation, getEvaluationById, updateEvaluation, deleteEvaluation, getEvaluationByusuarioId }

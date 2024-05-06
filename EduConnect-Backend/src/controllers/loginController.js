@@ -68,16 +68,30 @@ const verifyToken = async (req, res) => {
     if (err) return res.status(401).json({ message: 'No Autorizado' })
     const usuarioEncontrado = await userByEmailModel(user.email)
     const colegioid = await idColegioAsignaturaModel(usuarioEncontrado.usuario_id)
-
     if (!usuarioEncontrado) return res.status(401).json({ message: 'No Autorizado' })
-
-    return res.json({
-      id: usuarioEncontrado.usuario_id,
-      nombre: usuarioEncontrado.nombre,
-      email: usuarioEncontrado.email,
-      perfil: usuarioEncontrado.perfil_id,
-      colegio: colegioid.colegio_id
-    })
+    if (usuarioEncontrado.perfil_id === 1) {
+      return res.json({
+        id: usuarioEncontrado.usuario_id,
+        nombre: usuarioEncontrado.nombre,
+        email: usuarioEncontrado.email,
+        perfil: usuarioEncontrado.perfil_id
+      })
+    } else if (usuarioEncontrado.perfil_id === 2) {
+      return res.json({
+        id: usuarioEncontrado.usuario_id,
+        nombre: usuarioEncontrado.nombre,
+        email: usuarioEncontrado.email,
+        perfil: usuarioEncontrado.perfil_id,
+        colegio: colegioid.colegio_id
+      })
+    } else if (usuarioEncontrado.perfil_id === 4) {
+      return res.json({
+        id: usuarioEncontrado.usuario_id,
+        nombre: usuarioEncontrado.nombre,
+        email: usuarioEncontrado.email,
+        perfil: usuarioEncontrado.perfil_id
+      })
+    }
   })
 }
 export { loginUser, logout, verifyToken }
