@@ -1,33 +1,48 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
-function App() {
-  const [count, setCount] = useState(0)
-
+import { Routes, Route, BrowserRouter } from 'react-router-dom'
+// import { useContext } from 'react'
+// import PerfilSuperAdminFormulario from './views/privado/PerfilSuperAdminFormulario.jsx'
+// import PerfilSuperAdminHome from './views/privado/PerfilSuperAdminHome.jsx'
+// import PerfilSuperAdminFormularioAdmin from './views/privado/PerfilSuperAdminFormularioAdmin.jsx'
+// import PerfilAdminFormularioProfesor from './views/privado/PerfilAdminFormularioProfesor.jsx'
+// import PerfilAdminFormularioEstudiante from './views/privado/PerfilAdminFormularioEstudiante.jsx'
+import HomePage from './views/publico/HomePage.jsx'
+import Login from './views/publico/login.jsx'
+import Alumno from './views/privado/PerfilAlumno.jsx'
+import ProtectedRouteAdmin from './ProtectedRouteAdmin.jsx'
+import ProtectedRouteSuperAdmin from './ProtectedRouteSuperAdmin.jsx'
+import PaginaError from './views/publico/paginaError.jsx'
+import SuperAdmin from './views/privado/SuperAdmin.jsx'
+import Admin from './views/privado/Admin.jsx'
+import Docente from './views/privado/Docente.jsx'
+function App () {
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+
+      <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<HomePage />}/>
+        <Route path='/login' element={<Login />} />
+          <Route element ={ <ProtectedRouteSuperAdmin/> }>
+            <Route path='/superadmin' element={ <SuperAdmin />}/>
+            <Route path='*' element={< PaginaError />}/>
+        </Route>
+        <Route element ={ <ProtectedRouteAdmin/> }>
+          <Route path='/admin' element={ <Admin />}/>
+          <Route path='*' element={< PaginaError />}/>
+        </Route>
+        <Route path='*' element={< PaginaError />}/>
+        <Route path='/alumno' element={ <Alumno />}/>
+        <Route path='/docente' element={ <Docente />}/>
+          {/* <Route path='/superadmin/formulariocolegio' element={ Persona.perfil === 'Superadmin' ? <PerfilSuperAdminFormulario/> : <Navigate to ='/login' replace />}/>
+        <Route path='/superadmin/formularioadmin' element={ Persona.perfil === 'Superadmin' ? <PerfilSuperAdminFormularioAdmin/> : <Navigate to ='/login' replace />}/>
+        <Route path='/admin' element={ Persona.perfil === 'Admin' ? <PerfilAdminHome/> : <Navigate to ='/login' replace />}/>
+        <Route path='/admin/formularioprofesor' element={ Persona.perfil === 'Admin' ? <PerfilAdminFormularioProfesor/> : <Navigate to ='/login' replace />}/>
+        <Route path='/admin/formularioestudiante' element={ Persona.perfil === 'Admin' ? <PerfilAdminFormularioEstudiante/> : <Navigate to ='/login' replace />}/>
+        <Route path='/alumno' element={ Persona.perfil === 'Alumno' ? <Alumno/> : <Navigate to ='/login' replace />}></Route> */}
+
+      </Routes>
+
+      </BrowserRouter>
     </>
   )
 }

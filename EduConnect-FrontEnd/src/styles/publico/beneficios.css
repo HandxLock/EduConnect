@@ -1,0 +1,40 @@
+.h2-beneficios{
+  text-align: center;
+}
+
+.h2-beneficios > h2{
+  margin-top: 60px;
+  color:#281b4fff;
+  font-weight: bold;
+  font-size: 40px;
+}
+.beneficio > div > img{
+  width: 254px;
+  height: 190px;
+  text-align: center;
+  box-shadow: 0px 0px 10px rgb(23, 3, 34,0.5);
+}
+
+.beneficio > div > div > div{
+  text-align: center;
+  margin-bottom: 10px;
+  color: #281b4fff ;
+}
+
+.beneficio>div>div>p {
+  text-align: center;
+  margin-bottom: 10px;
+  color: #483285;
+}
+
+@media (max-width: 576px) {
+  .beneficio{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .beneficio >div{
+    margin-bottom: 20px;
+  }
+
+}
