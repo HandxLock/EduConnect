@@ -10,10 +10,10 @@ const createApoderadoModel = async (usuarioID, colegioID) => {
   return response.rows[0]
 }
 
-const modifyApoderadoModel = async (apoderadoID, { usuarioID, colegioID }) => {
+const modifyApoderadoModel = async (apoderadoID, usuarioID, colegioID) => {
   try {
-    console.log(usuarioID, colegioID)
-    const response = pool.query('UPDATE colegio.apoderados SET usuario_id=$1, colegio_id=$2 WHERE apoderado_id=$3 RETURNING *',
+    console.log('info recibida en modelo apoderados: ', apoderadoID, usuarioID, colegioID)
+    const response = await pool.query('UPDATE colegio.apoderados SET usuario_id=$1, colegio_id=$2 WHERE apoderado_id=$3 RETURNING *',
       [usuarioID, colegioID, apoderadoID])
     return response.rows
   } catch (error) {

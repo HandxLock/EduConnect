@@ -1,7 +1,7 @@
 // Este archivo de controllers aun se encuentra pendiente
 
 import { createAlumnoModel, deleteAlumnoModel, getAllAlumnosModel, getUsuarioByAlumnoModel, modifyAlumnoModel } from '../models/alumnoModel.js'
-import { createApoderadoModel, getApoderadoByAlumnoModel } from '../models/apoderadoModel.js'
+import { createApoderadoModel, getApoderadoByAlumnoModel, modifyApoderadoModel } from '../models/apoderadoModel.js'
 import { createUsuarioModel, deleteUsuarioModel, getUsuarioByUsuarioIdModel, modifyUsuarioModel } from '../models/UsuarioModel.js'
 import { createDocenteModel, deleteDocenteModel, getAllDocentesModel, getDocenteByUsuarioIdModel, getDocenteByDocenteModel, modifyDocenteModel } from '../models/docentesModel.js'
 import { createAsignaturaModel, getAsignaturaByIdModel, getAllAsignaturasModel, updateAsignaturaModel, deleteAsignaturaModel } from '../models/asignaturasModel.js'
@@ -180,7 +180,7 @@ const updateDocenteController = async (req, res) => {
     console.log('docente encontrado: ', finddocente)
     const { docente } = req.body
     const usuarioDocenteActualizado = await modifyUsuarioModel(finddocente.usuario_id, docente.user)
-    const docenteActualizado = await modifyDocenteModel(docenteID, finddocente.usuario_id, docente.ColegioID, docente.asignaturaID)
+    const docenteActualizado = await modifyDocenteModel(docente_id, finddocente.usuario_id, docente.ColegioID, docente.asignaturaID)
     res.json(docenteActualizado, usuarioDocenteActualizado)
   } catch (error) {
     console.log(error)
@@ -194,7 +194,7 @@ const getDocenteByIDController = async (req, res) => {
     const finddocente = await getDocenteByDocenteModel(docente_id)
     console.log('docente encontrado: ', finddocente)
     const usuarioDocente = await getUsuarioByUsuarioIdModel(finddocente.usuario_id)
-    res.json({ finddocente, usuarioDocente})
+    res.json({ finddocente, usuarioDocente })
   } catch (error) {
     console.log(error)
   }
@@ -252,14 +252,16 @@ const updateAlumnoController = async (req, res) => {
     const { alumno, apoderado } = req.body
     console.log('nueva data para alumno recibida en controller: ', alumno, apoderado)
     const apoderadoAlumno = await getApoderadoByAlumnoModel(alumno_id)
-    console.log('apoderado buscado por alumno: ', apoderadoAlumno);
+    console.log('apoderado buscado por alumno: ', apoderadoAlumno)
     const usuarioAlumnoActualizado = await modifyUsuarioModel(usuarioAlumno[0].usuario_id, alumno.user)
     console.log('usuario alumno actualizado: ', usuarioAlumnoActualizado)
     const usuarioApoderadoActualizado = await modifyUsuarioModel(apoderadoAlumno[0].usuario_id, apoderado.user)
     console.log('usuarios apoderado actualizado: ', usuarioApoderadoActualizado)
     const alumnoActualizado = await modifyAlumnoModel(alumno_id, usuarioAlumno[0].usuario_id, alumno.colegioID, apoderadoAlumno[0].apoderado_id, alumno.cursoID)
     console.log('registro alumno actualizado: ', alumnoActualizado)
-    res.json({ alumnoActualizado, usuarioAlumnoActualizado, usuarioApoderadoActualizado })
+    const apoderadoActualizado = await modifyApoderadoModel(apoderadoAlumno[0].apoderado_id, apoderadoAlumno[0].usuario_id, apoderado.colegioID)
+    console.log('registro apoderado actualizado: ', apoderadoActualizado)
+    res.json({ alumnoActualizado, usuarioAlumnoActualizado, usuarioApoderadoActualizado, apoderadoActualizado })
   } catch (error) {
     console.log(error)
   }
@@ -267,9 +269,11 @@ const updateAlumnoController = async (req, res) => {
 
 const deleteAlumnoController = async (req, res) => {
   try {
-    const { alumnoID } = req.params
-    const usuarioID = getUsuarioByAlumnoModel(alumnoID)
-    await deleteAlumnoModel(alumnoID)
+    const { alumno_id } = req.params
+    console.log('alumno id recibido controller', alumno_id)
+    const usuarioID = await getUsuarioByAlumnoModel(alumno_id)
+    console.log('usuario encontrado segun id en controller: ', usuarioID)
+    await deleteAlumnoModel(alumno_id)
     await deleteUsuarioModel(usuarioID)
     res.json({ mensaje: 'Alumno eliminado exitosamente' })
   } catch (error) {
