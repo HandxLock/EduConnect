@@ -22,7 +22,7 @@ app.use(express.json())
 app.use(cookieParser())
 
 app.use(cors({
-  origin: 'https://educonnectfront.onrender.com',
+  origin: process.env.FRONTEND_URL,
   credentials: true
 }))
 app.use(logger())
