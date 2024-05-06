@@ -1,20 +1,39 @@
 import * as echarts from 'echarts'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { getAdmins } from '../../services/adminService'
 import { getAlumnos } from '../../services/alumnoService'
 import { getDocentes } from '../../services/docenteService'
 import { getApoderados } from '../../services/apoderadoService'
-const docentes = await getDocentes()
-const alumnos = await getAlumnos()
-const admins = await getAdmins()
-const apoderados = await getApoderados()
+
 function DashboardSuperAdmin () {
-  const cantidadAdmins = admins.length
-  const cantidadAlumnos = alumnos.length
-  const cantidadDocentes = docentes.length
-  const cantidadApoderados = apoderados.length
-  const sumaTotal = (cantidadAdmins + cantidadAlumnos + cantidadDocentes + cantidadApoderados).toString()
+  const [admins, setAdmins] = useState([])
+  const [alumnos, setAlumnos] = useState([])
+  const [docentes, setDocentes] = useState([])
+  const [apoderados, setApoderados] = useState([])
+
   useEffect(() => {
+    async function fetchData () {
+      const docentesData = await getDocentes()
+      const alumnosData = await getAlumnos()
+      const adminsData = await getAdmins()
+      const apoderadosData = await getApoderados()
+
+      setDocentes(docentesData)
+      setAlumnos(alumnosData)
+      setAdmins(adminsData)
+      setApoderados(apoderadosData)
+    }
+
+    fetchData()
+  }, [])
+
+  useEffect(() => {
+    const cantidadAdmins = admins.length
+    const cantidadAlumnos = alumnos.length
+    const cantidadDocentes = docentes.length
+    const cantidadApoderados = apoderados.length
+    const sumaTotal = (cantidadAdmins + cantidadAlumnos + cantidadDocentes + cantidadApoderados).toString()
+
     const chartDom = document.getElementById('dashboard')
     const myChart = echarts.init(chartDom)
     const option = {
@@ -55,7 +74,7 @@ function DashboardSuperAdmin () {
 
     // Clean up when component unmounts
     return () => myChart.dispose()
-  }, [cantidadAdmins, cantidadAlumnos, cantidadApoderados, cantidadDocentes, sumaTotal])
+  }, [admins, alumnos, apoderados, docentes])
 
   return <div id='dashboard' className='dashboard' style={{ width: '50%', height: '400px', margin: '20px auto', marginTop: '3rem' }} />
 }
