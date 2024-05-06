@@ -21,6 +21,7 @@ function FormularioAsignatura () {
   }
   return (
     <>
+    <h2 className='text-center mt-3'>Creacion Asigatura</h2>
     <Card className="formulario">
         {mensaje && <div className="mensaje">{mensaje}</div>}
         <Form onSubmit={handleSubmit}>

@@ -24,7 +24,7 @@ const Sidebar = ({ onSidebarClick }) => {
             Crear Asignatura
           </Button>
           <Button variant="primary" size="lg" onClick={() => handleClick('Botón 3')}>
-            etc
+            Crear Curso
           </Button>
           <Button variant="dark" size="lg" onClick={() => handleClick('Botón 4')}>
             DashBoard
