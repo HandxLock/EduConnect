@@ -1,19 +1,16 @@
-import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import { IconBrandGithub, IconBrandGoogle, IconBrandFacebook } from '@tabler/icons-react'
 import '../../styles/publico/login.css'
 import { useAuth } from '../../context/AuthContext'
 import { GoogleOAuthProvider } from '@react-oauth/google'
 import LoginGoogle from './LoginGoogle'
-// import { gapi } from 'gapi-script'
-// import GoogleLogin from 'react-google-login'
-
 function Login () {
+  const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [rememberMe, setRememberMe] = useState(false)
-  const [redirectTo, setRedirectTo] = useState(null)
 
   const { logeo, errors: logeoErrors, user } = useAuth()
 
@@ -26,42 +23,19 @@ function Login () {
       alert('Error de inicio de sesión. Por favor, verifica tus credenciales.')
     }
   }
-
-  useEffect(() => {
-    // Verificar si user tiene un valor
-    if (user) {
-      if (user.perfil_id === 1) {
-        setRedirectTo('/superadmin')
-      } else if (user.perfil_id === 2) {
-        setRedirectTo('/admin')
-      } else if (user.perfil_id === 4) {
-        setRedirectTo('/alumno')
-      } else if (user.perfil_id === 3) {
-        setRedirectTo('/docente')
-      } else {
-        setRedirectTo('/login')
-      }
-      // También puedes realizar otras acciones, como redireccionar
+  if (user) {
+    if (user.perfil_id === 1) {
+      navigate('/superadmin')
+    } else if (user.perfil_id === 2) {
+      navigate('/admin')
+    } else if (user.perfil_id === 4) {
+      navigate('/alumno')
+    } else if (user.perfil_id === 3) {
+      navigate('/docente')
+    } else {
+      navigate('/login')
     }
-  }, [user])
-
-  useEffect(() => {
-    if (redirectTo) {
-      // Redireccionar una vez que se establece redirectTo
-      window.location.href = redirectTo
-    }
-  }, [redirectTo])
-
-  // const onSuccess = (response) => {
-  //   console.log(response.profileObj)
-  //   const persona = {
-  //     ...response.profileObj,
-  //     perfil: 'Superadmin',
-  //     isLogedIn: true
-  //   }
-  //   setPersona(persona)
-  //   redirect(persona)
-  // }
+  }
 
   return (
     <Container>
@@ -127,12 +101,7 @@ function Login () {
 
             <p className='mt-5'>O usa tu cuenta</p>
 
-            {/* <GoogleLogin
-              clientId={clientID}
-              onSuccess={onSuccess}
-              onFailure={onFailure}
-              cookiePolicy={'single_host_policy'}
-            /> */
+            {
               <GoogleOAuthProvider
                 clientId='478413847757-67v0cr4i1g3ctbdji14vrrkseq0fqhu7.apps.googleusercontent.com'
               >
