@@ -31,7 +31,7 @@ const loginUser = async (req, res) => {
     const token = await createToken(usuario_id, nombre, email, perfil_id)
     res.cookie('token', token, {
       httpOnly: true,
-      SameSite: 'none',
+      sameSite: 'None',
       secure: true
     })
     res.status(200).json({
@@ -49,7 +49,8 @@ const loginUser = async (req, res) => {
 }
 
 const logout = async (req, res) => {
-  res.cookie('token', '', {
+  const token = req.cookies.token
+  res.cookie(token, '', {
     expires: new Date(0)
   })
   return res.sendStatus(200)
