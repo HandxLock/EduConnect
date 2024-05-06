@@ -26,13 +26,15 @@ const userByEmailModel = async (email) => {
 
 const modifyUsuarioModel = async (usuarioId, { rut, nombre, apellido1, apellido2, email, clave, direccion, telefono, perfilId }) => {
   try {
-    console.log(rut, nombre, apellido1, apellido2, email, clave, direccion, telefono, perfilId)
+    console.log('usuario id recibido en modificador de usuario en modelo: ', usuarioId);
+    console.log('datos recibidos para modificar usuario en modelo: ', rut, nombre, apellido1, apellido2, email, clave, direccion, telefono, perfilId)
     const hashedClave = bcrypt.hashSync(clave)
     const SQLQuery = {
-      text: 'UPDATE perfilamiento.usuarios SET (rut, nombre, apellido1, apellido2, email, clave, direccion, telefono, perfil_id, fecha_modificacion) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, NOW()) WHERE usuario_id=$10 RETURNING *',
+      text: 'UPDATE perfilamiento.usuarios SET rut = $1, nombre = $2, apellido1 = $3, apellido2 = $4, email = $5, clave = $6, direccion = $7, telefono = $8, perfil_id = $9, fecha_modificacion = now() WHERE usuario_id=$10 RETURNING *',
       values: [rut, nombre, apellido1, apellido2, email, hashedClave, direccion, telefono, perfilId, usuarioId]
     }
-    const response = pool.query(SQLQuery)
+    const response = await pool.query(SQLQuery)
+    // console.log('respuesta de la query: ', response)
     return response.rows[0]
   } catch (error) {
     throw new Error('Error modificando el registro del usuario:' + error.message)

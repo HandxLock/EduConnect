@@ -12,9 +12,11 @@ const createAlumnoModel = async (usuarioID, colegioID, apoderadoID, cursoID) => 
 
 const modifyAlumnoModel = async (alumnoId, usuarioID, colegioID, apoderadoID, cursoID) => {
   try {
-    console.log(usuarioID, colegioID, apoderadoID, cursoID)
-    const response = pool.query('UPDATE colegio.alumnos SET usuario_id=$1, colegio_id=$2, apoderado_iD=$3, curso_iD=$4 WHERE alumno_id=$5 RETURNING *',
+    console.log('Data recibida para modifcar alumno en modelo', usuarioID, colegioID, apoderadoID, cursoID)
+    console.log('alumnod id recibido en modelo: ', alumnoId);
+    const response = await pool.query('UPDATE colegio.alumnos SET usuario_id=$1, colegio_id=$2, apoderado_iD=$3, curso_iD=$4 WHERE alumno_id=$5 RETURNING *',
       [usuarioID, colegioID, apoderadoID, cursoID, alumnoId])
+    console.log('respuesta de la query de modificacion de alumnos modelo: ', response.rows)
     return response.rows
   } catch (error) {
     throw new Error('Error modificando el registro del alumno:' + error.message)

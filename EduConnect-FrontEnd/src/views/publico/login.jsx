@@ -32,7 +32,9 @@ function Login () {
       if (user.perfil_id === 1) {
         setRedirectTo('/superadmin')
       } else if (user.perfil_id === 2) {
-        setRedirectTo('/admin')
+        setRedirectTo('/admin')}
+        else if (user.perfil_id === 4) {
+          setRedirectTo('/alumno')
       } else {
         setRedirectTo('/login')
       }
