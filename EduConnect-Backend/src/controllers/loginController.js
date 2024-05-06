@@ -91,6 +91,13 @@ const verifyToken = async (req, res) => {
         email: usuarioEncontrado.email,
         perfil: usuarioEncontrado.perfil_id
       })
+    } else if (usuarioEncontrado.perfil_id === 3) {
+      return res.json({
+        id: usuarioEncontrado.usuario_id,
+        nombre: usuarioEncontrado.nombre,
+        email: usuarioEncontrado.email,
+        perfil: usuarioEncontrado.perfil_id
+      })
     }
   })
 }
