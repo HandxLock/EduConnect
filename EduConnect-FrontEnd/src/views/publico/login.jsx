@@ -17,7 +17,7 @@ function Login () {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      logeo({ email, password })
+      logeo(email, password)
     } catch (error) {
       alert('Error de inicio de sesión. Por favor, verifica tus credenciales.')
     }
