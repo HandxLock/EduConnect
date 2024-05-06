@@ -2,9 +2,9 @@
 import axios from './axios'
 
 // crear asignatura
-const crearAsignatura = async (nombre, descripcion, colegio_id, docente_id) => {
+const crearAsignatura = async (nombre, descripcion, colegio_id) => {
   try {
-    const asignatura = { nombre, descripcion, colegio_id, docente_id }
+    const asignatura = { nombre, descripcion, colegio_id }
     return await axios.post('/asignatura', asignatura)
   } catch (error) {
     console.log(error)
@@ -12,9 +12,9 @@ const crearAsignatura = async (nombre, descripcion, colegio_id, docente_id) => {
 }
 
 // modificar asignatura
-const modificarAsignatura = async (nombre, descripcion, colegio_id, docente_id) => {
+const modificarAsignatura = async (nombre, descripcion, colegio_id) => {
   try {
-    const asignatura = { nombre, descripcion, colegio_id, docente_id }
+    const asignatura = { nombre, descripcion, colegio_id }
     return await axios.put('/asignatura/:asignatura_id', asignatura)
   } catch (error) {
     console.log(error)

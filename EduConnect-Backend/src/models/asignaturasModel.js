@@ -44,3 +44,12 @@ export const deleteAsignaturaModel = async (asignatura_id) => {
   const response = await pool.query(SQLQuery)
   return response.rows[0]
 }
+
+export const idColegioAsignaturaModel = async (usuario_id) => {
+  const SQLQuery = {
+    text: 'SELECT colegio_id from superadmin.admins WHERE usuario_id = $1',
+    values: [usuario_id]
+  }
+  const response = await pool.query(SQLQuery)
+  return response.rows[0]
+}

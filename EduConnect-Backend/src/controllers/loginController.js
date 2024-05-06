@@ -3,6 +3,7 @@ import { userByEmailModel } from '../models/UsuarioModel.js'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import sendErrorResponse from '../../utils/utils.js'
+import { idColegioAsignaturaModel } from '../models/asignaturasModel.js'
 
 const loginUser = async (req, res) => {
   console.log(req.body)
@@ -66,14 +67,16 @@ const verifyToken = async (req, res) => {
   jwt.verify(token, process.env.JWT_SECRET, async (err, user) => {
     if (err) return res.status(401).json({ message: 'No Autorizado' })
     const usuarioEncontrado = await userByEmailModel(user.email)
+    const colegioid = await idColegioAsignaturaModel(usuarioEncontrado.usuario_id)
+
     if (!usuarioEncontrado) return res.status(401).json({ message: 'No Autorizado' })
 
     return res.json({
       id: usuarioEncontrado.usuario_id,
       nombre: usuarioEncontrado.nombre,
       email: usuarioEncontrado.email,
-      perfil: usuarioEncontrado.perfil_id
-
+      perfil: usuarioEncontrado.perfil_id,
+      colegio: colegioid.colegio_id
     })
   })
 }
