@@ -1,5 +1,5 @@
 import express from 'express'
-import { createEvaluation, getEvaluationById, updateEvaluation, deleteEvaluation } from '../src/controllers/evaluacionController.js'
+import { createEvaluation, getEvaluationById, updateEvaluation, deleteEvaluation, getEvaluationByusuarioId } from '../src/controllers/evaluacionController.js'
 import validateParamsEvaluation from '../middlewares/valid.params.evaluaciones.js'
 
 const router = express.Router()
@@ -11,5 +11,7 @@ router.get('/alumnos/:idAlumno/evaluaciones/:idEvaluacion', getEvaluationById)
 router.put('/alumnos/:idAlumno/evaluaciones/:idEvaluacion', validateParamsEvaluation, updateEvaluation)
 
 router.delete('/alumnos/:idAlumno/evaluaciones/:idEvaluacion', deleteEvaluation)
+
+router.get('/alumnos/:usuario_id', getEvaluationByusuarioId)
 
 export default router
