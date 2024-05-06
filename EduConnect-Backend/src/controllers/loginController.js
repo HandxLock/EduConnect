@@ -30,7 +30,9 @@ const loginUser = async (req, res) => {
     const { usuario_id, email, nombre, apellido1, apellido2, perfil_id } = findUser
     const token = await createToken(usuario_id, nombre, email, perfil_id)
     res.cookie('token', token, {
-      httpOnly: true
+      httpOnly: true,
+      SameSite: 'none',
+      secure: true
     })
     res.status(200).json({
       usuario_id,
