@@ -15,9 +15,6 @@ export const createAsignatura = async (req, res) => {
   try {
     const { nombre, descripcion, colegio_id } = req.body
 
-    if (!nombre || !descripcion || !colegio_id) {
-      return res.status(400).json({ message: 'Todos los campos son requeridos' })
-    }
     const nuevaAsignatura = await createAsignaturaModel(nombre, descripcion, colegio_id)
     return res.status(201).json(nuevaAsignatura)
   } catch (error) {
@@ -57,14 +54,11 @@ export const getAllAsignaturas = async (req, res) => {
 export const updateAsignatura = async (req, res) => {
   try {
     const { asignatura_id } = req.params
-    const { nombre, descripcion, colegio_id, docente_id } = req.body
+    const { nombre, descripcion, colegio_id } = req.body
     if (!asignatura_id) {
       return res.status(400).json({ message: 'ID de asignatura no proporcionado' })
     }
-    if (!nombre || !descripcion || !colegio_id || !docente_id) {
-      return res.status(400).json({ message: 'Todos los campos son requeridos' })
-    }
-    const asignaturaActualizada = await updateAsignaturaModel(asignatura_id, nombre, descripcion, colegio_id, docente_id)
+    const asignaturaActualizada = await updateAsignaturaModel(asignatura_id, nombre, descripcion, colegio_id)
     return res.status(200).json(asignaturaActualizada)
   } catch (error) {
     console.error('Error al actualizar una asignatura:', error)
@@ -89,12 +83,9 @@ export const deleteAsignatura = async (req, res) => {
 /* sección CRUD cursos */
 
 export const createCurso = async (req, res) => {
-  const { name, description, school_id } = req.body
-  if (!name || !description || !school_id) {
-    return res.status(400).json({ message: 'Todos los campos son requeridos' })
-  }
+  const { nombre, descripcion, colegio_id } = req.body
   try {
-    const newCourse = await createCursoModel(name, description, school_id)
+    const newCourse = await createCursoModel(nombre, descripcion, colegio_id)
     return res.status(201).json(newCourse)
   } catch (error) {
     return res.status(500).json({ message: error.message })
@@ -127,13 +118,13 @@ export const getCursoById = async (req, res) => {
 }
 
 export const updateCurso = async (req, res) => {
-  const { id } = req.params
-  const { name, description, school_id } = req.body
-  if (!id || !name || !description || !school_id) {
+  const { curso_id } = req.params
+  const { nombre, descripcion, colegio_id } = req.body
+  if (!curso_id || !nombre || !descripcion || !colegio_id) {
     return res.status(400).json({ message: 'Todos los campos son requeridos' })
   }
   try {
-    const updatedCourse = await updateCursoModel(id, name, description, school_id)
+    const updatedCourse = await updateCursoModel(curso_id, nombre, descripcion, colegio_id)
     return res.status(200).json(updatedCourse)
   } catch (error) {
     return res.status(500).json({ message: error.message })
@@ -141,12 +132,12 @@ export const updateCurso = async (req, res) => {
 }
 
 export const deleteCurso = async (req, res) => {
-  const { id } = req.params
-  if (!id) {
+  const { curso_id } = req.params
+  if (!curso_id) {
     return res.status(400).json({ message: 'ID de curso no proporcionado' })
   }
   try {
-    await deleteCursoModel(id)
+    await deleteCursoModel(curso_id)
     return res.status(204).end()
   } catch (error) {
     return res.status(500).json({ message: error.message })

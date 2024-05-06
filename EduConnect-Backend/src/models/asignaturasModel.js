@@ -29,7 +29,7 @@ export const getAllAsignaturasModel = async () => {
 
 export const updateAsignaturaModel = async (asignatura_id, nombre, descripcion, colegio_id) => {
   const SQLQuery = {
-    text: 'UPDATE colegio.asignaturas SET nombre = $1, descripcion = $2, colegio_id = $3, docente_id = $4 WHERE asignatura_id = $5 RETURNING *',
+    text: 'UPDATE colegio.asignaturas SET nombre = $1, descripcion = $2, colegio_id = $3 WHERE asignatura_id = $4 RETURNING *',
     values: [nombre, descripcion, colegio_id, asignatura_id]
   }
   const response = await pool.query(SQLQuery)
