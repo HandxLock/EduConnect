@@ -4,12 +4,13 @@ import { useState } from 'react'
 import FormularioAsignatura from '../../components/privado/FormularioAsignatura'
 import FormularioCurso from '../../components/privado/FormularioCurso'
 import FormularioAlumnoApoderado from '../../components/privado/FormularioAlumnoApoderado'
+import FormularioProfesor from '../../components/privado/FormularioProfesor'
 function Admin () {
   const [contenido, setContenido] = useState('')
   const handleSidebarClick = (boton) => {
     switch (boton) {
       case 'Botón 0':
-        setContenido('colocar componente 0')
+        setContenido(<FormularioProfesor />)
         break
       case 'Botón 1':
         setContenido(<FormularioAlumnoApoderado/>)
