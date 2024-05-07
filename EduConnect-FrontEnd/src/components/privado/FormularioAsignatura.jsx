@@ -13,7 +13,7 @@ function FormularioAsignatura () {
     e.preventDefault()
     try {
       await crearAsignatura(nombre, descripcion, user.colegio)
-      setMensaje('Asignatura se creoexitosamente.')
+      setMensaje('Asignatura se creo exitosamente.')
     } catch (error) {
       console.error('Error al crear asignatura:', error)
       setMensaje('Error al crear asignatura. Por favor, inténtalo de nuevo.')
