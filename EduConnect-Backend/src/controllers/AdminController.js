@@ -148,12 +148,11 @@ export const deleteCurso = async (req, res) => {
 
 const createNewDocente = async (req, res) => {
   try {
-    const { docente } = req.body
-    console.log('info ingresada:', docente)
-    const newUserDocente = await createUsuarioModel(docente.user)
+    const { usuarioID, colegioID, asignaturaID } = req.body
+    console.log('info ingresada:', usuarioID)
+    const newUserDocente = await createUsuarioModel(usuarioID.user)
     console.log('info retornada usuario docente', newUserDocente)
-    console.log('info alumno: ', docente.colegioID, docente.asignaturaID, newUserDocente.user_id)
-    const NewDocente = await createDocenteModel(newUserDocente.usuario_id, docente.colegioID, docente.asignaturaID)
+    const NewDocente = await createDocenteModel(newUserDocente.usuario_id, colegioID, asignaturaID)
     return res.status(201).json({ newUserDocente, NewDocente })
   } catch (error) {
     console.error('Error al crear un registro nuevo de docente:', error)
