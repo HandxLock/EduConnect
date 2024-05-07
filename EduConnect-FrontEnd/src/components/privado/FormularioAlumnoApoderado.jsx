@@ -70,13 +70,13 @@ function FormularioAlumnoApoderado () {
 
       const alumno = {
         user: usuario,
-        colegioID: user.colegio,
+        colegioID: user.colegio_id,
         cursoID: parseInt(selectCurso)
 
       }
       const apoderado = {
         user: usuario2,
-        colegioID: user.colegio
+        colegioID: user.colegio_id
       }
 
       await createAlumno(alumno, apoderado)
