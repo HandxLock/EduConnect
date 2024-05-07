@@ -104,7 +104,7 @@ function Login () {
 
             {
               <GoogleOAuthProvider
-                clientId='478413847757-67v0cr4i1g3ctbdji14vrrkseq0fqhu7.apps.googleusercontent.com'
+                clientId='478413847757-ftv1shc2l9q56oqpe9aftub56ugge1t3.apps.googleusercontent.com'
               >
                 <LoginGoogle />
               </GoogleOAuthProvider>
