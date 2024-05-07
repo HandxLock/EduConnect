@@ -1,8 +1,18 @@
 const validateParamsDocente = (req, res, next) => {
-  const { docente } = req.body
-  if (!docente.user.rut || !docente.user.nombre || !docente.user.apellido1 || !docente.user.apellido2 || !docente.user.email || !docente.user.clave || !docente.user.direccion || !docente.user.telefono || !docente.user.perfilId === 3 || !docente.asignaturaID || !docente.colegioID) {
-    return res.status(400).json({ error: 'debe ingresar todos los campos para registrar un docente' })
+  const { usuarioID, colegioID, asignaturaID } = req.body
+  if (!usuarioID || !usuarioID.user || !usuarioID.user.rut || !usuarioID.user.nombre || !usuarioID.user.apellido1 || !usuarioID.user.apellido2 || !usuarioID.user.email || !usuarioID.user.clave || !usuarioID.user.direccion || !usuarioID.user.telefono || !usuarioID.user.perfilId === 3) {
+    return res.status(400).json({ error: 'Faltan campos del usuario en la solicitud' })
   }
+
+  if (!colegioID) {
+    return res.status(400).json({ error: 'Falta el campo colegioID en la solicitud' })
+  }
+
+  // Comprobación de la existencia de asignaturaID y su campo
+  if (!asignaturaID) {
+    return res.status(400).json({ error: 'Falta el campo asignaturaID en la solicitud' })
+  }
+
   next()
 }
 
