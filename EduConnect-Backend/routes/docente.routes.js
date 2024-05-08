@@ -8,7 +8,7 @@ const router = Router()
 router.post('/admin/docente', validateParamsDocente, createNewDocente)
 router.get('/admin/docentes/:docente_id', getDocenteByIDController)
 router.get('/admin/docentes', getDocentesController)
-router.put('/admin/docentes/:docente_id', updateDocenteController)
+router.put('/admin/docentes/:docente_id', validateParamsDocente, updateDocenteController)
 router.delete('/admin/docentes/:docente_id', deleteDocenteController)
 
 export default router
