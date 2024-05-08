@@ -152,7 +152,7 @@ function Login () {
             <div>
               <p className='m-5 fs-4 text-white'>Si aún no tienes una cuenta, únete a nosotros</p>
             </div>
-            <Link to="/">
+            <Link to="/contacto">
             <Button className='w-50 fs-4 shadow rounded-pill' variant="primary"><b>¡Contáctanos!</b></Button>
             </Link>
           </section>
