@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken'
 import 'dotenv/config'
 
 const validarToken = async (req, res, next) => {
-  const { token } = req.cookies
+  const token = req.cookies.token
   if (!token) {
     return res.status(401).json({ message: 'No Token, autorizacion denegada' })
   }

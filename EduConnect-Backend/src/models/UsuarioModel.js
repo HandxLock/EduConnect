@@ -26,7 +26,7 @@ const userByEmailModel = async (email) => {
 
 const modifyUsuarioModel = async (usuarioId, { rut, nombre, apellido1, apellido2, email, clave, direccion, telefono, perfilId }) => {
   try {
-    console.log('usuario id recibido en modificador de usuario en modelo: ', usuarioId);
+    console.log('usuario id recibido en modificador de usuario en modelo: ', usuarioId)
     console.log('datos recibidos para modificar usuario en modelo: ', rut, nombre, apellido1, apellido2, email, clave, direccion, telefono, perfilId)
     const hashedClave = bcrypt.hashSync(clave)
     const SQLQuery = {
