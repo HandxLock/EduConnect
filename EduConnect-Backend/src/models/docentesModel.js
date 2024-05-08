@@ -46,7 +46,7 @@ const getDocenteByUsuarioIdModel = async (usuarioId) => {
 
 const getDocenteByDocenteModel = async (docenteID) => {
   try {
-    console.log('docente id recibido modelo: ', docenteID);
+    console.log('docente id recibido modelo: ', docenteID)
     const SQLQuery = {
       text: 'SELECT * FROM colegio.docentes WHERE docente_id = $1',
       values: [docenteID]
