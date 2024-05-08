@@ -109,4 +109,12 @@ const asignarColegio = async (usuario_id, colegio_id) => {
     console.log(error)
   }
 }
-export { crearColegio, obtenerColegios, actualizarColegio, eliminarColegio, crearAdmin, obtenerAdmins, actualizarAdmin, eliminarAdmin, asignarColegio }
+
+const obteneridColegioAdmin = async (usuario_id) => {
+  const idColegio = await pool.query(
+    'SELECT colegio_id FROM superadmin.admins WHERE usuario_id = $1',
+    [usuario_id]
+  )
+  return idColegio.rows[0].colegio_id
+}
+export { crearColegio, obtenerColegios, actualizarColegio, eliminarColegio, crearAdmin, obtenerAdmins, actualizarAdmin, eliminarAdmin, asignarColegio, obteneridColegioAdmin }

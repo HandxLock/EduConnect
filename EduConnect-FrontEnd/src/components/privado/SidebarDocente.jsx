@@ -1,7 +1,7 @@
 import Button from 'react-bootstrap/Button'
 import '../../styles/privado/aside.css'
 import { useAuth } from '../../context/AuthContext'
-const Sidebar = ({ onSidebarClick }) => {
+const SidebarDocente = ({ onSidebarClick }) => {
   const { logout, user } = useAuth()
   const handleClick = (boton) => {
     onSidebarClick(boton)
@@ -15,16 +15,16 @@ const Sidebar = ({ onSidebarClick }) => {
         </div>
         <div className='botones'>
           <Button variant="secondary" size="lg" onClick={() => handleClick('Botón 0')} >
-            Crear Docente
+            Cursos
           </Button>
           <Button variant="warning" size="lg" onClick={() => handleClick('Botón 1')} >
-            Crear Alumno
+            Crear observación
           </Button>
           <Button variant="success" size="lg"onClick={() => handleClick('Botón 2')}>
-            Crear Asignatura
+            Crear evaluación
           </Button>
           <Button variant="primary" size="lg" onClick={() => handleClick('Botón 3')}>
-            Crear Curso
+            Calificar evaluación
           </Button>
           <Button variant="dark" size="lg" onClick={() => handleClick('Botón 4')}>
             DashBoard
@@ -42,4 +42,4 @@ const Sidebar = ({ onSidebarClick }) => {
   )
 }
 
-export default Sidebar
+export default SidebarDocente
