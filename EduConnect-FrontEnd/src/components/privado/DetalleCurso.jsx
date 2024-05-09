@@ -21,9 +21,9 @@ function DetalleCurso ({ curso, cursoId }) {
       <thead>
         <tr>
           <td colSpan="2"></td>
-          <td colSpan="3" style={{ textAlign: 'center' }}>Texto para Evaluacion</td>
-          <td colSpan="2" style={{ textAlign: 'center' }}>Texto para Revision</td>
-          <td colSpan="2" style={{ textAlign: 'center' }}>Texto para Interrogatorio</td>
+          <td colSpan="3" >Evaluacion Sumativa</td>
+          <td colSpan="2" >Evaluacion Formativa</td>
+          <td colSpan="2" >Evaluacion Sumativa</td>
         </tr>
         <tr>
           <th>#</th>
@@ -35,6 +35,7 @@ function DetalleCurso ({ curso, cursoId }) {
           <th style={{ textAlign: 'center' }}>Revision 2</th>
           <th style={{ textAlign: 'center' }}>Interrogación 1</th>
           <th style={{ textAlign: 'center' }}>Interrogación 2</th>
+          <th style={{ textAlign: 'center' }}>Promedio</th>
         </tr>
       </thead>
       <tbody>
@@ -42,13 +43,14 @@ function DetalleCurso ({ curso, cursoId }) {
           <tr key={alumno.alumno_id}>
             <td>{index + 1}</td>
             <td >{`${alumno.nombre} ${alumno.apellido1}`}</td>
-            <td><input type="text" /></td> {/* Campo de entrada para Evaluacion 1 */}
-            <td><input type="text" /></td> {/* Campo de entrada para Evaluacion 2 */}
-            <td><input type="text" /></td> {/* Campo de entrada para Evaluacion 3 */}
-            <td><input type="text" /></td> {/* Campo de entrada para Revision 1 */}
-            <td><input type="text" /></td> {/* Campo de entrada para Revision 2 */}
-            <td><input type="text" /></td> {/* Campo de entrada para Interrogación 1 */}
-            <td><input type="text" /></td> {/* Campo de entrada para Interrogación 2 */}
+            <td><input type="text" /></td>
+            <td><input type="text" /></td>
+            <td><input type="text" /></td>
+            <td><input type="text" /></td>
+            <td><input type="text" /></td>
+            <td><input type="text" /></td>
+            <td><input type="text" /></td>
+            <td><input type="text" /></td>
           </tr>
         ))}
       </tbody>

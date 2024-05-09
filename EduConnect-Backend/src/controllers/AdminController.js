@@ -4,10 +4,9 @@ import { createAlumnoModel, deleteAlumnoModel, getAllAlumnosModel, getUsuarioByA
 
 import { createApoderadoModel, getApoderadoByAlumnoModel, getApoderadoByUsuarioIdModel, modifyApoderadoModel } from '../models/apoderadoModel.js'
 import { createUsuarioModel, deleteUsuarioModel, getUsuarioByRutModel, getUsuarioByUsuarioIdModel, modifyUsuarioModel } from '../models/UsuarioModel.js'
-import { createDocenteModel, deleteDocenteModel, getAllDocentesModel, getDocenteByUsuarioIdModel, getDocenteByDocenteModel, modifyDocenteModel, getDocentePorColegioId, createAsignacionCursoModel } from '../models/docentesModel.js'
+import { createDocenteModel, deleteDocenteModel, getAllDocentesModel, getDocenteByDocenteModel, modifyDocenteModel, getDocentePorColegioId, createAsignacionCursoModel } from '../models/docentesModel.js'
 import { createAsignaturaModel, getAsignaturaByIdModel, getAllAsignaturasModel, updateAsignaturaModel, deleteAsignaturaModel, getAsignaturaColegioIdModel } from '../models/asignaturasModel.js'
-import { createCursoModel, getCursoByIdModel, getCursosModel, updateCursoModel, deleteCursoModel, getCursoPorCOlegioIdModel } from '../models/cursosModel.js'
-
+import { createCursoModel, getCursoByIdModel, getCursosModel, updateCursoModel, deleteCursoModel, getCursoPorCOlegioIdModel, getCursosPorUsuarioId } from '../models/cursosModel.js'
 
 // import sendErrorResponse from '../../utils/utils.js'
 
@@ -173,16 +172,26 @@ export const getCursoPorColegioIdController = async (req, res) => {
     return res.status(500).json({ message: error.message })
   }
 }
+
+export const getCursoPorUsuarioIdController = async (req, res) => {
+  const { usuario_id } = req.params
+  try {
+    const cursos = await getCursosPorUsuarioId(usuario_id)
+    return res.status(200).json(cursos)
+  } catch (error) {
+    console.log(error)
+  }
+}
 /* sección CRUD docentes */
 
 const createNewDocente = async (req, res) => {
   try {
-    const { docente } = req.body
+    const { usuarioID, colegioID, asignaturaID } = req.body
     // console.log('info ingresada:', docente)
-    const newUserDocente = await createUsuarioModel(docente.user)
+    const newUserDocente = await createUsuarioModel(usuarioID.user)
     // console.log('info retornada usuario docente', newUserDocente)
     // console.log('info alumno: ', docente.colegioID, docente.asignaturaID, newUserDocente.user_id)
-    const NewDocente = await createDocenteModel(newUserDocente.usuario_id, docente.colegioID, docente.asignaturaID)
+    const NewDocente = await createDocenteModel(newUserDocente.usuario_id, colegioID, asignaturaID)
     return res.status(201).json({ newUserDocente, NewDocente })
   } catch (error) {
     console.error('Error al crear un registro nuevo de docente:', error)
@@ -285,27 +294,25 @@ const createAsignacionCursoController = async (req, res) => {
 const createNewAlumno = async (req, res) => {
   try {
     const { alumno, apoderado } = req.body
-    // console.log('info ingresada:', alumno, apoderado)
     const newUserAlumno = await createUsuarioModel(alumno.user)
     const findUserApoderado = await getUsuarioByRutModel(apoderado.user.rut)
     let apoderadoID = ''
     let apoderadoUsuario = {}
     let apoderadoResponse = {}
-    if (!findUserApoderado) {
+    if (!findUserApoderado || findUserApoderado.length === 0) {
       const newUserApoderado = await createUsuarioModel(apoderado.user)
+      console.log(newUserApoderado)
       const newApoderado = await createApoderadoModel(newUserApoderado.usuario_id, apoderado.colegioID)
       apoderadoID = newApoderado.apoderado_id
       apoderadoUsuario = newUserApoderado
       apoderadoResponse = newApoderado
     } else {
-      const oldApoderado = await getApoderadoByUsuarioIdModel(findUserApoderado.usuario_id)
-      apoderadoID = oldApoderado.apoderado_id
+      console.log('aqui')
+      const oldApoderado = await getApoderadoByUsuarioIdModel(findUserApoderado[0].usuario_id)
+      apoderadoID = oldApoderado[0].apoderado_id
       apoderadoUsuario = findUserApoderado
       apoderadoResponse = oldApoderado
     }
-    // console.log('info retornada usuario alumno', newUserAlumno)
-    // console.log('info retornada usuario apoderado', newUserApoderado)
-    // console.log('info alumno: ', alumno.colegioID, alumno.cursoID, newUserApoderado.apoderado_id)
     const newAlumno = await createAlumnoModel(newUserAlumno.usuario_id, alumno.colegioID, apoderadoID, alumno.cursoID)
     return res.status(201).json({ newUserAlumno, newAlumno, apoderadoUsuario, apoderadoResponse })
   } catch (error) {
