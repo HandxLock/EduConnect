@@ -11,6 +11,16 @@ const createEvaluacionModel = async ({ alumnoId, evaluacionData }) => {
   return response.rows[0]
 }
 
+const calificarEvaluacionModel = async ({ alumnoId, evaluacionData }) => {
+  const { nombre, calificacion, fechaEvaluacion } = evaluacionData
+  const SQLQuery = {
+    text: 'INSERT INTO colegio.evaluacionesPorAlumno (alumno_id, nombre, calificacion, fecha_evaluacion) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+    values: [alumnoId, nombre, calificacion, fechaEvaluacion]
+  }
+  const response = await pool.query(SQLQuery)
+  return response.rows[0]
+}
+
 const getEvaluacionesByAlumnoIdModel = async (alumnoId) => {
   const SQLQuery = {
     text: 'SELECT * FROM colegio.evaluacionesPorAlumno WHERE alumno_id = $1',
@@ -48,4 +58,4 @@ const getEvaluacionesByUsuarioIdModel = async (usuario_id) => {
   return response.rows
 }
 
-export { createEvaluacionModel, getEvaluacionesByAlumnoIdModel, updateEvaluacionModel, deleteEvaluacionModel, getEvaluacionesByUsuarioIdModel }
+export { createEvaluacionModel, calificarEvaluacionModel, getEvaluacionesByAlumnoIdModel, updateEvaluacionModel, deleteEvaluacionModel, getEvaluacionesByUsuarioIdModel }

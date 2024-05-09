@@ -22,8 +22,10 @@ function NavBar () {
         <Navbar.Collapse id="basic-navbar-nav">
           <div className="d-lg-flex justify-content-center align-items-center flex-lg-grow-1">
             <Nav className="mr-auto navbar-color">
+              
               <Nav.Link href="#beneficios">Beneficios</Nav.Link>
-              <Nav.Link href='#contacto'>Contacto</Nav.Link>
+              <Nav.Link href='/contacto'>Contacto</Nav.Link>
+
             </Nav>
           </div>
           <Link to="/login" className='text-dark'>

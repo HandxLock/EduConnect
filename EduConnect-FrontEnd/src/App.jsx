@@ -13,6 +13,7 @@ import ProtectedRouteSuperAdmin from './ProtectedRouteSuperAdmin.jsx'
 import PaginaError from './views/publico/paginaError.jsx'
 import SuperAdmin from './views/privado/SuperAdmin.jsx'
 import Admin from './views/privado/Admin.jsx'
+import Contacto from './views/publico/Contacto.jsx'
 import Docente from './views/privado/Docente.jsx'
 function App () {
   return (
@@ -30,6 +31,7 @@ function App () {
           <Route path='/admin' element={ <Admin />}/>
         </Route>
         <Route path='/alumno' element={ <Alumno />}/>
+        <Route path='/contacto' element={ <Contacto />}/>
         <Route path='/docente' element={ <Docente />}/>
         <Route path='*' element={< PaginaError />}/>
           {/* <Route path='/superadmin/formulariocolegio' element={ Persona.perfil === 'Superadmin' ? <PerfilSuperAdminFormulario/> : <Navigate to ='/login' replace />}/>
