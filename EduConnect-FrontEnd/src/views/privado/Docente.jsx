@@ -11,7 +11,7 @@ function Docente () {
   const handleSidebarClick = (boton) => {
     switch (boton) {
       case 'Botón 0':
-        setContenido(<HomeDocente />)
+        window.location.reload()// Esto recargará la página
         break
       case 'Botón 1':
         setContenido(<FormularioAdmin />)

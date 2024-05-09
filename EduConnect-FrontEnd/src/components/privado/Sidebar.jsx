@@ -2,7 +2,7 @@ import Button from 'react-bootstrap/Button'
 import '../../styles/privado/aside.css'
 import { useAuth } from '../../context/AuthContext'
 const Sidebar = ({ onSidebarClick }) => {
-  const { logout, user } = useAuth()
+  const { user, logoutContext } = useAuth()
   const handleClick = (boton) => {
     onSidebarClick(boton)
   }
@@ -32,7 +32,7 @@ const Sidebar = ({ onSidebarClick }) => {
         </div>
       </div>
       <div className='cerrarSesion'>
-        <Button variant="danger" size="lg" onClick={() => logout()}>
+        <Button variant="danger" size="lg" onClick={() => logoutContext()}>
             Cerrar Sesion
         </Button>
 
