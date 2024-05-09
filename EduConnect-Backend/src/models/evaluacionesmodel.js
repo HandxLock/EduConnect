@@ -50,8 +50,12 @@ const deleteEvaluacionModel = async (evaluacionId) => {
 }
 
 const getEvaluacionesByUsuarioIdModel = async (usuario_id) => {
+  // Verificar si usuario_id está definido y no es null
+  if (usuario_id === undefined || usuario_id === null) {
+    throw new Error('El ID de usuario no está definido o es nulo')
+  }
   const SQLQuery = {
-    text: 'SELECT epa.*, e.nombre AS nombre_evaluacion, e.descripcion AS descripcion_evaluacion FROM colegio.evaluacionesPorAlumno AS epa JOIN colegio.alumnos AS a ON epa.alumno_id = a.alumno_id JOIN colegio.evaluaciones AS e ON epa.evaluacion_id = e.evaluacion_id JOIN perfilamiento.usuarios AS u ON a.usuario_id = u.usuario_id WHERE u.usuario_id = $1; ',
+    text: 'SELECT epa.*, e.nombre AS nombre_evaluacion, e.descripcion AS descripcion_evaluacion FROM colegio.evaluacionesPorAlumno AS epa JOIN colegio.alumnos AS a ON epa.alumno_id = a.alumno_id JOIN colegio.evaluaciones AS e ON epa.evaluacion_id = e.evaluacion_id JOIN perfilamiento.usuarios AS u ON a.usuario_id = u.usuario_id WHERE u.usuario_id = $1 ',
     values: [usuario_id]
   }
   const response = await pool.query(SQLQuery)
