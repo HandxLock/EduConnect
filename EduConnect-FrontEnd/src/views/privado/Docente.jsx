@@ -2,7 +2,7 @@ import SidebarDocente from '../../components/privado/SidebarDocente.jsx'
 import MainSuperAdmin from '../../components/privado/MainSuperAdmin'
 import { useState } from 'react'
 import HomeDocente from '../../components/privado/HomeDocente.jsx'
-import DashboardSuperAdmin from '../../components/privado/DashboardSuperAdmin'
+import DashboardAdmin from '../../components/privado/DashboardAdmin.jsx'
 function Docente () {
   const [contenido, setContenido] = useState(<HomeDocente />)
   const handleSidebarClick = (boton) => {
@@ -11,7 +11,7 @@ function Docente () {
         setContenido(<HomeDocente />)
         break
       case 'Botón 4':
-        setContenido(<DashboardSuperAdmin />)
+        setContenido(<DashboardAdmin />)
         break
       default:
         setContenido(<HomeDocente />)
