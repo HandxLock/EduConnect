@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Container, Row, Col, Button } from 'react-bootstrap'
-import { IconBrandGithub, IconBrandGoogle, IconBrandFacebook } from '@tabler/icons-react'
+// import { IconBrandGithub, IconBrandGoogle, IconBrandFacebook } from '@tabler/icons-react'
 import '../../styles/publico/login.css'
 import { useAuth } from '../../context/AuthContext'
-import { GoogleOAuthProvider } from '@react-oauth/google'
-import LoginGoogle from './LoginGoogle'
+// import { GoogleOAuthProvider } from '@react-oauth/google'
+// import LoginGoogle from './LoginGoogle'
 function Login () {
   const navigate = useNavigate()
   const [email, setEmail] = useState('')
@@ -100,7 +100,7 @@ function Login () {
               </div>
             </form>
 
-            <p className='mt-5'>O usa tu cuenta</p>
+            {/* <p className='mt-5'>O usa tu cuenta</p>
 
             {
               <GoogleOAuthProvider
@@ -113,7 +113,7 @@ function Login () {
               <a href="https://github.com/" className='m-3'><IconBrandGithub size={25} stroke={2} /></a>
               <a href="https://www.google.com/" className='m-3'><IconBrandGoogle size={25} stroke={2} /></a>
               <a href="https://es-la.facebook.com/" className='m-3'><IconBrandFacebook size={25} stroke={2} /></a>
-            </div>
+            </div> */}
           </section>
         </Col>
         {/* Columna derecha */}

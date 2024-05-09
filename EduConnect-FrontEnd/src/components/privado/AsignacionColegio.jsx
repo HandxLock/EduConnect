@@ -12,7 +12,7 @@ function AsignacionColegio () {
   const [administradores, setAdministradores] = useState([])
   const [selectedColegio, setSelectedColegio] = useState('') // Estado para almacenar el colegio seleccionado
   const [selectedAdmin, setSelectedAdmin] = useState('') // Estado para almacenar el admin seleccionado
-  // const [mensaje, setMensaje] = useState('')
+  const [mensaje, setMensaje] = useState('')
 
   useEffect(() => {
     // Función asincrónica para obtener los colegios y administradores al cargar el componente
@@ -35,15 +35,15 @@ function AsignacionColegio () {
     try {
       // Aquí debes enviar los IDs de colegio y administrador seleccionados al backend
       await asignarColegio(selectedAdmin, selectedColegio)
-      Swal.fire('Asignacion creada exitosamente.')
-      // setMensaje('Asignacion creada exitosamente.')
+      setMensaje('Asignacion creada exitosamente.')
+      Swal.fire(mensaje)
     } catch (error) {
+      setMensaje('Error al Asignar. Por favor, inténtalo de nuevo.')
       Swal.fire({
         title: 'Error!',
-        text: 'Error al Asignar. Por favor, inténtalo de nuevo.',
+        text: mensaje,
         icon: 'error'
       })
-      // setMensaje('Error al Asignar. Por favor, inténtalo de nuevo.')
     }
   }
 
