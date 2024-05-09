@@ -35,7 +35,7 @@ const AuthProvider = ({ children }) => {
     }
   }
 
-  const logout = () => {
+  const logoutContext = async () => {
     Cookies.remove('token')
     setAuthenticated(false)
     setUser(null)
@@ -83,7 +83,7 @@ const AuthProvider = ({ children }) => {
       errors,
       logeo,
       loading,
-      logout
+      logoutContext
     }}>
       {children}
     </AuthContext.Provider>

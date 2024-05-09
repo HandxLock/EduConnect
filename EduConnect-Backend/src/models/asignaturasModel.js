@@ -53,3 +53,12 @@ export const idColegioAsignaturaModel = async (usuario_id) => {
   const response = await pool.query(SQLQuery)
   return response.rows[0]
 }
+
+export const getAsignaturaColegioIdModel = async (colegio_id) => {
+  const SQLQuery = {
+    text: 'SELECT * FROM colegio.asignaturas WHERE colegio_id = $1',
+    values: [colegio_id]
+  }
+  const response = await pool.query(SQLQuery)
+  return response.rows
+}

@@ -2,7 +2,7 @@
 
 import { Router } from 'express'
 // import validateParamsAlumno from '../middlewares/valid.params.Alumno.js'
-import { createCurso, getCursoById, getCurso, updateCurso, deleteCurso /* , createNewAlumno, createNewDocente */ } from '../src/controllers/AdminController.js'
+import { createCurso, getCursoById, getCurso, updateCurso, deleteCurso, getCursoPorColegioIdController /* , createNewAlumno, createNewDocente */ } from '../src/controllers/AdminController.js'
 // import validateParamsDocente from '../middlewares/valid.params.Docente.js'
 import { validateParamsCurso } from '../middlewares/valid.params.cursos.js'
 
@@ -20,5 +20,6 @@ router.get('/curso/:curso_id', getCursoById)
 router.get('/curso', getCurso)
 router.put('/curso/:curso_id', validateParamsCurso, updateCurso)
 router.delete('/curso/:curso_id', deleteCurso)
+router.get('/curso/colegio/:colegio_id', getCursoPorColegioIdController)
 
 export default router
