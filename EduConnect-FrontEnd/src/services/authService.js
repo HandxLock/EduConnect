@@ -15,5 +15,12 @@ const logout = async () => {
     // Handle logout error on the client-side (e.g., display an error message)
   }
 }
-
-export { loginUser, logout }
+const verificarTokenRequest = async (token) => {
+  try {
+    const data = await axios.get('/verify', token)
+    return data
+  } catch (error) {
+    console.error('Error logging out:', error)
+  }
+}
+export { loginUser, logout, verificarTokenRequest }
