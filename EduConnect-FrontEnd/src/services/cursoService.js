@@ -47,4 +47,22 @@ const eliminarCurso = async () => {
     console.log(error)
   }
 }
-export { crearCurso, modificarCurso, obtenerCurso, obtenerCursoId, eliminarCurso }
+
+const obtenerCursoPorColegioId = async (colegio_id) => {
+  try {
+    const res = await axios.get(`/curso/colegio/${colegio_id}`)
+    return res.data
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const obtenerCursosPorUsuarioId = async (usuario_id) => {
+  try {
+    const res = await axios.get(`/cursos/colegio/docente/${usuario_id}`)
+    return res.data
+  } catch (error) {
+    console.log(error)
+  }
+}
+export { crearCurso, modificarCurso, obtenerCurso, obtenerCursoId, eliminarCurso, obtenerCursoPorColegioId, obtenerCursosPorUsuarioId }

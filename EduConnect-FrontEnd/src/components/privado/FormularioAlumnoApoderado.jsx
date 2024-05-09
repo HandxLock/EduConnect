@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card'
 import { useState, useEffect } from 'react'
 import { useAuth } from '../../context/AuthContext'
 import { createAlumno } from '../../services/alumnoService'
-import { obtenerCurso } from '../../services/cursoService'
+import { obtenerCursoPorColegioId } from '../../services/cursoService'
 
 function FormularioAlumnoApoderado () {
   const { user } = useAuth()
@@ -32,7 +32,7 @@ function FormularioAlumnoApoderado () {
     // Función asincrónica para obtener los colegios y administradores al cargar el componente
     const fetchData = async () => {
       try {
-        const cursoData = await obtenerCurso()
+        const cursoData = await obtenerCursoPorColegioId(user.colegio_id)
         setCursos(cursoData)
       } catch (error) {
         console.error('Error fetching data:', error)
@@ -40,7 +40,7 @@ function FormularioAlumnoApoderado () {
     }
 
     fetchData()
-  }, [])
+  }, [user.colegio_id])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -88,43 +88,43 @@ function FormularioAlumnoApoderado () {
   }
   return (
     <>
-        <h2 className='text-center mt-3'>Creacion Admin</h2>
+      <h2 className='text-center mt-3'>Crear Alumno</h2>
       <Card className="formulario">
         {mensaje && <div className="mensaje">{mensaje}</div>}
         <Form onSubmit={handleSubmit}>
-          <div className='padre'>
+          <div className='padre d-flex justify-content-between'>
           <div className='alumno'>
           <Form.Group>
-            <Form.Label>Rut</Form.Label>
-            <Form.Control type="string" placeholder="Rut" value={rut} onChange={(e) => setRut(e.target.value)} />
+            <Form.Label>Rut Alumno</Form.Label>
+            <Form.Control type="string" placeholder="Rut Alumno" value={rut} onChange={(e) => setRut(e.target.value)} />
           </Form.Group>
           <Form.Group>
-            <Form.Label>Nombre</Form.Label>
-            <Form.Control type="string" placeholder="Nombre" value={nombre} onChange={(e) => setNombre(e.target.value)} />
+            <Form.Label>Nombre Alumno</Form.Label>
+            <Form.Control type="string" placeholder="Nombre Alumno" value={nombre} onChange={(e) => setNombre(e.target.value)} />
           </Form.Group>
           <Form.Group>
-            <Form.Label>Apellido Paterno</Form.Label>
-            <Form.Control type="string" placeholder="Apellido Paterno" value={apellidoPaterno} onChange={(e) => setApellidoPaterno(e.target.value)} />
+            <Form.Label>Apellido Paterno Alumno</Form.Label>
+            <Form.Control type="string" placeholder="Apellido Paterno Alumno" value={apellidoPaterno} onChange={(e) => setApellidoPaterno(e.target.value)} />
           </Form.Group>
           <Form.Group>
-            <Form.Label>Apellido Materno</Form.Label>
-            <Form.Control type="string" placeholder="Apellido Materno" value={apellidoMaterno} onChange={(e) => setApellidoMaterno(e.target.value)} />
+            <Form.Label>Apellido Materno Alumno</Form.Label>
+            <Form.Control type="string" placeholder="Apellido Materno Alumno" value={apellidoMaterno} onChange={(e) => setApellidoMaterno(e.target.value)} />
           </Form.Group>
           <Form.Group>
-            <Form.Label>Email</Form.Label>
-            <Form.Control type="string" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+            <Form.Label>Email Alumno</Form.Label>
+            <Form.Control type="string" placeholder="Email Alumno" value={email} onChange={(e) => setEmail(e.target.value)} />
           </Form.Group>
           <Form.Group>
-            <Form.Label>Clave</Form.Label>
-            <Form.Control type="string" placeholder="Clave" value={clave} onChange={(e) => setClave(e.target.value)} />
+            <Form.Label>Clave Alumno</Form.Label>
+            <Form.Control type="string" placeholder="Clave Alumno" value={clave} onChange={(e) => setClave(e.target.value)} />
           </Form.Group>
           <Form.Group>
-            <Form.Label>Dirección</Form.Label>
-            <Form.Control type="string" placeholder="Dirección" value={direccion} onChange={(e) => setDireccion(e.target.value)} />
+            <Form.Label>Dirección Alumno</Form.Label>
+            <Form.Control type="string" placeholder="Dirección Alumno" value={direccion} onChange={(e) => setDireccion(e.target.value)} />
           </Form.Group>
           <Form.Group>
-            <Form.Label>Teléfono</Form.Label>
-            <Form.Control type="string" placeholder="Teléfono" value={telefono} onChange={(e) => setTelefono(e.target.value)} />
+            <Form.Label>Teléfono Alumno</Form.Label>
+            <Form.Control type="string" placeholder="Teléfono Alumno" value={telefono} onChange={(e) => setTelefono(e.target.value)} />
           </Form.Group>
           <Form.Group>
             <Form.Label>Selecciona Curso</Form.Label>
@@ -138,36 +138,36 @@ function FormularioAlumnoApoderado () {
           </div>
           <div className='apoderado'>
             <Form.Group>
-            <Form.Label>Rut</Form.Label>
-            <Form.Control type="string" placeholder="Rut" value={rut1} onChange={(e) => setRut1(e.target.value)} />
+            <Form.Label>Rut Apoderado</Form.Label>
+            <Form.Control type="string" placeholder="Rut Apoderado" value={rut1} onChange={(e) => setRut1(e.target.value)} />
           </Form.Group>
           <Form.Group>
-            <Form.Label>Nombre</Form.Label>
-            <Form.Control type="string" placeholder="Nombre" value={nombre1} onChange={(e) => setNombre1(e.target.value)} />
+            <Form.Label>Nombre Apoderado</Form.Label>
+            <Form.Control type="string" placeholder="Nombre Apoderado" value={nombre1} onChange={(e) => setNombre1(e.target.value)} />
           </Form.Group>
           <Form.Group>
-            <Form.Label>Apellido Paterno</Form.Label>
-            <Form.Control type="string" placeholder="Apellido Paterno" value={apellidoPaterno1} onChange={(e) => setApellidoPaterno1(e.target.value)} />
+            <Form.Label>Apellido Paterno Apoderado</Form.Label>
+            <Form.Control type="string" placeholder="Apellido Paterno Apoderado" value={apellidoPaterno1} onChange={(e) => setApellidoPaterno1(e.target.value)} />
           </Form.Group>
           <Form.Group>
-            <Form.Label>Apellido Materno</Form.Label>
-            <Form.Control type="string" placeholder="Apellido Materno" value={apellidoMaterno1} onChange={(e) => setApellidoMaterno1(e.target.value)} />
+            <Form.Label>Apellido Materno Apoderado</Form.Label>
+            <Form.Control type="string" placeholder="Apellido Materno Apoderado" value={apellidoMaterno1} onChange={(e) => setApellidoMaterno1(e.target.value)} />
           </Form.Group>
           <Form.Group>
-            <Form.Label>Email</Form.Label>
-            <Form.Control type="string" placeholder="Email" value={email1} onChange={(e) => setEmail1(e.target.value)} />
+            <Form.Label>Email Apoderado</Form.Label>
+            <Form.Control type="string" placeholder="Email Apoderado" value={email1} onChange={(e) => setEmail1(e.target.value)} />
           </Form.Group>
           <Form.Group>
-            <Form.Label>Clave</Form.Label>
-            <Form.Control type="string" placeholder="Clave" value={clave1} onChange={(e) => setClave1(e.target.value)} />
+            <Form.Label>Clave Apoderado</Form.Label>
+            <Form.Control type="string" placeholder="Clave Apoderado" value={clave1} onChange={(e) => setClave1(e.target.value)} />
           </Form.Group>
           <Form.Group>
-            <Form.Label>Dirección</Form.Label>
-            <Form.Control type="string" placeholder="Dirección" value={direccion1} onChange={(e) => setDireccion1(e.target.value)} />
+            <Form.Label>Dirección Apoderado</Form.Label>
+            <Form.Control type="string" placeholder="Dirección Apoderado" value={direccion1} onChange={(e) => setDireccion1(e.target.value)} />
           </Form.Group>
           <Form.Group>
-            <Form.Label>Teléfono</Form.Label>
-            <Form.Control type="string" placeholder="Teléfono" value={telefono1} onChange={(e) => setTelefono1(e.target.value)} />
+            <Form.Label>Teléfono Apoderado</Form.Label>
+            <Form.Control type="string" placeholder="Teléfono Apoderado" value={telefono1} onChange={(e) => setTelefono1(e.target.value)} />
           </Form.Group>
           </div>
         </div>

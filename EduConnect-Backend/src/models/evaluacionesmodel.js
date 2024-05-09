@@ -11,6 +11,16 @@ const createEvaluacionModel = async ({ alumnoId, evaluacionData }) => {
   return response.rows[0]
 }
 
+const calificarEvaluacionModel = async ({ alumnoId, evaluacionData }) => {
+  const { nombre, calificacion, fechaEvaluacion } = evaluacionData
+  const SQLQuery = {
+    text: 'INSERT INTO colegio.evaluacionesPorAlumno (alumno_id, nombre, calificacion, fecha_evaluacion) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+    values: [alumnoId, nombre, calificacion, fechaEvaluacion]
+  }
+  const response = await pool.query(SQLQuery)
+  return response.rows[0]
+}
+
 const getEvaluacionesByAlumnoIdModel = async (alumnoId) => {
   const SQLQuery = {
     text: 'SELECT * FROM colegio.evaluacionesPorAlumno WHERE alumno_id = $1',
@@ -40,12 +50,16 @@ const deleteEvaluacionModel = async (evaluacionId) => {
 }
 
 const getEvaluacionesByUsuarioIdModel = async (usuario_id) => {
+  // Verificar si usuario_id está definido y no es null
+  if (usuario_id === undefined || usuario_id === null) {
+    throw new Error('El ID de usuario no está definido o es nulo')
+  }
   const SQLQuery = {
-    text: 'SELECT epa.*, e.nombre AS nombre_evaluacion, e.descripcion AS descripcion_evaluacion FROM colegio.evaluacionesPorAlumno AS epa JOIN colegio.alumnos AS a ON epa.alumno_id = a.alumno_id JOIN colegio.evaluaciones AS e ON epa.evaluacion_id = e.evaluacion_id JOIN perfilamiento.usuarios AS u ON a.usuario_id = u.usuario_id WHERE u.usuario_id = $1; ',
+    text: 'SELECT epa.*, e.nombre AS nombre_evaluacion, e.descripcion AS descripcion_evaluacion FROM colegio.evaluacionesPorAlumno AS epa JOIN colegio.alumnos AS a ON epa.alumno_id = a.alumno_id JOIN colegio.evaluaciones AS e ON epa.evaluacion_id = e.evaluacion_id JOIN perfilamiento.usuarios AS u ON a.usuario_id = u.usuario_id WHERE u.usuario_id = $1 ',
     values: [usuario_id]
   }
   const response = await pool.query(SQLQuery)
   return response.rows
 }
 
-export { createEvaluacionModel, getEvaluacionesByAlumnoIdModel, updateEvaluacionModel, deleteEvaluacionModel, getEvaluacionesByUsuarioIdModel }
+export { createEvaluacionModel, calificarEvaluacionModel, getEvaluacionesByAlumnoIdModel, updateEvaluacionModel, deleteEvaluacionModel, getEvaluacionesByUsuarioIdModel }

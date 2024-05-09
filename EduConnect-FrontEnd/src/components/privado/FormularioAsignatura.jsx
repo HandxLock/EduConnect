@@ -12,8 +12,8 @@ function FormularioAsignatura () {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      await crearAsignatura(nombre, descripcion, user.colegio)
-      setMensaje('Asignatura se creoexitosamente.')
+      await crearAsignatura(nombre, descripcion, user.colegio_id)
+      setMensaje('Asignatura se creo exitosamente.')
     } catch (error) {
       console.error('Error al crear asignatura:', error)
       setMensaje('Error al crear asignatura. Por favor, inténtalo de nuevo.')
@@ -21,7 +21,7 @@ function FormularioAsignatura () {
   }
   return (
     <>
-    <h2 className='text-center mt-3'>Creacion Asigatura</h2>
+    <h2 className='text-center mt-3'>Creacion Asignatura</h2>
     <Card className="formulario">
         {mensaje && <div className="mensaje">{mensaje}</div>}
         <Form onSubmit={handleSubmit}>
