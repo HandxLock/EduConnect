@@ -96,14 +96,6 @@ const loginUser = async (req, res) => {
   }
 }
 
-const logout = async (req, res) => {
-  const token = req.cookies.token
-  res.cookie(token, '', {
-    expires: new Date(0)
-  })
-  return res.sendStatus(200)
-}
-
 // funcion para crear el token
 // eslint-disable-next-line camelcase
 const createToken = async (usuario_id, nombre, email, perfil_id) => {
@@ -155,4 +147,4 @@ const verifyToken = async (req, res) => {
     }
   })
 }
-export { loginUser, logout, verifyToken }
+export { loginUser, verifyToken }

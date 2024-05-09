@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import pool from '../../dbase/config.js'
 
 const createAlumnoModel = async (usuarioID, colegioID, apoderadoID, cursoID) => {
@@ -108,4 +109,12 @@ const deleteAlumnoModel = async (alumnoId) => {
   }
 }
 
-export { createAlumnoModel, getAlumnoByUsuarioIdModel, deleteAlumnoModel, modifyAlumnoModel, getAllAlumnosModel, getAlumnoByApoderadoModel, getAlumnoByCursoModel, getAlumnoByAsignaturaModel, getUsuarioByAlumnoModel }
+const obtenerNombrePorCursoID = async (curso_id) => {
+  const query = await pool.query(
+    'SELECT u.usuario_id as alumno_id, u.nombre, u.apellido1 FROM perfilamiento.usuarios u JOIN colegio.alumnos a ON u.usuario_id = a.usuario_id WHERE a.curso_id = $1',
+    [curso_id]
+  )
+  return query.rows
+}
+
+export { createAlumnoModel, getAlumnoByUsuarioIdModel, deleteAlumnoModel, modifyAlumnoModel, getAllAlumnosModel, getAlumnoByApoderadoModel, getAlumnoByCursoModel, getAlumnoByAsignaturaModel, getUsuarioByAlumnoModel, obtenerNombrePorCursoID }

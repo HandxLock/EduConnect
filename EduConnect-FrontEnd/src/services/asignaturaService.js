@@ -49,4 +49,13 @@ const eliminarAsignatura = async () => {
   }
 }
 
-export { crearAsignatura, modificarAsignatura, obtenerAsignatura, obtenerAsignaturaId, eliminarAsignatura }
+const obtenerAsignaturaPorColegioId = async (colegio_id) => {
+  try {
+    const res = await axios.get(`/asignatura/colegio/${colegio_id}`)
+    return res.data
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export { crearAsignatura, modificarAsignatura, obtenerAsignatura, obtenerAsignaturaId, eliminarAsignatura, obtenerAsignaturaPorColegioId }

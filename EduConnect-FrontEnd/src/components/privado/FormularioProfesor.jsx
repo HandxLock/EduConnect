@@ -5,7 +5,7 @@ import '../../styles/privado/formulario.css'
 import { useState, useEffect } from 'react'
 import { createDocente } from '../../services/docenteService'
 import { useAuth } from '../../context/AuthContext'
-import { obtenerAsignatura } from '../../services/asignaturaService'
+import { obtenerAsignaturaPorColegioId } from '../../services/asignaturaService'
 
 function FormularioProfesor () {
   const { user } = useAuth()
@@ -25,7 +25,8 @@ function FormularioProfesor () {
     // Función asincrónica para obtener los colegios y administradores al cargar el componente
     const fetchData = async () => {
       try {
-        const asignaturaData = await obtenerAsignatura()
+        const asignaturaData = await obtenerAsignaturaPorColegioId(user.colegio_id)
+        console.log(asignaturaData)
         setAsignaturas(asignaturaData)
       } catch (error) {
         console.error('Error fetching data:', error)
@@ -33,7 +34,7 @@ function FormularioProfesor () {
     }
 
     fetchData()
-  }, [])
+  }, [user.colegio_id])
 
   const handleSubmit = async (e) => {
     e.preventDefault()

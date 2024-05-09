@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import pool from '../../dbase/config.js'
 
 const createDocenteModel = async (usuarioID, colegioID, asignaturaID) => {
@@ -95,4 +96,25 @@ const deleteDocenteModel = async (docenteID) => {
   }
 }
 
-export { createDocenteModel, getDocenteByUsuarioIdModel, deleteDocenteModel, modifyDocenteModel, getAllDocentesModel, getDocenteByAsignaturaModel, getDocenteByCursoModel, getDocenteByDocenteModel }
+const getDocentePorColegioId = async (colegio_id) => {
+  try {
+    const response = await pool.query('select d.docente_id, u.nombre, u.apellido1 FROM colegio.docentes d INNER JOIN perfilamiento.usuarios u ON d.usuario_id = u.usuario_id WHERE colegio_id = $1 ', [colegio_id])
+    return response.rows
+  } catch (error) {
+    throw new Error('Error al intentar eliminar el registro del docente:' + error.message)
+  }
+}
+
+const createAsignacionCursoModel = async (docente_id, curso_id) => {
+  try {
+    const res = await pool.query(
+      'INSERT INTO colegio.docentesporcurso (docente_id, curso_id) VALUES ($1, $2) RETURNING *',
+      [docente_id, curso_id]
+    )
+    return res.rows
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export { createDocenteModel, getDocenteByUsuarioIdModel, deleteDocenteModel, modifyDocenteModel, getAllDocentesModel, getDocenteByAsignaturaModel, getDocenteByCursoModel, getDocenteByDocenteModel, getDocentePorColegioId, createAsignacionCursoModel }
