@@ -77,6 +77,19 @@ const getUsuarioByPerfilModel = async (perfilId) => {
   }
 }
 
+const getPermisosByPerfilModel = async (perfilId, permiso) => {
+  try {
+    const SQLQuery = {
+      text: 'SELECT * FROM perfilamiento.permisosporperfil WHERE perfil_id = $1 AND permiso_id=$2',
+      values: [perfilId, permiso]
+    }
+    const response = await pool.query(SQLQuery)
+    return response.rows
+  } catch (error) {
+    throw new Error('Error al buscar en el registro de permisos:' + error.message)
+  }
+}
+
 const getUsuarioByRutModel = async (rut) => {
   try {
     const SQLQuery = {
@@ -100,4 +113,4 @@ const deleteUsuarioModel = async (usuarioID) => {
   }
 }
 
-export { createUsuarioModel, userByEmailModel, getUsuarioByUsuarioIdModel, deleteUsuarioModel, modifyUsuarioModel, getAllUsuariosModel, getUsuarioByPerfilModel, getUsuarioByRutModel }
+export { createUsuarioModel, userByEmailModel, getUsuarioByUsuarioIdModel, deleteUsuarioModel, modifyUsuarioModel, getAllUsuariosModel, getUsuarioByPerfilModel, getUsuarioByRutModel, getPermisosByPerfilModel }
