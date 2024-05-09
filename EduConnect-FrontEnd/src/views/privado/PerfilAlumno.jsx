@@ -5,11 +5,31 @@ import ObservacionesAlumno from '../../components/privado/AlumnoObservaciones'
 import AsideAlumno from '../../components/privado/AlumnoAside'
 import AlumnosDashboard from '../../components/privado/AlumnosDashboard'
 import '../../styles/privado/views.css'
-
+import { useAuth } from '../../context/AuthContext'
+import { obtenerEvaluacionUsuarioId } from '../../services/evaluacionService.js'
+import { obtenerObservacionesUsuarioId } from '../../services/obervacionService.js'
+import { useEffect, useState } from 'react'
 const Views = () => {
-  const notas = [6.5, 4.0, 5.7, 7.0, 2.0]
+  const { user } = useAuth()
+  const [evaluaciones, setEvaluaciones] = useState([])
+  const [observaciones, setObservaciones] = useState([])
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        console.log(user.usuario_id)
+        const evaluacionesData = await obtenerEvaluacionUsuarioId(user.usuario_id)
+        const observacionesData = await obtenerObservacionesUsuarioId(user.usuario_id)
+        console.log(evaluacionesData)
+        setEvaluaciones(evaluacionesData)
+        setObservaciones(observacionesData)
+      } catch (error) {
+        console.error('Error fetching data:', error)
+      }
+    }
+
+    fetchData()
+  }, [user.usuario_id])
   const anotaciones = ['1-Falta de atención', '2-Participa mucho en clase']
-  const observaciones = ['1-Alumno con buen rendimiento académico', '2-Necesita mejorar en matemáticas']
 
   return (
     <Container fluid className='views-container'>
@@ -25,13 +45,13 @@ const Views = () => {
           </Row>
           <Row>
             <Col sm={12} md={6}>
-              <NotasAlumno notas={notas} />
+              <NotasAlumno notas={evaluaciones.map((evaluacion) => evaluacion.calificacion)} />
             </Col>
             <Col sm={12} md={3}>
               <AnotacionesAlumno anotaciones={anotaciones} />
             </Col>
             <Col sm={12} md={3}>
-              <ObservacionesAlumno observaciones={observaciones} />
+              <ObservacionesAlumno observaciones={observaciones.map((observacion) => observacion.descripcion)} />
             </Col>
           </Row>
         </Col>

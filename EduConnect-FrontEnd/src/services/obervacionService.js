@@ -41,4 +41,12 @@ const eliminarObservacion = async () => {
   }
 }
 
-export { crearObservacion, modificarObservacion, obtenerObservacion, eliminarObservacion }
+const obtenerObservacionesUsuarioId = async (usuario_id) => {
+  try {
+    const res = await axios.get(`/admin/alumnos/observaciones/${usuario_id}`)
+    return res.data
+  } catch (error) {
+    console.log(error)
+  }
+}
+export { crearObservacion, modificarObservacion, obtenerObservacion, eliminarObservacion, obtenerObservacionesUsuarioId }
