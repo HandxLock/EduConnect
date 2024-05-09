@@ -8,9 +8,10 @@ const getColegios = async () => {
   }
 }
 
-const agregarColegio = async (nombre, descripcion, rut, telefono, email) => {
+const agregarColegio = async (nombre, descripcion, rut, direccion, telefono, email) => {
   try {
-    const colegio = { nombre, descripcion, rut, telefono, email }
+    const colegio = { nombre, descripcion, rut, direccion, telefono, email }
+    console.log(colegio)
     return await axios.post('/superadmin/colegio', colegio)
   } catch (error) {
     console.log(error)

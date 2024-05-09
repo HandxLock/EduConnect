@@ -18,7 +18,7 @@ function FormularioColegio () {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      await agregarColegio(nombre, descripcion, rut, telefono, email)
+      await agregarColegio(nombre, descripcion, rut, direccion, telefono, email)
       setMensaje('Colegio creado exitosamente.')
     } catch (error) {
       console.error('Error al agregar colegio:', error)

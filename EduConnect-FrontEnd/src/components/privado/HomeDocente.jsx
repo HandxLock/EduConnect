@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
 import DetalleCurso from './DetalleCurso'
-import { obtenerCurso } from '../../services/cursoService'
+import { obtenerCursosPorUsuarioId } from '../../services/cursoService'
 import { useAuth } from '../../context/AuthContext'
 function HomeDocente () {
   const { user } = useAuth()
@@ -12,7 +12,7 @@ function HomeDocente () {
   useEffect(() => {
     const fetchCursos = async () => {
       try {
-        const data = await obtenerCurso(user.usuario)
+        const data = await obtenerCursosPorUsuarioId(user.usuario_id)
         setCursos(data)
       } catch (error) {
         console.error('Error fetching cursos:', error.message)
@@ -20,7 +20,7 @@ function HomeDocente () {
     }
 
     fetchCursos()
-  }, [user.usuario])
+  }, [user.usuario_id])
 
   const handleClick = (curso) => {
     setCursoSeleccionado(curso)
@@ -39,8 +39,8 @@ function HomeDocente () {
             <Card className='' onClick={() => handleClick(curso)}>
               <Card.Img variant="top" src={curso.imagenUrl} />
               <Card.Body>
-                <Card.Title>{curso.nombre}</Card.Title>
-                <Card.Text>{curso.descripcion}</Card.Text>
+                <Card.Title>{curso.nombre_curso}</Card.Title>
+                <Card.Text>{curso.descripcion_curso}</Card.Text>
               </Card.Body>
             </Card>
           </Col>

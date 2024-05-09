@@ -6,9 +6,9 @@ import FormularioCurso from '../../components/privado/FormularioCurso'
 import FormularioAlumnoApoderado from '../../components/privado/FormularioAlumnoApoderado'
 import FormularioProfesor from '../../components/privado/FormularioProfesor'
 import DocenteCurso from '../../components/privado/DocenteCurso'
-import HomeDocente from '../../components/privado/HomeDocente'
+import HomeAdmin from '../../components/privado/HomeAdmin'
 function Admin () {
-  const [contenido, setContenido] = useState(<HomeDocente />)
+  const [contenido, setContenido] = useState(<HomeAdmin />)
   const handleSidebarClick = (boton) => {
     switch (boton) {
       case 'Botón 0':
@@ -30,7 +30,7 @@ function Admin () {
         setContenido(<DocenteCurso/>)
         break
       case 'Botón 6':
-        setContenido(<HomeDocente />)
+        setContenido(<HomeAdmin />)
         break
       default:
         setContenido(null)
