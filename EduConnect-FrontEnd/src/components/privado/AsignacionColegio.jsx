@@ -5,6 +5,7 @@ import '../../styles/privado/formulario.css'
 import { asignarColegio, getColegios } from '../../../src/services/colegioService.js'
 import { getAdmins } from '../../services/adminService.js'
 import { useEffect, useState } from 'react'
+import Swal from 'sweetalert2'
 
 function AsignacionColegio () {
   const [colegios, setColegios] = useState([]) // Estado para almacenar los colegios
@@ -35,8 +36,14 @@ function AsignacionColegio () {
       // Aquí debes enviar los IDs de colegio y administrador seleccionados al backend
       await asignarColegio(selectedAdmin, selectedColegio)
       setMensaje('Asignacion creada exitosamente.')
+      Swal.fire(mensaje)
     } catch (error) {
       setMensaje('Error al Asignar. Por favor, inténtalo de nuevo.')
+      Swal.fire({
+        title: 'Error!',
+        text: mensaje,
+        icon: 'error'
+      })
     }
   }
 
@@ -44,7 +51,7 @@ function AsignacionColegio () {
     <>
     <h2 className='text-center mt-3'>Asignacion Colegio</h2>
       <Card className="formulario">
-        {mensaje && <div className="mensaje">{mensaje}</div>}
+        {/* {mensaje && <div className="mensaje">{mensaje}</div>} */}
         <Form onSubmit={handleSubmit}>
           <Form.Group>
             <Form.Label>Colegio</Form.Label>
