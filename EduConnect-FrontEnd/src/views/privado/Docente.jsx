@@ -8,13 +8,13 @@ function Docente () {
   const handleSidebarClick = (boton) => {
     switch (boton) {
       case 'Botón 0':
-        window.location.reload()// Esto recargará la página
+        setContenido(<HomeDocente />)
         break
       case 'Botón 4':
         setContenido(<DashboardSuperAdmin />)
         break
       default:
-        setContenido(null)
+        setContenido(<HomeDocente />)
     }
   }
 
