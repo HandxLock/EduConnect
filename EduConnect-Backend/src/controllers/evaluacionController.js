@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { createEvaluacionModel, getEvaluacionesByAlumnoIdModel, updateEvaluacionModel, deleteEvaluacionModel, getEvaluacionesByUsuarioIdModel } from '../models/evaluacionesmodel.js'
+import { createEvaluacionModel, getEvaluacionesByAlumnoIdModel, updateEvaluacionModel, deleteEvaluacionModel, getEvaluacionesByUsuarioIdModel } from '../models/evaluacionesModel.js'
 import sendErrorResponse from '../../utils/utils.js'
 
 const createEvaluation = async (req, res) => {

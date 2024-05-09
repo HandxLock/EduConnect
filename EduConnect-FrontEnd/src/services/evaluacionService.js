@@ -40,12 +40,15 @@ const eliminarEvaluacion = async () => {
     console.log(error)
   }
 }
+
 const obtenerEvaluacionUsuarioId = async (usuario_id) => {
   try {
     const res = await axios.get(`/alumnos/${usuario_id}`)
     return res.data
   } catch (error) {
-    console.log(error)
+    console.error('Error al obtener la evaluación por ID:', error.message)
+
+    throw error
   }
 }
 

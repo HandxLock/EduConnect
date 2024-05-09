@@ -1,4 +1,4 @@
-import { crearObservacionModel, modificarObservacionModel, obtenerTodaObservacionModel, eliminarObservacionModel } from '../models/observacionesmodel.js'
+import { crearObservacionModel, modificarObservacionModel, obtenerTodaObservacionModel, eliminarObservacionModel, obtenerTodaObservacionUserId } from '../models/observacionesmodel.js'
 
 // crear observacion
 const crearObservacion = async (req, res) => {
@@ -52,4 +52,16 @@ const eliminarObservacion = async (req, res) => {
   }
 }
 
-export { crearObservacion, modificarObservacion, obtenerObservacion, eliminarObservacion }
+const obtenerObservacionUsuarioId = async (req, res) => {
+  try {
+    // eslint-disable-next-line camelcase
+    const { usuario_id } = req.params
+    const observacionId = await obtenerTodaObservacionUserId(usuario_id)
+    res.status(200).json(observacionId)
+  } catch (error) {
+    res.status(500).json(error.message)
+    console.log('Error al procesar la solicitud:', error)
+  }
+}
+
+export { crearObservacion, modificarObservacion, obtenerObservacion, eliminarObservacion, obtenerObservacionUsuarioId }

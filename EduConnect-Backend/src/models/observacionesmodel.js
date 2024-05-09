@@ -38,6 +38,16 @@ export const obtenerTodaObservacionModel = async () => {
   }
 }
 
+export const obtenerTodaObservacionUserId = async (usuario_id) => {
+  try {
+    const todaObservacion = await pool.query('SELECT   o.observacion_id,   o.fecha_observacion,   o.descripcion,   o.alumno_id,   u.nombre AS alumno_nombre,   u.nombre AS docente_nombre FROM colegio.observaciones AS o JOIN colegio.alumnos AS a ON o.alumno_id = a.alumno_id JOIN perfilamiento.usuarios AS u ON u.usuario_id = a.usuario_id WHERE a.usuario_id = $1', [usuario_id])
+    console.log(todaObservacion)
+    return todaObservacion.rows
+  } catch (error) {
+    throw new Error('Error al obtener:' + error.message)
+  }
+}
+
 export const eliminarObservacionModel = async (observacion_id) => {
   try {
     const resultado = await pool.query('DELETE from colegio.observaciones WHERE observacion_id=$1',
