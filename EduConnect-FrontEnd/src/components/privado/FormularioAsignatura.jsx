@@ -12,7 +12,7 @@ function FormularioAsignatura () {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      await crearAsignatura(nombre, descripcion, user.colegio)
+      await crearAsignatura(nombre, descripcion, user.colegio_id)
       setMensaje('Asignatura se creoexitosamente.')
     } catch (error) {
       console.error('Error al crear asignatura:', error)

@@ -1,43 +1,16 @@
-import { personByEmailModel } from '../models/UsuarioModel.js'
-import bcrypt from 'bcryptjs'
-import jwt from 'jsonwebtoken'
-import sendErrorResponse from '../../utils/utils.js'
+/* eslint-disable camelcase */
+import { obtenerNombrePorCursoID } from '../models/alumnoModel.js'
 
-const loginPerson = async (req, res) => {
-  const { person } = req.body
-
+const obtenerNombrePorCursoIDController = async (req, res) => {
   try {
-    const findPerson = await personByEmailModel(person)
-    console.log(findPerson)
-    if (!findPerson) {
-      return await sendErrorResponse(res, 'log_01')
-    }
-    const isPassValid = bcrypt.compareSync(
-      person.clave,
-      findPerson.clave
-    )
-    if (!isPassValid) {
-      return await sendErrorResponse(res, 'log_02')
-    }
-
-    const { email, nombre, apellido1, apellido2 } = findPerson
-    const token = await createToken(email)
-    res.status(200).json({
-      message: `Bienvenid@ ${nombre} ${apellido1} ${apellido2}, has iniciado sesión satisfactoriamente.`,
-      code: 200,
-      token
-    })
+    const { curso_id } = req.params
+    const data = await obtenerNombrePorCursoID(curso_id)
+    console.log(data)
+    res.json(data)
   } catch (error) {
-    res.status(500).json({ error: error.message })
+    console.error('Error al recibir el nombres por curso id:', error.message)
+    res.status(500).json({ error: 'No se Muestran nombres por curso id' })
   }
 }
 
-// funcion para crear el token
-const createToken = async (email) => {
-  const token = jwt.sign({ email }, process.env.JWT_SECRET, {
-    expiresIn: '60s'
-  })
-  return token
-}
-
-export default loginPerson
+export default obtenerNombrePorCursoIDController

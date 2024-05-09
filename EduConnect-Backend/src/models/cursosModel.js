@@ -69,3 +69,13 @@ export const deleteCursoModel = async (curso_id) => {
     throw new Error('Error al eliminar el curso')
   }
 }
+
+export const getCursoPorCOlegioIdModel = async (colegio_id) => {
+  try {
+    const cursos = await pool.query('SELECT * FROM colegio.cursos WHERE colegio_id = $1', [colegio_id])
+    return cursos.rows
+  } catch (error) {
+    console.error('Error al obtener los cursos:', error.message)
+    throw new Error('Error al obtener los cursos')
+  }
+}

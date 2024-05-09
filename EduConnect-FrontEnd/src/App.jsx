@@ -24,15 +24,14 @@ function App () {
         <Route path='/login' element={<Login />} />
           <Route element ={ <ProtectedRouteSuperAdmin/> }>
             <Route path='/superadmin' element={ <SuperAdmin />}/>
-            <Route path='*' element={< PaginaError />}/>
+
         </Route>
         <Route element ={ <ProtectedRouteAdmin/> }>
           <Route path='/admin' element={ <Admin />}/>
-          <Route path='*' element={< PaginaError />}/>
         </Route>
-        <Route path='*' element={< PaginaError />}/>
         <Route path='/alumno' element={ <Alumno />}/>
         <Route path='/docente' element={ <Docente />}/>
+        <Route path='*' element={< PaginaError />}/>
           {/* <Route path='/superadmin/formulariocolegio' element={ Persona.perfil === 'Superadmin' ? <PerfilSuperAdminFormulario/> : <Navigate to ='/login' replace />}/>
         <Route path='/superadmin/formularioadmin' element={ Persona.perfil === 'Superadmin' ? <PerfilSuperAdminFormularioAdmin/> : <Navigate to ='/login' replace />}/>
         <Route path='/admin' element={ Persona.perfil === 'Admin' ? <PerfilAdminHome/> : <Navigate to ='/login' replace />}/>
