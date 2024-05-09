@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import axios from './axios'
 
 const getDocentes = async () => {
@@ -26,4 +27,22 @@ const deleteDocente = async () => {
     console.log(error)
   }
 }
-export { getDocentes, createDocente, deleteDocente }
+
+const getDocenteIdPorColegioId = async (colegio_id) => {
+  try {
+    const res = await axios.get(`/admin/docente/colegio/${colegio_id}`)
+    return res.data
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const asignacionDocenteCurso = async (docente_id, curso_id) => {
+  try {
+    const docenteCurso = { docente_id, curso_id }
+    return await axios.post('/admin/docente/asignacioncurso/', docenteCurso)
+  } catch (error) {
+    console.log(error)
+  }
+}
+export { getDocentes, createDocente, deleteDocente, getDocenteIdPorColegioId, asignacionDocenteCurso }

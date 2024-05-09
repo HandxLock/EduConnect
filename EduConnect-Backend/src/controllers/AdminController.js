@@ -1,11 +1,14 @@
 // Este archivo de controllers aun se encuentra pendiente
 
 import { createAlumnoModel, deleteAlumnoModel, getAllAlumnosModel, getUsuarioByAlumnoModel, modifyAlumnoModel } from '../models/alumnoModel.js'
+
 import { createApoderadoModel, getApoderadoByAlumnoModel, getApoderadoByUsuarioIdModel, modifyApoderadoModel } from '../models/apoderadoModel.js'
 import { createUsuarioModel, deleteUsuarioModel, getUsuarioByRutModel, getUsuarioByUsuarioIdModel, modifyUsuarioModel } from '../models/UsuarioModel.js'
-import { createDocenteModel, deleteDocenteModel, getAllDocentesModel, getDocenteByDocenteModel, modifyDocenteModel } from '../models/docentesModel.js'
-import { createAsignaturaModel, getAsignaturaByIdModel, getAllAsignaturasModel, updateAsignaturaModel, deleteAsignaturaModel } from '../models/asignaturasModel.js'
-import { createCursoModel, getCursoByIdModel, getCursosModel, updateCursoModel, deleteCursoModel } from '../models/cursosModel.js'
+import { createDocenteModel, deleteDocenteModel, getAllDocentesModel, getDocenteByUsuarioIdModel, getDocenteByDocenteModel, modifyDocenteModel, getDocentePorColegioId, createAsignacionCursoModel } from '../models/docentesModel.js'
+import { createAsignaturaModel, getAsignaturaByIdModel, getAllAsignaturasModel, updateAsignaturaModel, deleteAsignaturaModel, getAsignaturaColegioIdModel } from '../models/asignaturasModel.js'
+import { createCursoModel, getCursoByIdModel, getCursosModel, updateCursoModel, deleteCursoModel, getCursoPorCOlegioIdModel } from '../models/cursosModel.js'
+
+
 // import sendErrorResponse from '../../utils/utils.js'
 
 /* eslint-disable camelcase */
@@ -85,6 +88,15 @@ export const deleteAsignatura = async (req, res) => {
   }
 }
 
+export const getAsignaturaColegioId = async (req, res) => {
+  const { colegio_id } = req.params
+  if (!colegio_id) {
+    return res.status(400).json({ message: 'ID de asignatura no proporcionado' })
+  }
+  const asignaturaColegio = await getAsignaturaColegioIdModel(colegio_id)
+  return res.status(200).json(asignaturaColegio)
+}
+
 /* sección CRUD cursos */
 
 export const createCurso = async (req, res) => {
@@ -149,6 +161,18 @@ export const deleteCurso = async (req, res) => {
   }
 }
 
+export const getCursoPorColegioIdController = async (req, res) => {
+  const { colegio_id } = req.params
+  if (!colegio_id) {
+    return res.status(400).json({ message: 'ID de curso no proporcionado' })
+  }
+  try {
+    const cursoColegio = await getCursoPorCOlegioIdModel(colegio_id)
+    return res.status(200).json(cursoColegio)
+  } catch (error) {
+    return res.status(500).json({ message: error.message })
+  }
+}
 /* sección CRUD docentes */
 
 const createNewDocente = async (req, res) => {
@@ -232,6 +256,30 @@ const deleteDocenteController = async (req, res) => {
   }
 }
 
+const getDocentePorColegioIdController = async (req, res) => {
+  try {
+    const { colegio_id } = req.params
+    const docenteId = await getDocentePorColegioId(colegio_id)
+    res.json(docenteId)
+  } catch (error) {
+    console.error('Error al obtener id docente:', error.message)
+    res.status(500).json({ error: 'No se encuentra id docente' })
+  }
+}
+
+const createAsignacionCursoController = async (req, res) => {
+  try {
+    const { docente_id, curso_id } = req.body
+    console.log(docente_id)
+    console.log(curso_id)
+    const asignacion = await createAsignacionCursoModel(docente_id, curso_id)
+    console.log(asignacion)
+    res.json(asignacion)
+  } catch (error) {
+    console.error('Error al asignar docente:', error.message)
+    res.status(500).json({ error: 'Error al asignar docente:' })
+  }
+}
 /* sección CRUD alumnos */
 
 const createNewAlumno = async (req, res) => {
@@ -317,4 +365,4 @@ const deleteAlumnoController = async (req, res) => {
 
 /* sección CRUD apoderados */
 
-export { createNewAlumno, createNewDocente, getDocentesController, deleteDocenteController, updateDocenteController, getAlumnosController, updateAlumnoController, deleteAlumnoController, getDocenteByIDController }
+export { createNewAlumno, createNewDocente, getDocentesController, deleteDocenteController, updateDocenteController, getAlumnosController, updateAlumnoController, deleteAlumnoController, getDocenteByIDController, getDocentePorColegioIdController, createAsignacionCursoController }

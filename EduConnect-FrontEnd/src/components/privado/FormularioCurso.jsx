@@ -12,7 +12,7 @@ function FormularioCurso () {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      await crearCurso(nombre, descripcion, user.colegio)
+      await crearCurso(nombre, descripcion, user.colegio_id)
       setMensaje('Curso creado exitosamente.')
     } catch (error) {
       console.error('Error al agregar curso:', error)

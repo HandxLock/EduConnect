@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { createAsignatura, getAsignaturaById, getAllAsignaturas, updateAsignatura, deleteAsignatura } from '../src/controllers/AdminController.js'
+import { createAsignatura, getAsignaturaById, getAllAsignaturas, updateAsignatura, deleteAsignatura, getAsignaturaColegioId } from '../src/controllers/AdminController.js'
 import validateParamsAsignatura from '../middlewares/valid.params.asignaturas.js'
 import { validarPermisoLecturaAsignatura } from '../middlewares/validarPermisosLectura.js'
 import { validarPermisoCRUDAsignatura } from '../middlewares/validarPermisosCRUD.js'
@@ -7,10 +7,14 @@ import { validarPermisoCRUDAsignatura } from '../middlewares/validarPermisosCRUD
 const router = Router()
 
 // Rutas Asignaturas
+
 router.post('/asignatura', validateParamsAsignatura, validarPermisoCRUDAsignatura, createAsignatura)
 router.get('/asignatura/:asignatura_id', validarPermisoLecturaAsignatura, getAsignaturaById)
 router.get('/asignatura', validarPermisoLecturaAsignatura, getAllAsignaturas)
 router.put('/asignatura/:asignatura_id', validateParamsAsignatura, validarPermisoCRUDAsignatura, updateAsignatura)
 router.delete('/asignatura/:asignatura_id', validarPermisoCRUDAsignatura, deleteAsignatura)
+router.get('/asignatura/colegio/:colegio_id', getAsignaturaColegioId)
+
+
 
 export default router

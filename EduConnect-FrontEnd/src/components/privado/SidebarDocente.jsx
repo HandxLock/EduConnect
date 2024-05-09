@@ -1,8 +1,9 @@
 import Button from 'react-bootstrap/Button'
 import '../../styles/privado/aside.css'
 import { useAuth } from '../../context/AuthContext'
+import { Link } from 'react-router-dom'
 const SidebarDocente = ({ onSidebarClick }) => {
-  const { logout, user } = useAuth()
+  const { user, logout } = useAuth()
   const handleClick = (boton) => {
     onSidebarClick(boton)
   }
@@ -32,7 +33,8 @@ const SidebarDocente = ({ onSidebarClick }) => {
         </div>
       </div>
       <div className='cerrarSesion'>
-        <Button variant="danger" size="lg" onClick={() => logout()}>
+        <Link to='/' onClick={() => logout()}></Link>
+        <Button variant="danger" size="lg">
             Cerrar Sesion
         </Button>
 
