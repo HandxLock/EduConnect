@@ -77,6 +77,19 @@ const getUsuarioByPerfilModel = async (perfilId) => {
   }
 }
 
+const getUsuarioByRutModel = async (rut) => {
+  try {
+    const SQLQuery = {
+      text: 'SELECT * FROM perfilamiento.usuarios WHERE rut = $1',
+      values: [rut]
+    }
+    const response = await pool.query(SQLQuery)
+    return response.rows
+  } catch (error) {
+    throw new Error('Error al buscar en el registro de usuarios:' + error.message)
+  }
+}
+
 const deleteUsuarioModel = async (usuarioID) => {
   try {
     const response = await pool.query('DELETE from perfilamiento.usuarios WHERE usuario_id=$1',
@@ -87,4 +100,4 @@ const deleteUsuarioModel = async (usuarioID) => {
   }
 }
 
-export { createUsuarioModel, userByEmailModel, getUsuarioByUsuarioIdModel, deleteUsuarioModel, modifyUsuarioModel, getAllUsuariosModel, getUsuarioByPerfilModel }
+export { createUsuarioModel, userByEmailModel, getUsuarioByUsuarioIdModel, deleteUsuarioModel, modifyUsuarioModel, getAllUsuariosModel, getUsuarioByPerfilModel, getUsuarioByRutModel }

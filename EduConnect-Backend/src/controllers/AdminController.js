@@ -1,8 +1,8 @@
 // Este archivo de controllers aun se encuentra pendiente
 
 import { createAlumnoModel, deleteAlumnoModel, getAllAlumnosModel, getUsuarioByAlumnoModel, modifyAlumnoModel } from '../models/alumnoModel.js'
-import { createApoderadoModel, getApoderadoByAlumnoModel, modifyApoderadoModel } from '../models/apoderadoModel.js'
-import { createUsuarioModel, deleteUsuarioModel, getUsuarioByUsuarioIdModel, modifyUsuarioModel } from '../models/UsuarioModel.js'
+import { createApoderadoModel, getApoderadoByAlumnoModel, getApoderadoByUsuarioIdModel, modifyApoderadoModel } from '../models/apoderadoModel.js'
+import { createUsuarioModel, deleteUsuarioModel, getUsuarioByRutModel, getUsuarioByUsuarioIdModel, modifyUsuarioModel } from '../models/UsuarioModel.js'
 import { createDocenteModel, deleteDocenteModel, getAllDocentesModel, getDocenteByDocenteModel, modifyDocenteModel } from '../models/docentesModel.js'
 import { createAsignaturaModel, getAsignaturaByIdModel, getAllAsignaturasModel, updateAsignaturaModel, deleteAsignaturaModel } from '../models/asignaturasModel.js'
 import { createCursoModel, getCursoByIdModel, getCursosModel, updateCursoModel, deleteCursoModel } from '../models/cursosModel.js'
@@ -239,13 +239,27 @@ const createNewAlumno = async (req, res) => {
     const { alumno, apoderado } = req.body
     // console.log('info ingresada:', alumno, apoderado)
     const newUserAlumno = await createUsuarioModel(alumno.user)
-    const newUserApoderado = await createUsuarioModel(apoderado.user)
+    const findUserApoderado = await getUsuarioByRutModel(apoderado.user.rut)
+    let apoderadoID = ''
+    let apoderadoUsuario = {}
+    let apoderadoResponse = {}
+    if (!findUserApoderado) {
+      const newUserApoderado = await createUsuarioModel(apoderado.user)
+      const newApoderado = await createApoderadoModel(newUserApoderado.usuario_id, apoderado.colegioID)
+      apoderadoID = newApoderado.apoderado_id
+      apoderadoUsuario = newUserApoderado
+      apoderadoResponse = newApoderado
+    } else {
+      const oldApoderado = await getApoderadoByUsuarioIdModel(findUserApoderado.usuario_id)
+      apoderadoID = oldApoderado.apoderado_id
+      apoderadoUsuario = findUserApoderado
+      apoderadoResponse = oldApoderado
+    }
     // console.log('info retornada usuario alumno', newUserAlumno)
     // console.log('info retornada usuario apoderado', newUserApoderado)
     // console.log('info alumno: ', alumno.colegioID, alumno.cursoID, newUserApoderado.apoderado_id)
-    const newApoderado = await createApoderadoModel(newUserApoderado.usuario_id, apoderado.colegioID)
-    const newAlumno = await createAlumnoModel(newUserAlumno.usuario_id, alumno.colegioID, newApoderado.apoderado_id, alumno.cursoID)
-    return res.status(201).json({ newUserAlumno, newAlumno, newUserApoderado, newApoderado })
+    const newAlumno = await createAlumnoModel(newUserAlumno.usuario_id, alumno.colegioID, apoderadoID, alumno.cursoID)
+    return res.status(201).json({ newUserAlumno, newAlumno, apoderadoUsuario, apoderadoResponse })
   } catch (error) {
     console.error('Error al crear un registro nuevo de alumno:', error)
     return res.status(400).json({ message: 'Error interno del servidor' })
