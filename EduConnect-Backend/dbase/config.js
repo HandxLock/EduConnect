@@ -10,9 +10,9 @@ const pool = new pg.Pool({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
   port: process.env.DB_PORT,
-  ssl: {
-    rejectUnauthorized: true // Configura SSL/TLS en "require"
-  },
+  // ssl: {
+  //   rejectUnauthorized: true // Configura SSL/TLS en "require"
+  // },
   allowExitOnIdle: true
 })
 pool.query('SELECT NOW()', (err, res) => {

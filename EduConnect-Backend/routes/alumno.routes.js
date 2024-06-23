@@ -13,5 +13,4 @@ router.put('/admin/alumnos/:alumno_id', validateParamsAlumno, validarPermisoCRUD
 router.delete('/admin/alumnos/:alumno_id', validarPermisoCRUDAlumno, deleteAlumnoController)
 router.get('/admin/alumno/:curso_id', obtenerNombrePorCursoIDController)
 
-
 export default router
